@@ -4,6 +4,8 @@ import "@fontsource/playfair-display/700.css"; // Bold weight
 import "@fontsource/poppins"; // Normal weight
 import "@fontsource/poppins/600.css"; 
 import "@fontsource/poppins/200.css"; 
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 export const GlobalStyle = createGlobalStyle`

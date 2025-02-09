@@ -4,6 +4,7 @@ import { GlobalStyle } from "../GlobalStyle";
 import { NavLink } from "react-router-dom";
 import { Button } from "../components/Button";
 import FlowerRain from "../components/FlowerRain";
+import TiltCard from "../components/TiltCard";
 import { motion } from "framer-motion"; // Import animation library
 
 // const FlowerRain =()=>{
@@ -85,7 +86,8 @@ function Services() {
         {services.map((curElem) => {
           const { id, name, description, imageUrl, price } = curElem;
           return (
-            <motion.div
+           <TiltCard>
+             <motion.div
               className="card"
               key={id}
               whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0,0,0,0.2)" }}
@@ -97,11 +99,12 @@ function Services() {
               <div className="card-data">
                 <h3>{name}</h3>
                 <p>{description}</p>
-                <NavLink to="/">
+                <NavLink to="/service">
                   <Button className="btn">Know More</Button>
                 </NavLink>
               </div>
             </motion.div>
+           </TiltCard>
           );
         })}
       </div>
@@ -128,6 +131,7 @@ const Wrapper = styled.section`
     pointer-events: none;
 
   }
+ 
   .flower{
     position: absolute;
     width: 30px;
