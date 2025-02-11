@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { GlobalStyle } from "../GlobalStyle";
 import Header from "../components/Header";
 import { Button } from "../components/Button";
 
@@ -62,69 +63,75 @@ const Service = () => {
   ];
 
   return (
-    <Wrapper>
-      <div className="imgdiv">
-        <div className="blackdiv">
-          <h2>
-            <span className="writeup">
-              {" "}
-              Wedding : Stage Decor Setup &nbsp;
-              <br />{" "}
-            </span>
-            <span className="subhead"> SunRise</span>
-          </h2>
-        </div>
-      </div>
-      <div className="container grid grid-three-column">
-        {packages.map((pkg, index) => (
-          <div key={index} className="package-card">
-            <div className="text">
-              <h3>Basic</h3>
-            </div>
-            <div className="card-content">
-              <div className="leftside">
-                <div className="top">
-                  <span>
-                    {" "}
-                    <h3>SunRise Silver Package</h3>
-                  </span>
-                </div>
-                <span>
-                  {" "}
-                  {Object.entries(pkg.features).map(([feature, value]) => (
-                    <li key={feature} className="features">
-                      <img
-                        src="https://images.wedmegood.com/react-frontend-v4/static/media/TickIcon.54f3b9aa.png"
-                        alt=""
-                      />
-                      <strong>{feature}:</strong> {value}
-                    </li>
-                  ))}
-                </span>
-              </div>
+    <>
+    <GlobalStyle/>
+     <Wrapper>
+         
 
-              <div className="rightside">
-                <div className="rupees">
-                  <span className="price-tag">
-                    {" "}
-                    <i class="fa fa-inr">
-                      {" "}
-                      &nbsp;<span className="price-val">7000</span>
-                    </i>
-                  </span>
-                </div>
-                <div className="addbtn">
-                  <span className="btn">Add &nbsp;</span>
-                  <span className="plusdiv">
-                    <i class="fa fa-plus"></i>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </Wrapper>
+         <div className="imgdiv">
+           <div className="blackdiv">
+             <h2>
+               <span className="writeup">
+                 {" "}
+                 Wedding : Stage Decor Setup &nbsp;
+                 <br />{" "}
+               </span>
+               <span className="subhead"> SunRise</span>
+             </h2>
+           </div>
+         </div>
+         <div className="container grid grid-three-column">
+           {packages.map((pkg, index) => (
+             <div key={index} className="package-card">
+               <div className="text">
+                 <h3>Basic</h3>
+               </div>
+               <div className="card-content">
+                 <div className="leftside">
+                   <div className="top">
+                     <span>
+                       {" "}
+                       <h3>SunRise Silver Package</h3>
+                     </span>
+                   </div>
+                   <span>
+                     {" "}
+                     {Object.entries(pkg.features).map(([feature, value]) => (
+                       <li key={feature} className="features">
+                         <img
+                           src="https://images.wedmegood.com/react-frontend-v4/static/media/TickIcon.54f3b9aa.png"
+                           alt=""
+                         />
+                         <strong>{feature}:</strong> {value}
+                       </li>
+                     ))}
+                   </span>
+                 </div>
+   
+                 <div className="rightside">
+                   <div className="rupees">
+                     <span className="price-tag">
+                       {" "}
+                       <i class="fa fa-inr">
+                         {" "}
+                         &nbsp;<span className="price-val">7000</span>
+                       </i>
+                     </span>
+                   </div>
+                   <div className="addbtn">
+                     <span className="btn">Add &nbsp;</span>
+                     <span className="plusdiv">
+                       <i class="fa fa-plus"></i>
+                     </span>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           ))}
+         </div>
+       </Wrapper>
+    </>
+   
   );
 };
 const Wrapper = styled.section`
@@ -254,10 +261,13 @@ const Wrapper = styled.section`
       color: white;
 
       .subhead {
-        color: #f701ff;
+        color: #D6A060;
       }
     }
   }
+
+
+
 `;
 
 export default Service;

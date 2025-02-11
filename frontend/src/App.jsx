@@ -34,7 +34,7 @@ function App() {
     <>
     
     <ThemeProvider theme={theme}>
-      
+      <GlobalStyle/>
       <BrowserRouter>
         <Navbar/>
         <div className='global-wrapper'>
