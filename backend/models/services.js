@@ -1,25 +1,13 @@
 import mongoose from "mongoose";
 
-const FeatureSchema = new mongoose.Schema({
-    venueDecoration: { type: String },
-    stageDesign: { type: String },
-    lighting: { type: String },
-    seatingArrangement: { type: String },
-    floralArrangement: { type: String },
-    centerpieces: { type: String },
-    entrySetup: { type: String },
-    mandap: { type: String },
-    soundAndDJ: { type: String },
-    fireworks: { type: String },
-    catering: { type: String },
-}, { _id: false }); // Prevents creation of unnecessary _id fields inside features
-
+// Schema for a package (Each package has different features)
 const PackageSchema = new mongoose.Schema({
-    features: { type: FeatureSchema, default: {} },
-}, { _id: false }); // Prevents unnecessary _id fields inside packages
+    features: { type: Map, of: String, default: {} }, // Dynamic key-value pairs for features
+}, { _id: false });
 
+// Main Service Schema
 const ServiceSchema = new mongoose.Schema({
-    id: { type: Number, required: true },
+    id: { type: Number, required: true, unique: true },
     name: { type: String, required: true },
     description: { type: String, required: false },
     price: { type: Number, required: true },
@@ -29,7 +17,7 @@ const ServiceSchema = new mongoose.Schema({
         premium: { type: PackageSchema, default: {} },
         elite: { type: PackageSchema, default: {} },
     },
-});
+}, { timestamps: true });
 
 const Service = mongoose.models.Services || mongoose.model("Services", ServiceSchema);
 export default Service;
