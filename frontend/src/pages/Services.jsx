@@ -78,7 +78,8 @@ function Services() {
   ];
   return (
     <>
-    {/* <FlowerRain/> */}
+    <GlobalStyle/>
+    <FlowerRain/>
     <Wrapper>
        
       <h2 className="common-heading">Our Premium Services</h2>
@@ -173,7 +174,7 @@ const Wrapper = styled.section`
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #d607b0;
+    background: #870f0f;
     color: white;
     padding: 5px 10px;
     border-radius: 8px;
@@ -198,7 +199,8 @@ const Wrapper = styled.section`
     margin: 2rem;
 
     &:hover {
-        background: linear-gradient(135deg, #d607b0, #6e0732);
+        /* background: linear-gradient(135deg, #d607b0, #6e0732); */
+        background-color: #870f0f;
         color: #ffffff;
       box-shadow: 0px 4px 10px rgba(255, 95, 162, 0.5);
     }

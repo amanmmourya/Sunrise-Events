@@ -32,7 +32,7 @@ function App() {
 
   return (  // Fixed the typo here
     <ThemeProvider theme={theme}>
-      <GlobalStyle/>
+      {/* <GlobalStyle/> */}
       <BrowserRouter>
         <Header />
         <Routes>
