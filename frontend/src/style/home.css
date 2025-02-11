@@ -1,0 +1,8 @@
+.bg-img1{
+    background-image: url('../../public/img/mrg3.jpg');
+    background-size: cover;
+}
+.mobile-sr{
+    background-image: url('../../public/img/mobile-sr.png');
+    background-size: contain;
+}

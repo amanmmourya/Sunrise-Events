@@ -9,6 +9,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 export const GlobalStyle = createGlobalStyle`
+    .global-wrapper{
     * {
         margin: 0;
         padding: 0;
@@ -16,20 +17,20 @@ export const GlobalStyle = createGlobalStyle`
         font-family: "Poppins", sans-serif /* ✅ Capital P */
     }
 
-    html {
-        font-size: 62.5%;
-        overflow-x: hidden;
-    }
+    // html {
+    //     font-size: 62.5%;
+    //     overflow-x: hidden;
+    // }
 
 
     p {
         font-family: "Poppins", sans-serif;
         font-weight: 400; /* Normal weight */
     }
-    html{
-  font-size:62.5%;
-  overflow-x:hidden;
-  }
+  //   html{
+  // font-size:62.5%;
+  // overflow-x:hidden;
+  // }
   h1{
   font-size:6rem;
   font-weight: 500;
@@ -140,10 +141,10 @@ export const GlobalStyle = createGlobalStyle`
 @media (max-width : ${({theme})=>theme.media.mobile}){
 
 
-html{
-  font-size: 50%;
-  overflow-x: hidden;
-}
+// html{
+//   font-size: 50%;
+//   overflow-x: hidden;
+// }
 .grid{
   gap: 3.2rem;
 }
@@ -153,4 +154,5 @@ html{
 
 }
 }
+    }
 `;

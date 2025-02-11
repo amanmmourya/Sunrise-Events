@@ -6,6 +6,7 @@ import { Button } from "../components/Button";
 import FlowerRain from "../components/FlowerRain";
 import TiltCard from "../components/TiltCard";
 import { motion } from "framer-motion"; // Import animation library
+import '../style/services.css'
 
 // const FlowerRain =()=>{
 //     useEffect(()=>{
@@ -80,7 +81,7 @@ function Services() {
     <>
     {/* <FlowerRain/> */}
     <Wrapper>
-       
+      <div className="service-class">
       <h2 className="common-heading">Our Premium Services</h2>
       <div className="container grid grid-three-column">
         {services.map((curElem) => {
@@ -107,6 +108,7 @@ function Services() {
            </TiltCard>
           );
         })}
+      </div>
       </div>
     </Wrapper>
     </>

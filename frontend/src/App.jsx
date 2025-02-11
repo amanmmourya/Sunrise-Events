@@ -2,11 +2,11 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './GlobalStyle';
-import Header from './components/Header';
 import Services from './pages/Services';
 import Home from './pages/Home';
 import Service from './pages/Service';
-import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import Gallery from './pages/gallery';
 function App() {
   const theme = {
     colors: {
@@ -31,20 +31,25 @@ function App() {
   };
 
   return (  // Fixed the typo here
+    <>
+    
     <ThemeProvider theme={theme}>
-      <GlobalStyle/>
+      
       <BrowserRouter>
-        <Header />
+        <Navbar/>
+        <div className='global-wrapper'>
+        <GlobalStyle/>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<><Home/></>} />
+          <Route path="/home" element={<Home/>} />
           <Route path="/services" element={<Services />} />
           <Route path="/service" element={<Service />} />
-
+          <Route path="/gallery" element={<Gallery/>}/>
         </Routes>
-        <Footer/>
+        </div>
       </BrowserRouter>
     </ThemeProvider>
+    </>
   );
 }
 

@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import Navbar from './Navbar';
 
 function Header() {
   return (
     <Wrapper>
       <div className="navbar">
-        <ul>
+        {/* <ul>
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -19,7 +20,8 @@ function Header() {
           <li>
             <NavLink to="/contact">Contact</NavLink>
           </li>
-        </ul>
+        </ul> */}
+        
       </div>
     </Wrapper>
   );
