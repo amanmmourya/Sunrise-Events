@@ -16,12 +16,9 @@
     "@tailwindcss/cli": "^4.0.6",
     "@tailwindcss/vite": "^4.0.6",
     "axios": "^1.7.9",
-<<<<<<< HEAD
-=======
     "concurrently": "^9.1.2",
     "context": "^3.0.33",
     "date-fns": "^4.1.0",
->>>>>>> 9146d1271925748550c14aef9a3b0a46b26eaec8
     "framer-motion": "^12.4.1",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.475.0",

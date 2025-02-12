@@ -56,6 +56,7 @@ function App() {
               <Route path="/contact" element={<><Contact/><MyMap/></>}/>
 
             </Routes>
+            <Footer/>
           </div>
         </BrowserRouter>
       </AppProvider>
