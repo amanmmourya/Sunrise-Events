@@ -7,7 +7,7 @@ import styled from 'styled-components'
 const Navbar = () => {
   return (
     <Wrapper>
-    <div className='mynav fixed z-20 h-50 lg:h-[11vh] w-full bg-[#870f0fdb]  lg:flex lg:justify-center lg:items-center xl:space-x-[35vw] lg:space-x-[20vw] sm:space-x-0 '>
+    <div className='mynav fixed z-20 h-40 sm:h-60 lg:h-[8vh] w-full bg-[#870f0f]  lg:flex lg:justify-center lg:items-center xl:space-x-[35vw] lg:space-x-[20vw] sm:space-x-0 '>
         <div className='flex justify-center items-center space-x-3'>
             {/* <div className='logo-sunrise h-10 w-10'></div> */}
             <h2 className='brand-name text-blue-50 font-bold lg:text-4xl sm:text-2xl'>Sunrise Events</h2>

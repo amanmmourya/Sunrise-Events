@@ -19,6 +19,7 @@ import '../index.css'
 import '../style/home.css'
 import Footer from '../components/Footer'
 import Contact from '../components/Contact'
+import Appointment from '../components/Appointment'
 import { Flower2, Landmark, Music, Sun, Package, Armchair } from 'lucide-react'
 const Home = () => {
   return (
@@ -83,7 +84,6 @@ const Home = () => {
 
         </>
         <Contact />
-        <Footer />
 
       </div>
     </Wrapper>
