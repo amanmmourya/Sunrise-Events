@@ -15,10 +15,15 @@
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@tailwindcss/cli": "^4.0.6",
     "@tailwindcss/vite": "^4.0.6",
+    "axios": "^1.7.9",
+    "concurrently": "^9.1.2",
+    "context": "^3.0.33",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.4.1",
     "lucide-react": "^0.475.0",
     "motion": "^12.4.1",
     "react": "^19.0.0",
+    "react-calendar": "^5.1.0",
     "react-datepicker": "^8.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
@@ -26,7 +31,8 @@
     "redux": "^5.0.1",
     "router-dom": "^3.0.1",
     "styled-components": "^6.1.15",
-    "swiper": "^11.2.2"
+    "swiper": "^11.2.2",
+    "use": "^3.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
@@ -39,7 +45,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "globals": "^15.14.0",
-    "postcss": "^8.5.1",
+    "postcss": "^8.5.2",
     "tailwindcss": "^4.0.6",
     "vite": "^6.1.0"
   }

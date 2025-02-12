@@ -98,8 +98,8 @@ margin-top:5vh;
 font-size:6vh
 }
 .container{
-margin-5vh;
-padding:5vh
+margin:5vh;
+padding:5vh;
 }
 .text-2xl{
 font-size:3vh

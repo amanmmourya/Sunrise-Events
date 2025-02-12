@@ -1,0 +1,157 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const Calendar = ({ selectedDate, onDateSelect }) => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
+
+  const daysInMonth = new Date(selectedYear, currentDate.getMonth() + 1, 0).getDate();
+  const firstDayOfMonth = new Date(selectedYear, currentDate.getMonth(), 1).getDay();
+
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const nextMonth = () => setCurrentDate(new Date(selectedYear, currentDate.getMonth() + 1));
+  const prevMonth = () => setCurrentDate(new Date(selectedYear, currentDate.getMonth() - 1));
+
+  const handleDateClick = (day) => {
+    const selected = new Date(selectedYear, currentDate.getMonth(), day);
+    onDateSelect(selected);
+    setShowCalendar(false);
+  };
+
+  const formatDate = (date) => date ? `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}` : '';
+
+  const handleYearChange = (e) => {
+    setSelectedYear(Number(e.target.value));
+    setCurrentDate(new Date(Number(e.target.value), currentDate.getMonth()));
+  };
+
+  const days = Array.from({ length: firstDayOfMonth }, (_, i) => <DayCell key={`empty-${i}`} />)
+    .concat(
+      Array.from({ length: daysInMonth }, (_, day) => {
+        const date = new Date(selectedYear, currentDate.getMonth(), day + 1);
+        return (
+          <DayCell key={day} onClick={() => handleDateClick(day + 1)}>
+            {day + 1}
+          </DayCell>
+        );
+      })
+    );
+
+  return (
+    <CalendarWrapper>
+      <DateInput onClick={() => setShowCalendar(!showCalendar)} value={formatDate(selectedDate)} readOnly />
+      {showCalendar && (
+        <CalendarDropdown>
+          <CalendarHeader>
+            <MonthNav onClick={prevMonth}>◀</MonthNav>
+            <MonthYear>{months[currentDate.getMonth()]}</MonthYear>
+            <YearSelect value={selectedYear} onChange={handleYearChange}>
+              {Array.from({ length: 30 }, (_, i) => 2000 + i).map(year => (
+                <option key={year} value={year}>{year}</option>
+              ))}
+            </YearSelect>
+            <MonthNav onClick={nextMonth}>▶</MonthNav>
+          </CalendarHeader>
+          <WeekDays>
+            {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
+              <WeekDay key={day}>{day}</WeekDay>
+            ))}
+          </WeekDays>
+          <DaysGrid>{days}</DaysGrid>
+        </CalendarDropdown>
+      )}
+    </CalendarWrapper>
+  );
+};
+
+const CalendarWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+const DateInput = styled.input`
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: white;
+  &:focus { border-color: #007bff; }
+  &::placeholder { color: gray; }
+`;
+
+const CalendarDropdown = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fffffe;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  width: 280px;
+`;
+
+const CalendarHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  flex: 1000;
+  z-index: 1000;
+`;
+
+const MonthNav = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  &:hover { color: #007bff; }
+`;
+
+const MonthYear = styled.span`
+  font-size: 1.4rem;
+`;
+
+const YearSelect = styled.select`
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+`;
+
+const WeekDays = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+`;
+
+const WeekDay = styled.div`
+  width: 14%;
+  text-align: center;
+  font-weight: bold;
+`;
+
+const DaysGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+`;
+
+const DayCell = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  &:hover { background: #007bff; color: white; }
+`;
+
+export default Calendar;

@@ -1,7 +1,8 @@
 import express from "express";
-import connectDB from "./config/connection.js";
+import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 import cors from "cors";
+import serviceRoutes from "./routes/serviceRoutes.js"
 
 dotenv.config();
 connectDB();
@@ -21,6 +22,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
+app.use("/services", serviceRoutes);
 
 // Start Server
 app.listen(port, () => {

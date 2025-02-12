@@ -1,23 +1,14 @@
 import mongoose from "mongoose";
 
-// Schema for a package (Each package has different features)
-const PackageSchema = new mongoose.Schema({
-    features: { type: Map, of: String, default: {} }, // Dynamic key-value pairs for features
-}, { _id: false });
+const serviceSchema = new mongoose.Schema({
+  id: { type:String },
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  price: { type: Number, required: true },
+  imageUrl: { type: String, required: true },
+});
 
-// Main Service Schema
-const ServiceSchema = new mongoose.Schema({
-    id: { type: Number, required: true, unique: true },
-    name: { type: String, required: true },
-    description: { type: String, required: false },
-    price: { type: Number, required: true },
-    imageURL: { type: String, required: true },
-    packages: {
-        exclusive: { type: PackageSchema, default: {} },
-        premium: { type: PackageSchema, default: {} },
-        elite: { type: PackageSchema, default: {} },
-    },
-}, { timestamps: true });
+const Service =
+  mongoose.models.service || mongoose.model("service", serviceSchema);
 
-const Service = mongoose.models.Services || mongoose.model("Services", ServiceSchema);
 export default Service;
