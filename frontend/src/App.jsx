@@ -4,12 +4,15 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './GlobalStyle';
 import Services from './pages/Services';
 import Home from './pages/Home';
-import Service from './pages/Service';
 import Navbar from './components/Navbar';
 import Gallery from './pages/gallery';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
 import  MyMap from './components/Map'
+import Service from './pages/service';
+import { AppProvider } from './Context'; // ✅ Import AppProvider
+import Appointment from './components/Appointment';
+
 function App() {
   const theme = {
     colors: {
@@ -33,29 +36,30 @@ function App() {
     }
   };
 
-  return (  // Fixed the typo here
-    <>
-    
+  return (
     <ThemeProvider theme={theme}>
-      {/* <GlobalStyle/> */}
-      <BrowserRouter>
-        <Navbar/>
-        <div className='global-wrapper'>
-        <GlobalStyle/>
-        <Routes>
-          <Route path="/" element={<><Home/></>} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/service" element={<Service />} />
-          <Route path="/gallery" element={<Gallery/>}/>
-          <Route path="/book" element={<Services/>}/>
-          <Route path="/contact" element={<><Contact/><MyMap/></>}/>
-        </Routes>
-        <Footer/>
-        </div>
-      </BrowserRouter>
+             
+
+      <AppProvider>
+        <BrowserRouter>
+          <div className='global-wrapper'>
+          <Navbar/>
+            <Routes>
+            
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/service" element={<Service />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/appointment" element={<Appointment />} />
+              <Route path="/book" element={<Services/>}/>
+              <Route path="/contact" element={<><Contact/><MyMap/></>}/>
+
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </AppProvider>
     </ThemeProvider>
-    </>
   );
 }
 
