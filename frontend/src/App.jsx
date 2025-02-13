@@ -6,12 +6,16 @@ import Services from './pages/Services';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Gallery from './pages/gallery';
+import Login from './pages/login';
+import Signup from './pages/SignUp';
+import AdminLogin from './pages/AdminLogin';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
 import  MyMap from './components/Map'
 import Service from './pages/service';
 import { AppProvider } from './Context'; // ✅ Import AppProvider
 import Appointment from './components/Appointment';
+<<<<<<< HEAD
 import NewDash from './components/NewDash';
 import Error from './pages/Error';
 import Gototop from './components/Gototop';
@@ -26,6 +30,9 @@ import ServicesUpdate from './pages/ServicesUpdate';
 import Help from './pages/Help';
 import Header from './components/Header';
 
+=======
+import Admin from './pages/Admin';
+>>>>>>> 121f08c99798298687265529da08f0639ec30ea0
 
 function App() {
   const theme = {
@@ -68,6 +75,7 @@ function App() {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/appointment" element={<Appointment />} />
               <Route path="/contact" element={<><Contact/><MyMap/></>}/>
+<<<<<<< HEAD
               <Route path="/admin/appointments" element={<Appointments />} />
               <Route path="/admin/services-update" element={<ServicesUpdate />} />
               <Route path="/view-analytics" element={<Reports />} />
@@ -83,6 +91,12 @@ function App() {
 
               
 
+=======
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/signup" element={<Signup/>}/>
+              <Route path="/adminlogin" element={<AdminLogin/>}/>
+              <Route path="/admin" element={<Admin/>} />
+>>>>>>> 121f08c99798298687265529da08f0639ec30ea0
             </Routes>
             <Footer/>
           </div>

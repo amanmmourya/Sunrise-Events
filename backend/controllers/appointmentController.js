@@ -5,7 +5,7 @@ const bookSlots = async (req, res) => {
 console.log("in the bookslots backend ")
     console.log(req.body);
     const {
-       
+        
         name,
         email,
         phone,

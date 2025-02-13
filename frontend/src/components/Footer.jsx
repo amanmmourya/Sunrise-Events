@@ -1,29 +1,148 @@
+import React from 'react';
+import styled from 'styled-components';
+import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
 
-import React from 'react'
-import styled from 'styled-components'
 const Footer = () => {
     return (
-        <>
-            <Wrapper>
-            <div className='flex justify-around bg-black text-white h-[8vh] text-lg'>
-
-                <div className="leftbar flex justify-center items-center space-x-7">
-                    <div className='item_ '>&copy; 2025</div>
-                    <div className='item_ '>SunriseEvents</div>
+        <FooterWrapper>
+            <div className="footer-container">
+                <div className="footer-section about">
+                    <h3>Sunrise Events</h3>
+                    <p className='footer-text'>Your one-stop destination for unforgettable events.</p>
                 </div>
-                <span className="rightbar flex justify-center items-center space-x-10">
-                    <div className='item_ ' >Terms & Coditions</div>
-                    <div className='item_ '>Privacy Policy</div>
-                </span>
-            </div>
-            </Wrapper>
-        </>
 
-    )
+                <div className="footer-section links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li>Home</li>
+                        <li>Services</li>
+                        <li>Gallery</li>
+                        <li>Contact</li>
+                    </ul>
+                </div>
+
+                <div className="footer-section social">
+                    <h4>Follow Us</h4>
+                    <div className="social-icons">
+                        <FaFacebook />
+                        <FaInstagram />
+                        <FaTwitter />
+                        <FaLinkedin />
+                    </div>
+                </div>
+
+                <div className="footer-section newsletter">
+                    <h4>Subscribe to Our Newsletter</h4>
+                    <input type="email" placeholder="Enter your email" />
+                    <button>Subscribe</button>
+                </div>
+            </div>
+
+            <div className="footer-bottom">
+                <p className='footer-text'>&copy; 2025 Sunrise Events | Terms & Conditions | Privacy Policy</p>
+            </div>
+        </FooterWrapper>
+    );
+};
+
+const FooterWrapper = styled.footer`
+.footer-text{
+color:white;
 }
-const Wrapper=styled.section`
-.item_{
-margin-left:3vh
-}
-`
-export default Footer
+    background-color: #000;
+    color: #fff;
+    padding: 3vh 5vw;
+
+    .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 2vw;
+        margin-bottom: 2vh;
+    }
+
+    .footer-section {
+        flex: 1 1 20%;
+        margin-bottom: 2vh;
+    }
+
+    .about h3 {
+        font-size: 2.5vh;
+        margin-bottom: 1vh;
+    }
+
+    .links ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .links li {
+        margin: 0.5vh 0;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .links li:hover {
+        color: #e0aa3e;
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 1vw;
+        font-size: 2.5vh;
+        margin-top: 1vh;
+        cursor: pointer;
+    }
+
+    .social-icons svg:hover {
+        color: #e0aa3e;
+    }
+
+    .newsletter input {
+        padding: 0.5vh 1vw;
+        margin-top: 1vh;
+        border: none;
+        border-radius: 5px;
+        width: 80%;
+    }
+
+    .newsletter button {
+        margin-top: 1vh;
+        padding: 0.5vh 2vw;
+        background-color: #e0aa3e;
+        border: none;
+        color: #000;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .newsletter button:hover {
+        background-color: #c7952e;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        border-top: 1px solid #333;
+        padding-top: 2vh;
+        font-size: 1.5vh;
+    }
+
+    @media (max-width: 768px) {
+        .footer-container {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-section {
+            flex: 1 1 100%;
+            margin-bottom: 3vh;
+        }
+
+        .social-icons {
+            justify-content: center;
+        }
+    }
+`;
+
+export default Footer;
