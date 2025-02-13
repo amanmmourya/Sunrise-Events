@@ -6,6 +6,9 @@ import Services from './pages/Services';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Gallery from './pages/gallery';
+import Footer from './components/Footer';
+import Contact from './components/Contact';
+import  MyMap from './components/Map'
 import Service from './pages/service';
 import { AppProvider } from './Context'; // ✅ Import AppProvider
 import Appointment from './components/Appointment';
@@ -36,7 +39,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
              
-
+    
       <AppProvider>
         <BrowserRouter>
           <div className='global-wrapper'>
@@ -49,8 +52,10 @@ function App() {
               <Route path="/service" element={<Service />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/appointment" element={<Appointment />} />
+              <Route path="/contact" element={<><Contact/><MyMap/></>}/>
 
             </Routes>
+            <Footer/>
           </div>
         </BrowserRouter>
       </AppProvider>

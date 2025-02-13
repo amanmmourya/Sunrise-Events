@@ -5,4 +5,6 @@
 .mobile-sr{
     background-image: url('../../public/img/mobile-sr.png');
     background-size: contain;
+    color: #d37575;
+
 }

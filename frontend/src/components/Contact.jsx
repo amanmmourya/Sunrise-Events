@@ -16,12 +16,12 @@ const Contact = () => {
                     <div className='inline-block'>
                         <div className='small-heading font-medium'>For Vendors</div>
                         <div className='big-text'>sunrisevents01@gmail.com</div>
-                        <div className='big-text'>+91 7854239892</div>
+                        <div className='big-text'>+91 07942701066</div>
                     </div>
                     <div className='inline-block'>
                         <div className='small-heading font-medium'>For Customers</div>
                         <div className='big-text'>sunrisevents01@gmail.com</div>
-                        <div className='big-text'>+91 7854239892</div>
+                        <div className='big-text'>+91 07942701066</div>
                     </div>
                     
                 </div>
@@ -33,13 +33,13 @@ const Contact = () => {
                 Follow us on
                 </div >
                     <div className="instagram flex space-y-2">
-                        <FaInstagram size={28} className='mx-2 big-text1'/><div className='big-text inline-block'>Insta id</div>
+                        <FaInstagram size={28} className='mx-2 big-text1'/><div className='big-text inline-block'><a href="https://www.instagram.com/sunriseevents.in/">Instagram</a></div>
                     </div>
                     <div className="facebook flex space-y-2">
-                        <FaFacebook size={28} className='mx-2 big-text1'/><div className='big-text inline-block'>Facebook id</div>
+                        <FaFacebook size={28} className='mx-2 big-text1'/><div className='big-text inline-block'><a href="https://www.facebook.com/SunriseEvent.in/">Facebook</a></div>
                     </div>
                     <div className="twitter flex space-y-2">
-                        <FaTwitter size={28} className='mx-2 big-text1 '/><div className='big-text inline-block'>Twitter id</div>
+                        <FaTwitter size={28} className='mx-2 big-text1 '/><div className='big-text inline-block'>Twitter</div>
                     
                     </div>
                 <div>
