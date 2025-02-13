@@ -22,4 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-./src/.env
+
+node_modules/
+.env
+# Ignore .env file
+frontend/.env
+
+# Ignore node_modules folder
+node_modules/
+.env

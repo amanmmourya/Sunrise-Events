@@ -21,49 +21,48 @@ const FlowerRainContainer = styled.div`
   .flower {
     position: absolute;
     font-size: 2rem;
-    animation: ${fall} linear infinite;
+    animation: ${fall} linear;
     text-shadow: 0px 0px 8px rgba(255, 192, 203, 0.7); /* Soft pink glow */
   }
 `;
 
 const FlowerRain = () => {
-  const flowerTypes = ["🌸", "🌿", "🍂", "🍁","🌷","🌻","🌹","🌺" ];
-
-  const getRandomFlower = () => {
-    return flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
-  };
-
-  const generateFlowers = () => {
-    return Array.from({ length: 100 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100, // Random left position (0 to 100vw)
-      animationDuration: Math.random() * 3 + 2, // Duration between 2-5 seconds
-    }));
-  };
-
+  const flowerTypes = ["🌸", "🌿", "🍂", "🍁", "🌷", "🌻", "🌹", "🌺"];
   const [flowers, setFlowers] = useState([]);
 
   useEffect(() => {
-    setFlowers(generateFlowers());
+    setFlowers(
+      Array.from({ length: 100 }, (_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        animationDuration: Math.random() * 3 + 2, // Duration between 2-5 seconds
+      }))
+    );
+
+    // Clear flowers after 2 seconds
+    const timer = setTimeout(() => {
+      setFlowers([]);
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <FlowerRainContainer>
-     {flowers.map((flower) => (
-  <span
-    key={flower.id}
-    className="flower"
-    style={{
-      left: `${flower.left}vw`,
-      animationDuration: `${flower.animationDuration}s`,
-      fontSize: `${Math.random() * 1.5 + 1}rem`, // Random size between 1rem - 2.5rem
-      opacity: Math.random() * 0.5 + 0.5, // Opacity between 0.5 - 1 for depth effect
-    }}
-  >
-    {getRandomFlower()}
-  </span>
-))}
-
+      {flowers.map((flower) => (
+        <span
+          key={flower.id}
+          className="flower"
+          style={{
+            left: `${flower.left}vw`,
+            animationDuration: `${flower.animationDuration}s`,
+            fontSize: `${Math.random() * 1.5 + 1}rem`,
+            opacity: Math.random() * 0.5 + 0.5,
+          }}
+        >
+          {flowerTypes[Math.floor(Math.random() * flowerTypes.length)]}
+        </span>
+      ))}
     </FlowerRainContainer>
   );
 };

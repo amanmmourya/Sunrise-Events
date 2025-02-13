@@ -7,6 +7,7 @@ import FlowerRain from "../components/FlowerRain";
 import TiltCard from "../components/TiltCard";
 import { motion } from "framer-motion"; // Import animation library
 import '../style/services.css'
+import { useGlobalContext } from "../Context";
 
 // const FlowerRain =()=>{
 //     useEffect(()=>{
@@ -26,57 +27,10 @@ import '../style/services.css'
 // };
 
 function Services() {
+const {services} = useGlobalContext();
 
-  const services = [
-    {
-      id: 1,
-      name: "Wedding Decoration",
-      description: "Elegant wedding decor setup.",
-      imageUrl:
-        "https://media.istockphoto.com/id/2184339557/photo/close-up-of-groom-hand-holding-brides-hand-at-an-indian-wedding-concept-of-marriage.jpg?s=612x612&w=0&k=20&c=Sv70AYZy1pZV8PenDmwGkMuL766O9_pDdti-befKcxA=",
-      price: 25000,
-    },
-    {
-      id: 2,
-      name: "Reception Setup",
-      description: "Grand reception stage design.",
-      imageUrl:
-        "https://media.istockphoto.com/id/1479367454/photo/several-different-types-of-lit-candles-on-a-long-table-with-other-items.jpg?s=612x612&w=0&k=20&c=OT7k7JU1OVyitOJ9bdrrLrkMK1RjECnFg2kfiofqR30=",
-      price: 30000,
-    },
-    {
-      id: 3,
-      name: "Sangeet Decoration",
-      description: "Vibrant stage and lights.",
-      imageUrl:
-        "https://media.istockphoto.com/id/1876301260/photo/a-decorated-stage-for-haldi-ceremony.jpg?s=612x612&w=0&k=20&c=rT9TRFlj6oWUh2LIrM-Bx2-lC4mqK81fWw3Xtr-EKjE=",
-      price: 20000,
-    },
-    {
-      id: 4,
-      name: "Haldi Decoration",
-      description: "Bright yellow floral decor.",
-      imageUrl:
-        "https://media.istockphoto.com/id/2121901483/photo/close-up-shot-of-a-bride-and-groom-embracing-love-during-their-haldi-ceremony.jpg?s=612x612&w=0&k=20&c=QWY2lkUpRSrpjH9Qe8ijWPKGBcn6ic0YcpwhSUm6jtQ=",
-      price: 15000,
-    },
-    {
-        id: 5,
-        name: "Rental Furniture",
-        description: "Luxurious seating and tables.",
-        imageUrl:
-          "https://media.istockphoto.com/id/1323178494/photo/image-of-a-white-wedding-chair.jpg?s=612x612&w=0&k=20&c=kgSMTb6gCQ1TfQIp5cN1BcLfG5oeIIAmfXQ2HHsEQyA=",
-        price: 10000,
-      },
-      {
-        id: 6,
-        name: "Sitting Arrangement",
-        description: "Elegant event seating setup.",
-        imageUrl:
-          "https://media.istockphoto.com/id/178728249/photo/ballroom-western-restaurant.jpg?s=612x612&w=0&k=20&c=_eXG2bsIuz1LQAkv7Bh27Gt93AFYWlNgCHoxWLB51ZE=",
-        price: 10000,
-      },
-  ];
+console.log(services);
+ 
   return (
     <>
     <GlobalStyle/>
@@ -88,7 +42,6 @@ function Services() {
         {services.map((curElem) => {
           const { id, name, description, imageUrl, price } = curElem;
           return (
-           <TiltCard>
              <motion.div
               className="card"
               key={id}
@@ -101,12 +54,11 @@ function Services() {
               <div className="card-data">
                 <h3>{name}</h3>
                 <p>{description}</p>
-                <NavLink to="/service">
+                <NavLink to="/appointment" state={{service:{id,name,price}}}>
                   <Button className="btn">Know More</Button>
                 </NavLink>
               </div>
             </motion.div>
-           </TiltCard>
           );
         })}
       </div>
@@ -220,7 +172,7 @@ const Wrapper = styled.section`
       left: 0;
       width: 0%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      /* background-color: rgba(190, 24, 24, 0.2); */
       transition: all 0.2s linear;
       cursor: pointer;
     }

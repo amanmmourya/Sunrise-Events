@@ -1,12 +1,16 @@
 import express from "express";
-// import connectDB from "./config/connection.js";
 import dotenv from "dotenv";
 import cors from "cors";
 import userRouter from "./routes/userRoutes.js"
 import flash from "connect-flash"
 
+import connectDB from "./config/db.js";
+ 
+ 
+import serviceRoutes from "./routes/serviceRoutes.js"
+import appointmentRoutes from "./routes/appointment.js"
 dotenv.config();
-// connectDB();
+connectDB();
 
 const app = express();
 const port = process.env.PORT || 5000; // Use environment variable for port
@@ -30,6 +34,9 @@ app.use(cors(corsOptions));
  
 // Routes
 app.use("/",userRouter)
+app.use("/services", serviceRoutes);
+app.use("/appointment", appointmentRoutes);
+
 
 // Start Server
 app.listen(port, () => {
