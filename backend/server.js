@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import serviceRoutes from "./routes/serviceRoutes.js"
 import appointmentRoutes from "./routes/appointment.js"
+import dashRoutes from "./routes/dashRoutes.js";
+
 dotenv.config();
 connectDB();
 
@@ -24,6 +26,8 @@ app.use(express.json());
 // Routes
 app.use("/services", serviceRoutes);
 app.use("/appointment", appointmentRoutes);
+app.use("/dashboard", dashRoutes);
+
 
 
 // Start Server

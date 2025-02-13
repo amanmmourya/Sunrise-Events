@@ -1,43 +1,223 @@
-import React from 'react'
-// import '../style/navbar.css'
-import '../output.css'
-import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
+"use client"
+
+import { useState } from "react"
+import { NavLink } from "react-router-dom"
+import styled from "styled-components"
+import { FaUser, FaBars, FaTimes } from "react-icons/fa"
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
+
+  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleProfile = () => setIsProfileOpen(!isProfileOpen)
+
   return (
-    <Wrapper>
-    <div className='mynav fixed z-20 h-40 sm:h-60 lg:h-[8vh] w-full bg-[#870f0f]  lg:flex lg:justify-center lg:items-center xl:space-x-[35vw] lg:space-x-[20vw] sm:space-x-0 '>
-        <div className='flex justify-center items-center space-x-3'>
-            {/* <div className='logo-sunrise h-10 w-10'></div> */}
-            <h2 className='brand-name text-blue-50 font-bold lg:text-4xl sm:text-2xl'>Sunrise Events</h2>
-        </div>
-        <div className='lg:flex lg:justify-center lg:items-center'>
-            <NavLink to={'/home'} className='navbar-items  text-white text-lg lg:text-xl mx-3 cursor-pointer hover:text-[#e0aa3e]'>Home</NavLink>
-            <NavLink to={'/services'} className='navbar-items  text-white text-lg lg:text-xl mx-3 cursor-pointer hover:text-[#e0aa3e]'>Services</NavLink>
-            <NavLink to={'/gallery'} className='navbar-items  text-white text-lg lg:text-xl mx-3 cursor-pointer hover:text-[#e0aa3e]'>Gallery</NavLink>
-            <NavLink to={'/contact'} className='navbar-items  text-white text-lg lg:text-xl mx-3 cursor-pointer hover:text-[#e0aa3e]'>Contact</NavLink>
-            <NavLink to={'/signin'} className='book-btn hover:scale-[1.02] bg-red-500 text-center mt-2 lg:mt-0 w-28 ml-2 lg:p-2 lg:px-4 lg:w-36 sm:w-28 sm:px-2 sm:p-1 rounded-2xl lg:text-xl lg:font-medium sm:text-sm sm:font-medium  text-white'>Sign In</NavLink>
-            <NavLink to={'/admin-signin'} className='book-btn hover:scale-[1.02] bg-red-500 text-white text-center mt-2 lg:mt-0 w-28 ml-2 lg:p-2 lg:px-4 lg:w-36 sm:w-28 sm:px-2 sm:p-1 rounded-2xl lg:text-xl lg:font-medium sm:text-sm sm:font-medium'>Sign in as Admin</NavLink>
+    <NavWrapper>
+      <NavContainer>
+        <LogoContainer>
+          <LogoImage className="logo-sunrise" />
+          <BrandName>Sunrise Events</BrandName>
+        </LogoContainer>
 
-        </div>
+        <MenuIcon onClick={toggleMenu}>{isOpen ? <FaTimes /> : <FaBars />}</MenuIcon>
 
-    </div>
-    </Wrapper>
+        <NavMenu isOpen={isOpen}>
+          <NavItem>
+            <NavLink to="/home" activeClassName="active">
+              Home
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/services" activeClassName="active">
+              Services
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/gallery" activeClassName="active">
+              Gallery
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/contact" activeClassName="active">
+              Contact
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <SignInButton to="/signin">Sign In</SignInButton>
+          </NavItem>
+          <NavItem>
+            <AdminSignInButton to="/admin-signin">Sign in as Admin</AdminSignInButton>
+          </NavItem>
+          <ProfileContainer>
+            <ProfileIcon onClick={toggleProfile}>
+              <FaUser />
+            </ProfileIcon>
+            <ProfileDropdown isOpen={isProfileOpen}>
+              <DropdownItem to="/profile">Profile</DropdownItem>
+              <DropdownItem to="/settings">Settings</DropdownItem>
+              <DropdownItem to="/help">Help</DropdownItem>
+              <DropdownItem to="/about">About</DropdownItem>
+            </ProfileDropdown>
+          </ProfileContainer>
+        </NavMenu>
+      </NavContainer>
+    </NavWrapper>
   )
 }
-const Wrapper=styled.section`
-.brand-name{
-font-size:5vh;
-color:white;
-font-weight:500;
-}
-.navbar-items{
-font-size:2vh}
-.book-btn{
-font-size:2vh;
-width:auto
-}
+
+const NavWrapper = styled.nav`
+  background-color: #870f0f;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+`
+
+const NavContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+`
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const LogoImage = styled.div`
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 1rem;
+`
+
+const BrandName = styled.h1`
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: 700;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+`
+
+const MenuIcon = styled.div`
+  display: none;
+  font-size: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`
+
+const NavMenu = styled.ul`
+  display: flex;
+  align-items: center;
+  list-style: none;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #870f0f;
+    padding: 1rem 0;
+    display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+  }
+`
+
+const NavItem = styled.li`
+  margin: 0 1rem;
+
+  @media (max-width: 768px) {
+    margin: 0.5rem 0;
+  }
+
+  a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+
+    &:hover, &.active {
+      color: #e0aa3e;
+    }
+  }
+`
+
+const SignInButton = styled(NavLink)`
+  background-color: #e0aa3e;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #c99c3a;
+    transform: translateY(-2px);
+  }
+`
+
+const AdminSignInButton = styled(SignInButton)`
+  background-color: #1e90ff;
+
+  &:hover {
+    background-color: #187bcd;
+  }
+`
+
+const ProfileContainer = styled.div`
+  position: relative;
+`
+
+const ProfileIcon = styled.div`
+  font-size: 1.2rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #e0aa3e;
+  }
+`
+
+const ProfileDropdown = styled.div`
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+  min-width: 150px;
+`
+
+const DropdownItem = styled(NavLink)`
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #333333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
 `
 
 export default Navbar
+

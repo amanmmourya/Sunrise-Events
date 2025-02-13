@@ -12,6 +12,20 @@ import  MyMap from './components/Map'
 import Service from './pages/service';
 import { AppProvider } from './Context'; // ✅ Import AppProvider
 import Appointment from './components/Appointment';
+import NewDash from './components/NewDash';
+import Error from './pages/Error';
+import Gototop from './components/Gototop';
+import Confirmation from './pages/Confirmation';
+import Appointments from './components/Appointments';
+import Reports from './components/Reports';
+import AdminBox from './components/AdminBox';
+import Menubox from './components/Menubox';
+import SettingPage from './pages/SettingPage';
+import PrivateRoute from './components/PrivateRoute';
+import ServicesUpdate from './pages/ServicesUpdate';
+import Help from './pages/Help';
+import Header from './components/Header';
+
 
 function App() {
   const theme = {
@@ -43,9 +57,10 @@ function App() {
       <AppProvider>
         <BrowserRouter>
           <div className='global-wrapper'>
-          <Navbar/>
+            <Navbar/>
             <Routes>
-            
+            <Route path="/admin" element={<NewDash />} />
+
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/services" element={<Services />} />
@@ -53,6 +68,20 @@ function App() {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/appointment" element={<Appointment />} />
               <Route path="/contact" element={<><Contact/><MyMap/></>}/>
+              <Route path="/admin/appointments" element={<Appointments />} />
+              <Route path="/admin/services-update" element={<ServicesUpdate />} />
+              <Route path="/view-analytics" element={<Reports />} />
+              <Route path="/admin/settings" element={<SettingPage />} />
+              <Route path="/adminbox" element={<AdminBox />} />
+              <Route path="/menubox" element={<Menubox />} />
+              <Route path="/confirmation" element={<Confirmation />} />
+              <Route path="/help" element={<Help />} />
+              <Route path="*" element={<Error />} />
+
+
+
+
+              
 
             </Routes>
             <Footer/>
