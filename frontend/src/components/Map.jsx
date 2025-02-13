@@ -58,10 +58,10 @@ const MyMap = () => {
         <div className="p-4 bg-gradient-to-r bg-[#f2dfdf]">
           <h2 className="heading text-2xl font-bold text-center text-[#870f0f] bg-red-50 flex items-center">
             
-           <div className='m-2'>Our Location</div>
-           <MapPin className="mr-2" />
+           <div className='m-2 our-location'>Our Location</div>
+           <MapPin className="mr-2 pin" />
           </h2>
-          <p className="address text-center text-blue-100 mt-1">{companyAddress}</p>
+          <p className="address text-center mt-1">{companyAddress}</p>
         </div>
         <div className='upper-cont'>
         <div className="map-cont h-[500px] relative">
@@ -92,6 +92,12 @@ const MyMap = () => {
   );
 };
 const Wrapper=styled.section`
+.address{
+font-size:large;
+}
+.our-location{
+font-size:3vw;
+}
 .heading{
 background-color:#f2dfdf;
 display:flex;

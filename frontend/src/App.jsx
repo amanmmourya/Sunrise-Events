@@ -39,7 +39,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
              
-
+    
       <AppProvider>
         <BrowserRouter>
           <div className='global-wrapper'>
@@ -52,7 +52,6 @@ function App() {
               <Route path="/service" element={<Service />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/appointment" element={<Appointment />} />
-              <Route path="/book" element={<Services/>}/>
               <Route path="/contact" element={<><Contact/><MyMap/></>}/>
 
             </Routes>

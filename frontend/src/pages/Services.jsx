@@ -42,7 +42,7 @@ console.log(services);
         {services.map((curElem) => {
           const { id, name, description, imageUrl, price } = curElem;
           return (
-           <TiltCard>
+           <TiltCard key={id}>
              <motion.div
               className="card"
               key={id}
