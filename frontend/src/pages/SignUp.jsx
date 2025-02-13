@@ -12,30 +12,33 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Signing up with:", { name, email, password, confirmPassword });
-  if(password===confirmPassword){
-    await fetch('http://localhost:5000/signup',{
+  // if(password===confirmPassword){
+ let r=   await fetch('http://localhost:5000/signup',{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
       },
       body: JSON.stringify({
-        "name":name,
+        "username":name,
         "email":email,
         "password":password,
         "confirmPassword":confirmPassword,
     }),
     })
+console.log(r);
+
+
       console.log({
-        "name":name,
+        "username":name,
         "email":email,
         "password":password,
         "confirmPassword":confirmPassword,
     })
-    console.log("successfull added");
+
     
-  }else{
+  // }else{
     // req.flash("error", "Password and confirm password should be same ");
-  }
+  // }
   };
 
   return (

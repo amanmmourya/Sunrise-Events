@@ -6,18 +6,15 @@ import Services from './pages/Services';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Gallery from './pages/gallery';
-<<<<<<< HEAD
 import Login from './pages/login';
 import Signup from './pages/SignUp';
-
-=======
+import AdminLogin from './pages/AdminLogin';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
 import  MyMap from './components/Map'
 import Service from './pages/service';
 import { AppProvider } from './Context'; // ✅ Import AppProvider
 import Appointment from './components/Appointment';
->>>>>>> 5f2f04a1773adca5b3a3fb2c5a2b9c384cd5286b
 
 function App() {
   const theme = {
@@ -44,24 +41,6 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-<<<<<<< HEAD
-      {/* <GlobalStyle/> */}
-      <BrowserRouter>
-        <Navbar/>
-        <div className='global-wrapper'>
-        {/* <GlobalStyle/> */}
-        <Routes>
-          <Route path="/" element={<><Home/></>} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/service" element={<Service />} />
-          <Route path="/gallery" element={<Gallery/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/signup" element={<Signup/>}/>
-        </Routes>
-        </div>
-      </BrowserRouter>
-=======
              
     
       <AppProvider>
@@ -77,13 +56,14 @@ function App() {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/appointment" element={<Appointment />} />
               <Route path="/contact" element={<><Contact/><MyMap/></>}/>
-
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/signup" element={<Signup/>}/>
+              <Route path="/adminlogin" element={<AdminLogin/>}/>
             </Routes>
             <Footer/>
           </div>
         </BrowserRouter>
       </AppProvider>
->>>>>>> 5f2f04a1773adca5b3a3fb2c5a2b9c384cd5286b
     </ThemeProvider>
   );
 }

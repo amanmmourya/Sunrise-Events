@@ -17,8 +17,8 @@ const Navbar = () => {
             <NavLink to={'/services'} className='navbar-items  text-white text-lg lg:text-xl mx-3 cursor-pointer hover:text-[#e0aa3e]'>Services</NavLink>
             <NavLink to={'/gallery'} className='navbar-items  text-white text-lg lg:text-xl mx-3 cursor-pointer hover:text-[#e0aa3e]'>Gallery</NavLink>
             <NavLink to={'/contact'} className='navbar-items  text-white text-lg lg:text-xl mx-3 cursor-pointer hover:text-[#e0aa3e]'>Contact</NavLink>
-            <NavLink to={'/signin'} className='book-btn hover:scale-[1.02] bg-red-500 text-center mt-2 lg:mt-0 w-28 ml-2 lg:p-2 lg:px-4 lg:w-36 sm:w-28 sm:px-2 sm:p-1 rounded-2xl lg:text-xl lg:font-medium sm:text-sm sm:font-medium  text-white'>Sign In</NavLink>
-            <NavLink to={'/admin-signin'} className='book-btn hover:scale-[1.02] bg-red-500 text-white text-center mt-2 lg:mt-0 w-28 ml-2 lg:p-2 lg:px-4 lg:w-36 sm:w-28 sm:px-2 sm:p-1 rounded-2xl lg:text-xl lg:font-medium sm:text-sm sm:font-medium'>Sign in as Admin</NavLink>
+            <NavLink to={'/login'} className='book-btn hover:scale-[1.02] bg-red-500 text-center mt-2 lg:mt-0 w-28 ml-2 lg:p-2 lg:px-4 lg:w-36 sm:w-28 sm:px-2 sm:p-1 rounded-2xl lg:text-xl lg:font-medium sm:text-sm sm:font-medium  text-white'>Log In</NavLink>
+            <NavLink to={'/adminlogin'} className='book-btn hover:scale-[1.02] bg-red-500 text-white text-center mt-2 lg:mt-0 w-28 ml-2 lg:p-2 lg:px-4 lg:w-36 sm:w-28 sm:px-2 sm:p-1 rounded-2xl lg:text-xl lg:font-medium sm:text-sm sm:font-medium'>Sign in as Admin</NavLink>
 
         </div>
 
