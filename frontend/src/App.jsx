@@ -12,6 +12,7 @@ import  MyMap from './components/Map'
 import Service from './pages/service';
 import { AppProvider } from './Context'; // ✅ Import AppProvider
 import Appointment from './components/Appointment';
+import Admin from './pages/Admin';
 
 function App() {
   const theme = {
@@ -53,7 +54,7 @@ function App() {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/appointment" element={<Appointment />} />
               <Route path="/contact" element={<><Contact/><MyMap/></>}/>
-
+              <Route path="/admin" element={<Admin/>} />
             </Routes>
             <Footer/>
           </div>

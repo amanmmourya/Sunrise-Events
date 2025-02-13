@@ -14,7 +14,7 @@ import styled from 'styled-components'
 
 const Gallery = () => {
   const [imgoW, setImgoW] = useState([]);
-  const [imgoR, setImgoR] = useState([]);
+  // const [imgoR, setImgoR] = useState([]);
   const [imgoS, setImgoS] = useState([]);
   const [imgoH, setImgoH] = useState([]);
   useEffect(() => {
@@ -39,25 +39,25 @@ const Gallery = () => {
 
     fetchImagesW();
     // For Reception
-    const fetchImagesR = async () => {
-      const folderId = "10M9F_BvmRraw9iT5-ZS5ndP9FtiW6kln"; // Your folder ID
-      const apiKey = "AIzaSyD6YPEniA0tbg8tIp_pRPrFGPIkTa0AX9Q"; // Your API Key
+    // const fetchImagesR = async () => {
+    //   const folderId = "10M9F_BvmRraw9iT5-ZS5ndP9FtiW6kln"; // Your folder ID
+    //   const apiKey = "AIzaSyD6YPEniA0tbg8tIp_pRPrFGPIkTa0AX9Q"; // Your API Key
 
-      const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&fields=files(id,name,mimeType)&key=${apiKey}`;
+    //   const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&fields=files(id,name,mimeType)&key=${apiKey}`;
 
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-        console.log("new check", data.files);
-        setImgoR(data.files);
+    //   try {
+    //     const response = await fetch(url);
+    //     const data = await response.json();
+    //     console.log(data);
+    //     console.log("new check", data.files);
+    //     setImgoR(data.files);
 
-      } catch (error) {
-        console.error("Error fetching images:", error);
-      }
-    };
+    //   } catch (error) {
+    //     console.error("Error fetching images:", error);
+    //   }
+    // };
 
-    fetchImagesR();
+    // fetchImagesR();
     // For Sangeet
     const fetchImagesS = async () => {
       const folderId = "1YXWoMYlmJ8Ri7dLmAtKMNVUuN-imYfjz"; // Your folder ID
@@ -106,17 +106,17 @@ const Gallery = () => {
       '../../public/img/mrg3.jpg',
 
     ],
-    Reception: [
+    // Reception: [
+    //   '../../public/img/mrg3.jpg',
+
+
+    // ],
+    BabyShower: [
       '../../public/img/mrg3.jpg',
 
 
     ],
-    Sangeet: [
-      '../../public/img/mrg3.jpg',
-
-
-    ],
-    Haldi: [
+    Birthday: [
       '../../public/img/mrg3.jpg',
 
 
@@ -125,14 +125,14 @@ const Gallery = () => {
   imgoW.forEach((image) => (
     eventImages.Wedding.push(`https://drive.google.com/thumbnail?id=${image.id}&authuser=0`)
   ));
-  imgoR.forEach((image) => (
-    eventImages.Reception.push(`https://drive.google.com/thumbnail?id=${image.id}&authuser=0`)
-  ));
+  // imgoR.forEach((image) => (
+  //   eventImages.Reception.push(`https://drive.google.com/thumbnail?id=${image.id}&authuser=0`)
+  // ));
   imgoS.forEach((image) => (
-    eventImages.Sangeet.push(`https://drive.google.com/thumbnail?id=${image.id}&authuser=0`)
+    eventImages.BabyShower.push(`https://drive.google.com/thumbnail?id=${image.id}&authuser=0`)
   ));
   imgoH.forEach((image) => (
-    eventImages.Haldi.push(`https://drive.google.com/thumbnail?id=${image.id}&authuser=0`)
+    eventImages.Birthday.push(`https://drive.google.com/thumbnail?id=${image.id}&authuser=0`)
   ));
   // console.log(imgo)
 
@@ -187,6 +187,10 @@ const Gallery = () => {
 const Wrapper = styled.section`
 .cont{
 padding:5%;
+background-color:rgb(223, 210, 210);
+}
+.gallery-container{
+border-radius:2%;
 }
 .gallery-heading{
 color:#1A090D;

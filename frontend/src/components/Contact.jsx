@@ -1,88 +1,137 @@
-import React from 'react'
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
-import '../style/home.css'
+import React from 'react';
+import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 import styled from 'styled-components';
 
 const Contact = () => {
     return (
         <Wrapper>
-        <div className='flex justify-start items-start bg-[#efdfdf] p-10'>
-            <div className='left-contact w-[50vw] space-y-5'>
-                <div className='large-heading ml-10 text-2xl font-medium text-[#870f0f]'>
-                Contact Us to get the best deals
+            <div className="contact-container">
+                <div className="left-contact">
+                    <div className="large-heading">Contact Us to get the best deals</div>
+
+                    <div className="contact-info">
+                        <div className="info-block">
+                            <div className="small-heading">For Vendors</div>
+                            <div className="big-text">sunrisevents01@gmail.com</div>
+                            <div className="big-text">+91 07942701066</div>
+                        </div>
+                        <div className="info-block">
+                            <div className="small-heading">For Customers</div>
+                            <div className="big-text">sunrisevents01@gmail.com</div>
+                            <div className="big-text">+91 07942701066</div>
+                        </div>
+                    </div>
+
+                    <div className="small-heading">Address Details</div>
+                    <div className="big-text">Near, 110, Aagam Ochid, Nadani-2, Vesu, Surat, Gujarat 395007</div>
                 </div>
 
-                <div className='ml-10 space-x-5 '>
-                    <div className='inline-block'>
-                        <div className='small-heading font-medium'>For Vendors</div>
-                        <div className='big-text'>sunrisevents01@gmail.com</div>
-                        <div className='big-text'>+91 07942701066</div>
+                <div className="right-contact">
+                    <div className="large-heading">Follow us on</div>
+                    <div className="social-links">
+                        <div className="social-item">
+                            <FaInstagram size={42} className="icon" />
+                            <a href="https://www.instagram.com/sunriseevents.in/" className='social'>Instagram</a>
+                        </div>
+                        <div className="social-item">
+                            <FaFacebook size={42} className="icon" />
+                            <a href="https://www.facebook.com/SunriseEvent.in/" className='social'>Facebook</a>
+                        </div>
+                        <div className="social-item">
+                            <FaTwitter size={42} className="icon" />
+                            <span className='social'>Twitter</span>
+                        </div>
                     </div>
-                    <div className='inline-block'>
-                        <div className='small-heading font-medium'>For Customers</div>
-                        <div className='big-text'>sunrisevents01@gmail.com</div>
-                        <div className='big-text'>+91 07942701066</div>
-                    </div>
-                    
                 </div>
-                <div className='small-heading ml-10 font-medium'>Address Details</div>
-                <div className='big-text ml-10'>Near, 110, Aagam Ochid, Nadani-2, Vesu, Surat, Gujarat 395007</div>
             </div>
-            <div className='right-contact ml-[5vw] w-[40vw]'>
-                <div className='large-heading font-medium text-2xl mb-5 text-[#870f0f]'>
-                Follow us on
-                </div >
-                    <div className="instagram flex space-y-2">
-                        <FaInstagram size={28} className='mx-2 big-text1'/><div className='big-text inline-block'><a href="https://www.instagram.com/sunriseevents.in/">Instagram</a></div>
-                    </div>
-                    <div className="facebook flex space-y-2">
-                        <FaFacebook size={28} className='mx-2 big-text1'/><div className='big-text inline-block'><a href="https://www.facebook.com/SunriseEvent.in/">Facebook</a></div>
-                    </div>
-                    <div className="twitter flex space-y-2">
-                        <FaTwitter size={28} className='mx-2 big-text1 '/><div className='big-text inline-block'>Twitter</div>
-                    
-                    </div>
-                <div>
-
-                </div>
-            </div>
-            {/* <div className=' mobile-c w-full flex justify-center items-center '>
-                <div className="mobile-sr h-96 w-96 "></div>
-            </div> */}
-
-
-
-        </div>
         </Wrapper>
-    )
-}
-const Wrapper=styled.section`
-.large-heading{
-font-size:3vh;
-margin-bottom:2vh;
-font-weight:600
-}
-.small-heading{
-font-size:2vh;
-font-weight:700;
-}
-.big-text{
-font-size:2vh;
-padding:1vh;
-}
-.big-text1{
-font-size:42;
-width:4vh;
-}
-.left-contact{
-padding:10vh;
-}
-.right-contact{
-padding:10vh;
-}
-.mobile-c{
-margin:10vh
-}
-`
+    );
+};
 
-export default Contact
+const Wrapper = styled.section`
+.social{
+font-size:larger;
+}
+    .contact-container {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: #efdfdf;
+        padding: 5vh 2vw;
+        gap: 3vw;
+    }
+
+    .left-contact, .right-contact {
+        flex: 1 1 45%;
+        padding: 2vh;
+    }
+
+    .large-heading {
+        font-size: 3vh;
+        margin-bottom: 2vh;
+        font-weight: 600;
+        color: #870f0f;
+    }
+
+    .small-heading {
+        font-size: 2vh;
+        font-weight: 700;
+    }
+
+    .big-text {
+        font-size: 2vh;
+        margin: 1vh 0;
+    }
+
+    .contact-info {
+        display: flex;
+        gap: 2vw;
+        margin: 2vh 0;
+    }
+
+    .info-block {
+        flex: 1;
+    }
+
+    .social-links {
+        margin-top: 2vh;
+    }
+
+    .social-item {
+        display: flex;
+        align-items: center;
+        margin: 1vh 0;
+
+        .icon {
+            margin-right: 1vw;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .contact-container {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .contact-info {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .social-item {
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .large-heading {
+            font-size: 2.5vh;
+        }
+
+        .big-text, .small-heading {
+            font-size: 1.5vh;
+        }
+    }
+`;
+
+export default Contact;
