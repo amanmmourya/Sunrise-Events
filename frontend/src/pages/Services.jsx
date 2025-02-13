@@ -42,7 +42,6 @@ console.log(services);
         {services.map((curElem) => {
           const { id, name, description, imageUrl, price } = curElem;
           return (
-           <TiltCard>
              <motion.div
               className="card"
               key={id}
@@ -60,7 +59,6 @@ console.log(services);
                 </NavLink>
               </div>
             </motion.div>
-           </TiltCard>
           );
         })}
       </div>
@@ -174,7 +172,7 @@ const Wrapper = styled.section`
       left: 0;
       width: 0%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      /* background-color: rgba(190, 24, 24, 0.2); */
       transition: all 0.2s linear;
       cursor: pointer;
     }

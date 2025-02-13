@@ -9,7 +9,8 @@ const AppContext = React.createContext();
 const url = "http://localhost:5000/services";
 
 const initialState ={
-    services:[]
+    services:[],
+    bookData:[]
 }
 
 
@@ -35,6 +36,46 @@ const AppProvider = ({ children }) => {
       console.error("Error fetching services:", error);
     }
   };
+
+  const setbookingData = (
+  name,
+  email, 
+   phone,
+  venue,
+  guests,
+  specialRequests,
+  date,
+  eventType,
+  price
+  ) => {
+    console.log("Setting booking data...");
+    const newBooking = {
+      name,
+  email, 
+   phone,
+  venue,
+  guests,
+  specialRequests,
+  date,
+  eventType,
+  price
+    };
+    const updatedBookData = [...state.bookData, newBooking];
+
+    // Save to state
+    dispatch({
+      type: "SET_BOOK_DATA",
+      payload: updatedBookData,
+    });
+
+    // Persist to localStorage
+    localStorage.setItem("bookData", JSON.stringify(updatedBookData));
+    console.log("Booking data saved:", updatedBookData);
+  
+
+  }
+
+  
   useEffect(() => {
     getServices(url);
   }, []);
@@ -46,7 +87,9 @@ const AppProvider = ({ children }) => {
       value={{
         ...state,
         dispatch,
-        getServices
+        getServices,
+        setbookingData
+
         
       }}
     >
@@ -61,4 +104,4 @@ const useGlobalContext = () => {
   return useContext(AppContext);
 };
 
-export { AppContext, AppProvider, useGlobalContext };
+export { AppContext, AppProvider, useGlobalContext  };

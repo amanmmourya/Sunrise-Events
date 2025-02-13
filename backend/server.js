@@ -3,7 +3,7 @@ import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 import cors from "cors";
 import serviceRoutes from "./routes/serviceRoutes.js"
-
+import appointmentRoutes from "./routes/appointment.js"
 dotenv.config();
 connectDB();
 
@@ -23,6 +23,8 @@ app.use(express.json());
 
 // Routes
 app.use("/services", serviceRoutes);
+app.use("/appointment", appointmentRoutes);
+
 
 // Start Server
 app.listen(port, () => {

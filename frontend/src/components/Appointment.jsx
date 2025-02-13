@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
 import { GlobalStyle } from "../GlobalStyle";
 import Calendar from "./Calender";
+import axios from "axios";
+
 import { useLocation } from "react-router-dom";
+import { useGlobalContext } from "../Context";
 
 const Appointment = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +20,11 @@ const Appointment = () => {
     eventType: "wedding",
     specialRequests: "",
   });
+const {setbookingData} = useGlobalContext()
+  const [appointments,setAppointments] =useState([]);
+  const [filteredAppointments, setFilteredAppointments] = useState([]);
+
+  
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const location = useLocation();
@@ -28,7 +36,8 @@ const Appointment = () => {
     phone: "",
   });
   const price = appointmentData.price;
-  console.log(appointmentData);
+  //
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,15 +61,170 @@ const Appointment = () => {
     }));
   };
 
+//   const options = {
+//     key: import.meta.env.VITE_RAZORPAY_KEY,
+//     amount: order.amount,
+//     currency: "INR",
+//     name: "wediing decor services",
+//     description: "service booking Payment",
+//     order_id: order.id,
+//     handler: async (response) => {
+//       try {
+//         const res = await axios.post("https://salonease-oy0f.onrender.com/appointment/verify-payment", {
+//           razorpay_order_id: response.razorpay_order_id,
+//           razorpay_payment_id: response.razorpay_payment_id,
+//           razorpay_signature: response.razorpay_signature,
+//         });
+
+//         if (res.data.message === "Payment verified successfully") {
+//           alert("Payment successful!");
+//           navigate("/confirmation");
+//         } else {
+//           alert("Payment verification failed. Please contact support.");
+//         }
+//       } catch (error) {
+//         alert("Payment verification failed. Please try again.");
+//       }
+//     },
+//     prefill: {
+//       name: latestBooking?.fullname || "Customer Name",
+//       email: latestBooking?.email || "customer@example.com",
+//       contact: latestBooking?.contact || "1234567890",
+//     },
+//     theme: {
+//       color: "#6366f1",
+//     },
+//   };
+
+//   const rzp1 = new window.Razorpay(options);
+
+//   rzp1.on("payment.failed", (response) => {
+//     alert("Payment failed. Please try again.");
+//   });
+
+//   rzp1.open();
+// };
+
+
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     setIsSubmitting(true);
     // Simulate API call
+      bookSlots();
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsSubmitting(false);
     // Handle form submission
-    console.log(formData);
+    
+
   };
+
+  const API = "http://localhost:5000/appointment/book-slots"
+  const bookSlots = async ()=>{
+    console.log("in the try function ")
+    if(!formData.name
+       || !formData.email || 
+       !formData.phone ||
+       !formData.venue||
+       !formData.guests||
+       !formData.specialRequests||
+       !formData.date||
+       !appointmentData.eventType||
+       !appointmentData.price
+
+    ){
+
+      alert("please fill all the details ");
+      return;
+    }
+
+const requestBody={
+  name:formData.name,
+  email:formData.email,
+ phone:formData.phone ,
+      date: formData.date,
+     time : formData.time,
+     venue : formData.venue,
+      guests: formData.guests,
+     specialRequests : formData.specialRequests,
+     eventType : appointmentData.eventType,
+     price:appointmentData.price
+
+};
+try {
+  console.log("Sending request with:", requestBody);
+
+  const response = await axios.post(API,requestBody,{
+    headers:{
+      "content-Type":"application/json",
+    },
+  });
+
+  if(response.status==201){
+    setbookingData(
+      formData.name
+       ,formData.email, 
+  formData.phone,
+  formData.venue,
+  formData.guests,
+  formData.specialRequests,
+  formData.date,
+  appointmentData.eventType,
+  appointmentData.price
+    )
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      date: null,
+      time: "",
+      venue: "",
+      guests: "",
+      eventType: "wedding",
+      specialRequests: "",
+    });
+  
+    setAppointmentData({
+      eventType: service.name || "", 
+      price: service.price || "",
+      customerName: "",
+      phone: "",
+    });
+console.log(
+  "response fetched successssfully"
+)
+
+    
+  }
+  else{
+    console.log("else statement error that is response is not ok")
+  }
+} catch (error) {
+  console.log("some catch error has occured");
+
+  console.error("Booking failed:", error.response?.data || error.message);
+
+};
+  }
+useEffect(() => {
+  const fetchAppointments = async () => {
+    try {
+      const response = await fetch(
+"http://localhost:5000/appointment/details"        );
+      const data = await response.json();
+      setAppointments(data);
+      setFilteredAppointments(data);
+  
+    } catch (error) {
+      console.error("Error fetching appointments:", error);
+    }
+  };
+
+  fetchAppointments();
+}, []);
+
+
+  
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
@@ -208,6 +372,7 @@ const Appointment = () => {
     }
   };
 
+ 
   return (
     <Wrapper>
       <Container>
@@ -244,6 +409,7 @@ const Appointment = () => {
     </Wrapper>
   );
 };
+
 
 // Animations
 const fadeIn = keyframes`
