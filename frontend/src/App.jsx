@@ -7,6 +7,10 @@ import Home from './pages/Home';
 import Service from './pages/Service';
 import Navbar from './components/Navbar';
 import Gallery from './pages/gallery';
+import Login from './pages/login';
+import Signup from './pages/SignUp';
+
+
 function App() {
   const theme = {
     colors: {
@@ -34,17 +38,19 @@ function App() {
     <>
     
     <ThemeProvider theme={theme}>
-      <GlobalStyle/>
+      {/* <GlobalStyle/> */}
       <BrowserRouter>
         <Navbar/>
         <div className='global-wrapper'>
-        <GlobalStyle/>
+        {/* <GlobalStyle/> */}
         <Routes>
           <Route path="/" element={<><Home/></>} />
           <Route path="/home" element={<Home/>} />
           <Route path="/services" element={<Services />} />
           <Route path="/service" element={<Service />} />
           <Route path="/gallery" element={<Gallery/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<Signup/>}/>
         </Routes>
         </div>
       </BrowserRouter>
