@@ -141,7 +141,7 @@ font-size:larger;
   padding: 10px;
   text-align: center;
   font-weight: bold;
-  font-size:x-large;
+  font-size:large;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
