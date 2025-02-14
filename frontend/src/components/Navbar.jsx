@@ -22,8 +22,8 @@ const Navbar = () => {
           <NavLink to="/services" className="nav-item">Services</NavLink>
           <NavLink to="/gallery" className="nav-item">Gallery</NavLink>
           <NavLink to="/contact" className="nav-item">Contact</NavLink>
-          <NavLink to="/signin" className="btn">Sign In</NavLink>
-          <NavLink to="/admin-signin" className="btn">Sign in as Admin</NavLink>
+          <NavLink to="/login" className="btn">Log In</NavLink>
+          <NavLink to="/adminlogin" className="btn">Sign in as Admin</NavLink>
           <div className="profile" onClick={handleProfile}></div>
           {toShow && <Profile toShow={toShow} settoShow={setToShow} />}
         </div>
