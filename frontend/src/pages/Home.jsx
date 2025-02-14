@@ -11,6 +11,7 @@ import { NavLink } from 'react-router-dom';
 import { Flower2, Landmark, Music, Sun, Package, Armchair } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Agent from '../components/Agent';
+import Testimonials from '../components/Testimonial';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -195,6 +196,7 @@ const Home = () => {
       </section>
 
       <Services />
+      <Testimonials/>
       <Conact />
       <Contact />
     </Wrapper>

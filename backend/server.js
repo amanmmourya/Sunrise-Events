@@ -6,6 +6,7 @@ import flash from "connect-flash"
 import session from "express-session";
 import passport from "passport";
 import LocalStrategy from "passport-local";
+
 import connectDB from "./config/db.js";
 // import User from './models/user.js';
 
