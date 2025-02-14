@@ -30,9 +30,12 @@ const Home = () => {
     setshowAgent(true);
   }
   return (
+    <div>
+      {showAgent?(<Agent showAgent={showAgent} setshowAgent={setshowAgent}/>):<div></div>}
     <Wrapper>
+      
       <div>
-      {showAgent?(<Agent/>):<div></div>}
+      
         {/* navbar */}
         {/* hero section */}
         <>
@@ -96,26 +99,41 @@ const Home = () => {
                 </div>
               </div>
             </div>
+            
           </>
 
 
         </>
         <Contact />
-
+        
       </div>
+      
+     
     </Wrapper>
+    
+    </div>
+
   )
 }
 const Wrapper = styled.section`
 .agent-button{
-z-index:20;
-position:absolute;
-bottom:1vh;
-right:2vh;
-background-image:url('../../img/chat.webp');
-background-size:contain;
+  z-index: 10;
+  position: fixed;
+  bottom: 2vh;
+  right: 2vh;
+  background-image: url('../../img/chat.png');
+  background-size: contain;
+  height: 10vh;
+  width: 10vh;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 
+  &:hover {
+    transform: scale(1.05);
+  }
 }
+
 .nav-text{
 font-size:x-large;
 }

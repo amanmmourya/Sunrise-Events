@@ -88,10 +88,10 @@ const Wrapper = styled.section`
   .profile {
     width: 3.5vw;
     height: 3.5vw;
-    background-image: url('../../img/profile.png');
+    background-image: url('../../img/profile1.webp');
     background-size: cover;
     background-position: center;
-    border: 2px solid white;
+    // border: 2px solid black;
     border-radius: 50%;
     cursor: pointer;
     margin-left: 1vw;

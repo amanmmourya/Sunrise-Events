@@ -1,18 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import userRouter from "./routes/userRoutes.js"
+// import userRouter from "./routes/userRoutes.js"
 import flash from "connect-flash"
 import session from "express-session";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import connectDB from "./config/db.js";
-import User from './models/user.js';
+// import User from './models/user.js';
 
  
  
 import serviceRoutes from "./routes/serviceRoutes.js"
 import appointmentRoutes from "./routes/appointment.js"
+import agentRoutes from "./routes/agentRoutes.js"
 
 
 dotenv.config();
@@ -55,6 +56,7 @@ app.use(session({
 app.use("/",userRouter)
 app.use("/services", serviceRoutes);
 app.use("/appointment", appointmentRoutes);
+app.use("/agent",agentRoutes)
 
 
 // Start Server
