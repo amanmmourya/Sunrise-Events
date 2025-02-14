@@ -1,63 +1,36 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-import Navbar from './Navbar';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import Navbar from './Navbar'
+import styled from 'styled-components'
 
 function Header() {
   return (
-    <Wrapper>
-      <div className="navbar">
-        {/* <ul>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/about">About</NavLink>
-          </li>
-          <li>
-            <NavLink to="/services">Services</NavLink>
-          </li>
-          <li>
-            <NavLink to="/contact">Contact</NavLink>
-          </li>
-        </ul> */}
-        
-      </div>
-    </Wrapper>
-  );
+   <>
+   <MainHeader>
+   <NavLink to="/">
+    <h3 className='logo'>SALON EASE</h3>
+   </NavLink>
+   <Navbar/>
+   </MainHeader>
+   </>
+  )
 }
+const MainHeader = styled.header`
+padding: 0 4.8rem;
+height: 10rem;
+display: flex;
+background-color: #855c5c ;
+justify-content: space-between;
+align-items: center;
+gap: 5rem;
 
-const Wrapper = styled.section`
-  .navbar {
-    color: black;
-    height: 50px; /* Increased for better visibility */
-    width: 100%;
-    display: flex;
-    align-items: center;
 
-    ul {
-      display: flex;
-      gap: 20px;
-      list-style: none; /* Removes default bullet points */
-      padding: 0;
-      margin: 0;
 
-      li {
-        font-weight: 500;
-        font-size: large;
 
-        a {
-          text-decoration: none;
-          color: black ;/* Better contrast */
-          transition: color 0.3s ease-in-out;
 
-          &:hover {
-            color: yellow;
-          }
-        }
-      }
-    }
-  }
-`;
 
-export default Header;
+
+    
+`
+
+export default Header

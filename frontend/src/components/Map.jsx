@@ -24,7 +24,7 @@ const MyMap = () => {
     const fetchCoordinates = async () => {
       try {
         const response = await axios.get(
-          `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+          `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent}(
             companyAddress
           )}&key=${OPENCAGE_API_KEY}`
         );
@@ -106,21 +106,22 @@ align-items:center;
 font-weight:600;
 }
 .address{
-background-color:#f2dfdf:
+background-color:#f2dfdf;
 }
 .map-cont{
 width:80%;
 display:flex;
 justify-content:center;
-align-items-center;
+align-items: center;
+
 }
 .upper-cont{
 width:100%;
 display:flex;
 justify-content:center;
-align-items-center;
+align-items: center;
 padding:2%;
 }
-`
+`;
 
 export default MyMap;
