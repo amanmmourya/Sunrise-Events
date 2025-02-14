@@ -5,34 +5,30 @@ import { GlobalStyle } from './GlobalStyle';
 import Services from './pages/Services';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
-import Gallery from './pages/gallery';
+import Gallery from './pages/Gallery';
 import Login from './pages/login';
 import Signup from './pages/SignUp';
 import AdminLogin from './pages/AdminLogin';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
-import  MyMap from './components/Map'
-import Service from './pages/service';
+import MyMap from './components/Map';
+import Service from './pages/Service';
 import { AppProvider } from './Context'; // ✅ Import AppProvider
 import Appointment from './components/Appointment';
-<<<<<<< HEAD
 import NewDash from './components/NewDash';
 import Error from './pages/Error';
 import Gototop from './components/Gototop';
 import Confirmation from './pages/Confirmation';
 import Appointments from './components/Appointments';
 import Reports from './components/Reports';
-import AdminBox from './components/AdminBox';
+import AdminBox from './components/Adminbox';
 import Menubox from './components/Menubox';
 import SettingPage from './pages/SettingPage';
-import PrivateRoute from './components/PrivateRoute';
 import ServicesUpdate from './pages/ServicesUpdate';
 import Help from './pages/Help';
-import Header from './components/Header';
-
-=======
 import Admin from './pages/Admin';
->>>>>>> 121f08c99798298687265529da08f0639ec30ea0
+import ForgotPassword from './components/ForgotPassword';
+import ResetPage from './components/ResetPage';
 
 function App() {
   const theme = {
@@ -49,7 +45,7 @@ function App() {
       hr: "#000",
       gradient: "linear-gradient(0deg,rgb(132 144 255) 0%,rgb(98 189 252) 100%)",
       shadow: "rgba(0,0,0,0.02) 0px 1px 3px 0px , rgba(27,31,35,0.15) 0px 0px 0px 1px",
-      shadowSupport: "rgba(0,0,0,0.16) opx 1px 4px",
+      shadowSupport: "rgba(0,0,0,0.16) 0px 1px 4px",
     },
     media: {
       mobile: "768px",
@@ -59,23 +55,19 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-             
-    
       <AppProvider>
         <BrowserRouter>
           <div className='global-wrapper'>
-            <Navbar/>
+            <Navbar />
             <Routes>
-            <Route path="/admin" element={<NewDash />} />
-
+              <Route path="/admin" element={<NewDash />} />
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/services" element={<Services />} />
               <Route path="/service" element={<Service />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/appointment" element={<Appointment />} />
-              <Route path="/contact" element={<><Contact/><MyMap/></>}/>
-<<<<<<< HEAD
+              <Route path="/contact" element={<><Contact /><MyMap /></>} />
               <Route path="/admin/appointments" element={<Appointments />} />
               <Route path="/admin/services-update" element={<ServicesUpdate />} />
               <Route path="/view-analytics" element={<Reports />} />
@@ -85,20 +77,15 @@ function App() {
               <Route path="/confirmation" element={<Confirmation />} />
               <Route path="/help" element={<Help />} />
               <Route path="*" element={<Error />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Signup />} />
+              <Route path="/adminlogin" element={<AdminLogin />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path='/forgot-password' element={<ForgotPassword/>}/>
+              <Route path='/resetpage' element={<ResetPage/>}/>
 
-
-
-
-              
-
-=======
-              <Route path="/login" element={<Login/>}/>
-              <Route path="/signup" element={<Signup/>}/>
-              <Route path="/adminlogin" element={<AdminLogin/>}/>
-              <Route path="/admin" element={<Admin/>} />
->>>>>>> 121f08c99798298687265529da08f0639ec30ea0
             </Routes>
-            <Footer/>
+            <Footer />
           </div>
         </BrowserRouter>
       </AppProvider>

@@ -91,8 +91,9 @@ console.log("in the bookslots backend ")
         });
 
         await appointment.save();
+        
 
-        res.status(201).json({ message: 'Appointment confirmed', appointment });
+        res.status(201).json({ message: 'Appointment confirmed', appointment ,appointmentId:appointment._id });
     } catch (error) {
         console.log("error in catch backend",error.message)
         console.error('Error booking appointment:', error);

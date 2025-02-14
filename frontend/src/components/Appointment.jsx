@@ -137,6 +137,11 @@ const {setbookingData} = useGlobalContext()
       alert("please fill all the details ");
       return;
     }
+    const generateUPILink = (amount) => {
+      const upiId = "client@upi"; // Replace with the actual UPI ID of the client
+      return `upi://pay?pa=${upiId}&pn=Client Name&am=${amount}&cu=INR`;
+    };
+
 
 const requestBody={
   name:formData.name,
@@ -172,6 +177,8 @@ try {
   appointmentData.eventType,
   appointmentData.price
     )
+    console.log(response);
+
     setFormData({
       name: "",
       email: "",
@@ -191,12 +198,15 @@ try {
       phone: "",
     });
 console.log(
-  "response fetched successssfully"
+  "response fetched successssfully", response
 )
 
+
+window.location.href = generateUPILink(formData.amount);
     
   }
   else{
+    alert("Failed to book appointment. Please try again.");
     console.log("else statement error that is response is not ok")
   }
 } catch (error) {
