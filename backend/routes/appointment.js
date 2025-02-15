@@ -1,5 +1,6 @@
 import express from 'express';
-import {bookSlots ,getappointments ,deleteappointment, deleteAppointmentsByDate,updateAppointmentStatus,rescheduleAppointment,getAppointmentByName} from '../controllers/appointmentController.js';
+import {bookSlots ,getappointments ,deleteappointment, deleteAppointmentsByDate,updateAppointmentStatus,rescheduleAppointment,getAppointmentByName,createRazorpayOrder, 
+    verifyPayment,} from '../controllers/appointmentController.js';
 
 const router = express.Router();
 
@@ -21,8 +22,8 @@ router.put("/reschedule" , rescheduleAppointment)
 
 // router.get('/available-slots', availableSlots);
 router.post('/book-slots', validateBookingRequest, bookSlots);
-// router.post('/create-razorpay-order' , createRazorpayOrder);
-// router.post('/verify-payment', verifyPayment);
+router.post('/create-razorpay-order' , createRazorpayOrder);
+router.post('/verify-payment', verifyPayment);
 router.get('/:name', getAppointmentByName)
 
 

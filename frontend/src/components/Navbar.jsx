@@ -1,144 +1,204 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-import Profile from './Profile';
+"use client"
+
+import { useState, useEffect } from "react"
+import { NavLink } from "react-router-dom"
+import styled from "styled-components"
+import { FaBars, FaTimes, FaUser } from "react-icons/fa"
+import Profile from "./Profile"
 
 const Navbar = () => {
-  const [toShow, setToShow] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [showProfile, setShowProfile] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
-  const handleProfile = () => {
-    setToShow(true);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled)
+      }
+    }
+
+    document.addEventListener("scroll", handleScroll)
+    return () => {
+      document.removeEventListener("scroll", handleScroll)
+    }
+  }, [scrolled])
+
+  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleProfile = () => setShowProfile(!showProfile)
 
   return (
-    <Wrapper>
-      <div className="navbar">
-        <div className="brand">
-          <h2 className="brand-name">Sunrise Events</h2>
-        </div>
+    <NavWrapper scrolled={scrolled}>
+      <NavContainer>
+        <LogoContainer>
+          <BrandName>Sunrise Events</BrandName>
+        </LogoContainer>
 
-        <div className="nav-links">
-          <NavLink to="/home" className="nav-item">Home</NavLink>
-          <NavLink to="/services" className="nav-item">Services</NavLink>
-          <NavLink to="/gallery" className="nav-item">Gallery</NavLink>
-          <NavLink to="/contact" className="nav-item">Contact</NavLink>
-          <NavLink to="/signin" className="btn">Sign In</NavLink>
-          <NavLink to="/admin-signin" className="btn">Sign in as Admin</NavLink>
-          <div className="profile" onClick={handleProfile}></div>
-          {toShow && <Profile toShow={toShow} settoShow={setToShow} />}
-        </div>
-      </div>
-    </Wrapper>
-  );
-};
+        <MobileMenuIcon onClick={toggleMenu}>{isOpen ? <FaTimes /> : <FaBars />}</MobileMenuIcon>
 
-const Wrapper = styled.section`
-  .navbar {
-    position: fixed;
-    top: 0;
+        <NavMenu isOpen={isOpen}>
+          <NavItem>
+            <NavLink to="/home" onClick={() => setIsOpen(false)}>
+              Home
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/services" onClick={() => setIsOpen(false)}>
+              Services
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/gallery" onClick={() => setIsOpen(false)}>
+              Gallery
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/contact" onClick={() => setIsOpen(false)}>
+              Contact
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <StyledButton to="/signin" onClick={() => setIsOpen(false)}>
+              Sign In
+            </StyledButton>
+          </NavItem>
+          <NavItem>
+            <StyledButton to="/admin-signin" onClick={() => setIsOpen(false)} admin>
+              Sign in as Admin
+            </StyledButton>
+          </NavItem>
+          <ProfileContainer>
+            <ProfileIcon onClick={toggleProfile}>
+              <FaUser />
+            </ProfileIcon>
+            {showProfile && <Profile setShowProfile={setShowProfile} />}
+          </ProfileContainer>
+        </NavMenu>
+      </NavContainer>
+    </NavWrapper>
+  )
+}
+
+const NavWrapper = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: ${(props) => (props.scrolled ? "#870f0f" : "transparent")};
+  transition: background-color 0.3s ease-in-out;
+  z-index: 1000;
+  box-shadow: ${(props) => (props.scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none")};
+`
+
+const NavContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+`
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const BrandName = styled.h1`
+  font-size: 1.8rem;
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+`
+
+const MobileMenuIcon = styled.div`
+  display: none;
+  font-size: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`
+
+const NavMenu = styled.ul`
+  display: flex;
+  align-items: center;
+  list-style: none;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
     width: 100%;
-    height: 8vh;
     background-color: #870f0f;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2vw;
-    z-index: 20;
+    padding: 1rem 0;
+    display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+`
+
+const NavItem = styled.li`
+  margin: 0 1rem;
+
+  @media (max-width: 768px) {
+    margin: 0.5rem 0;
   }
 
-  .brand-name {
-    color: #fff;
-    font-size: 2.5vh;
-    font-weight: bold;
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-  }
-
-  .nav-item {
-    color: white;
+  a {
+    color: #ffffff;
     text-decoration: none;
-    margin: 0 1vw;
-    font-size: 2vh;
-    transition: color 0.3s;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
 
-    &:hover {
+    &:hover, &.active {
       color: #e0aa3e;
     }
   }
+`
 
-  .btn {
-    background-color: red;
-    color: white;
-    padding: 0.5vh 1.5vw;
-    margin: 0 0.5vw;
-    border-radius: 1vh;
-    text-align: center;
-    text-decoration: none;
-    font-size: 2vh;
-    transition: transform 0.3s;
+const StyledButton = styled(NavLink)`
+  background-color: ${(props) => (props.admin ? "#1e90ff" : "#e0aa3e")};
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
 
-    &:hover {
-      transform: scale(1.05);
-    }
+  &:hover {
+    background-color: ${(props) => (props.admin ? "#187bcd" : "#c99c3a")};
+    transform: translateY(-2px);
   }
+`
 
-  .profile {
-    width: 3.5vw;
-    height: 3.5vw;
-    background-image: url('../../img/profile.png');
-    background-size: cover;
-    background-position: center;
-    border: 2px solid white;
-    border-radius: 50%;
-    cursor: pointer;
-    margin-left: 1vw;
-    transition: transform 0.3s;
+const ProfileContainer = styled.div`
+  position: relative;
+`
 
-    &:hover {
-      transform: scale(1.05);
-    }
+const ProfileIcon = styled.div`
+  font-size: 1.2rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-left: 1rem;
+
+  &:hover {
+    color: #e0aa3e;
   }
+`
 
-  @media (max-width: 1024px) {
-    .navbar {
-      flex-direction: column;
-      height: auto;
-      padding: 1vh 2vw;
-      position:static;
-    }
+export default Navbar
 
-    .nav-links {
-      flex-direction: column;
-      margin-top: 1vh;
-    }
-
-    .nav-item, .btn {
-      margin: 1vh 0;
-    }
-
-    .profile {
-      width: 6vw;
-      height: 6vw;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .brand-name {
-      font-size: 2vh;
-    }
-
-    .nav-item, .btn {
-      font-size: 1.5vh;
-    }
-
-    .profile {
-      width: 8vw;
-      height: 8vw;
-    }
-  }
-`;
-
-export default Navbar;

@@ -26,6 +26,34 @@ export const Reducer = (state , action)=>{
             console.log("Updated State:", updatedState);
             return updatedState;
           }
+          if(action.type== "SET_ORDER"){
+            return{
+                ...state,
+                order : action.payload,
+            }
+        }  
+        if(action.type==="SET_SELECTED_BUTTON"){
+          return{
+              ...state,
+              selectedButton :action.payload,
+          };
+        };
+        if(action.type =="SET_PROFILE_INFO"){
+          return{
+              ...state,
+              profileInfo:action.payload,
+          };
+      }
+      if(action.type=="LOGOUT"){
+        return {
+            ...state,
+            profileInfo:"",
+            userEmail:"",
+            userPassword:"",
+            bookData:[],
+        }
+    }
+      
       
         
         

@@ -1,20 +1,18 @@
+import React from "react";
 import styled from "styled-components";
-import { FaUserCircle } from "react-icons/fa";
-import { NavLink , useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../Context";
+import { User, Calendar, BarChart2, Clock } from "lucide-react";
 
 const AdminBox = () => {
-  
   const navigate = useNavigate();
   const currentDate = new Date().toLocaleDateString();
   const currentTime = new Date().toLocaleTimeString();
+  const { profileInfo } = useGlobalContext();
 
-  const { profileInfo} = useGlobalContext();
-
-  const name = profileInfo?.name ? profileInfo.name : "harsh";
-  const role = profileInfo?.role ? profileInfo.role : name;
-
-
+  const name = profileInfo?.name || "Admin";
+  const role = profileInfo?.role || "Administrator";
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -23,155 +21,233 @@ const AdminBox = () => {
     return "Good Evening";
   };
 
-  const handleAppointments= ()=>{
-    navigate("/admin/appointments")
-  }
-  const handleAnalytics= ()=>{
-    navigate("/view-analytics");
-  }
+  const handleAppointments = () => {
+    navigate("/admin/appointments");
+  };
 
+  const handleAnalytics = () => {
+    navigate("/view-analytics");
+  };
 
   return (
-    <StyledAdminBox>
-      <Avatar>
-        <FaUserCircle size={80} />
-      </Avatar>
-      <div className="greeting-container">
-      <h2>{getGreeting()} {role}</h2>
-      <h3>Welcome <span>{name}</span>,<br />
-      Here's your dashboard overview.</h3>
-      </div>
-     <div className="data"> <Info>
-        <p>
-          <strong>Date:</strong> {currentDate}
-        </p>
-        <p>
-          <strong>Time:</strong> {currentTime}
-        </p>
-      </Info>
-      <QuickActions>
-        <button onClick={handleAppointments}>Manage Appointments</button>
-        <button  onClick={handleAnalytics}>View Analytics</button>
-      </QuickActions></div>
+    <StyledAdminBox
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <ProfileSection>
+        <AvatarWrapper
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+        >
+          <User size={64} strokeWidth={1.5} />
+        </AvatarWrapper>
+        <GreetingContainer>
+          <Greeting>{getGreeting()},</Greeting>
+          <Name>{name}</Name>
+          <Role>{role}</Role>
+        </GreetingContainer>
+      </ProfileSection>
+
+      <Divider />
+
+      <InfoSection>
+        <InfoItem
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 400 }}
+        >
+          <Calendar size={20} />
+          <InfoText>
+            <Label>Date</Label>
+            <Value>{currentDate}</Value>
+          </InfoText>
+        </InfoItem>
+        <InfoItem
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 400 }}
+        >
+          <Clock size={20} />
+          <InfoText>
+            <Label>Time</Label>
+            <Value>{currentTime}</Value>
+          </InfoText>
+        </InfoItem>
+      </InfoSection>
+
+      <ActionSection>
+        <ActionButton
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleAppointments}
+        >
+          <Calendar size={20} />
+          Manage Appointments
+        </ActionButton>
+        <ActionButton
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleAnalytics}
+        >
+          <BarChart2 size={20} />
+          View Analytics
+        </ActionButton>
+      </ActionSection>
     </StyledAdminBox>
   );
 };
-const StyledAdminBox = styled.div`
-  background: linear-gradient(135deg, #cb9c11, #fc25a2);
+
+const StyledAdminBox = styled(motion.div)`
+  background: linear-gradient(135deg, #DB2777 0%, #9333EA 100%);
   color: white;
   padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  max-width: 300px; /* Adjust width for proper fit */
-  margin: 1rem auto; /* Center horizontally */
-
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05),
+              0 10px 15px rgba(219, 39, 119, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 300px;
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center items horizontally */
+  flex-direction: column;
+  gap: 1.5rem;
 
-  
-  @media (max-width: 740px)
-     {
-       
-         display: flex;
-         flex-direction: row;
-         gap: 0.5rem;
-         max-width: fit-content;
-         h2{
-          display: none;
-
-         }
-         h3{
-          font-size: 140%;
-         }
-         .greeting-container{
-          text-align: left;
-         }
-    
+  @media (max-width: 1024px) {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
   }
 
-  h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0.5rem 0; /* Adjust margin for spacing */
-    
-  @media (max-width: 740px)
-     {
-       
-        font-size: 180%;
-    
-  }
-  }
-
-  p {
-    font-size: 2rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-    text-align: center; /* Ensure text is centered */
-    span {
-      font-weight: bold;
-      color: #ffebf0;
-    }
+  @media (max-width: 640px) {
+    flex-direction: column;
+    padding: 1.5rem;
   }
 `;
 
-const Avatar = styled.div`
-  margin-bottom: 1rem; /* Add space below avatar */
-  color: #ffebf0;
-`;
-
-const Info = styled.div`
-  margin: 1rem 0;
-  font-size: 0.9rem;
-  text-align: left;
-  width: 100%; /* Ensure full width for alignment */
-
-  p {
-    margin: 0.3rem 0;
-  }
-`;
-
-
-const QuickActions = styled.div`
-  margin-top: 1.5rem;
+const ProfileSection = styled.div`
   display: flex;
-  flex-direction: column; /* Stack buttons vertically */
-  align-items: center; /* Center buttons horizontally */
-  @media (max-width:740px){
-   display: flex;
-   flex-direction: row;
-   gap: 0.5rem;
+  align-items: center;
+  gap: 1.5rem;
 
-   
-  
+  @media (max-width: 1024px) {
+    flex: 1;
+    min-width: 300px;
+  }
+`;
 
+const AvatarWrapper = styled(motion.div)`
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+`;
+
+const GreetingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`;
+
+const Greeting = styled.span`
+  font-size: 0.875rem;
+  opacity: 0.9;
+`;
+
+const Name = styled.h2`
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+`;
+
+const Role = styled.span`
+  font-size: 0.875rem;
+  opacity: 0.8;
+`;
+
+const Divider = styled.div`
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0.5rem 0;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const InfoSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media (max-width: 1024px) {
+    flex: 1;
+    flex-direction: row;
+    min-width: 300px;
   }
 
-
-  button {
-    background: white;
-    color: #6a11cb;
-    border: none;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem 0; /* Add vertical spacing */
-    border-radius: 8px;
-    font-weight: bold;
-    font-size:1.5rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    width: fit-content; /* Make buttons consistent in width */
-
-    &:hover {
-      background: #ffebf0;
-    }
+  @media (max-width: 640px) {
+    flex-direction: column;
   }
+`;
 
+const InfoItem = styled(motion.div)`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+`;
 
-  
-`
+const InfoText = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-;
+const Label = styled.span`
+  font-size: 0.75rem;
+  opacity: 0.8;
+`;
 
+const Value = styled.span`
+  font-size: 0.875rem;
+  font-weight: 500;
+`;
+
+const ActionSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  @media (max-width: 1024px) {
+    flex: 1;
+    min-width: 300px;
+  }
+`;
+
+const ActionButton = styled(motion.button)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+`;
 
 export default AdminBox;

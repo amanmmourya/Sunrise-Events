@@ -10,8 +10,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export const GlobalStyle = createGlobalStyle`
     * {
-        /* margin: 0; 
-        padding: 0; */
+        margin: 0; 
+        padding: 0;
         box-sizing: border-box;
         font-family: "Poppins", sans-serif /* ✅ Capital P */
     }
