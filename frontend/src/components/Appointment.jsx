@@ -192,7 +192,6 @@ console.log(
           });
 
           if (res.data.message === "Payment verified successfully") {
-             await bookSlots();
             alert("Payment successful!");
 
             // Now, book the appointment only after successful payment
@@ -234,6 +233,7 @@ console.log(
     setIsSubmitting(true);
 
     try {
+      await bookSlots();
       await handlePayment();
     } catch (error) {
       console.error("Payment error:", error);
@@ -248,7 +248,7 @@ useEffect(() => {
   const fetchAppointments = async () => {
     try {
       const response = await fetch(
-"http://localhost:5000/appointment/details"        );
+"http://localhost:5000/appointment/details");
       const data = await response.json();
       setAppointments(data);
       setFilteredAppointments(data);
