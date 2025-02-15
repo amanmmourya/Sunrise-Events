@@ -116,6 +116,7 @@ align-items: center;
 
 }
 .upper-cont{
+z-index:0;
 width:100%;
 display:flex;
 justify-content:center;

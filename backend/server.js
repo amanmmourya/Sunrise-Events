@@ -2,10 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 // import userRouter from "./routes/userRoutes.js"
-// import flash from "connect-flash"
-// import session from "express-session";
-// import passport from "passport";
-// import LocalStrategy from "passport-local";
+import flash from "connect-flash"
+import session from "express-session";
+import passport from "passport";
+import LocalStrategy from "passport-local";
+
 import connectDB from "./config/db.js";
 // import User from './models/user.js';
 
@@ -13,6 +14,7 @@ import connectDB from "./config/db.js";
  import paymentRoutes from './routes/appointment.js'
 import serviceRoutes from "./routes/serviceRoutes.js"
 import appointmentRoutes from "./routes/appointment.js"
+import agentRoutes from "./routes/agentRoutes.js"
 import dashRoutes from "./routes/dashRoutes.js";
 import authRoutes from './routes/auth.js';
 import { errorHandler } from './middlewares/errorHandler.js';
@@ -43,6 +45,7 @@ app.use(cors(corsOptions));
 
 app.use("/services", serviceRoutes);
 app.use("/appointment", appointmentRoutes);
+app.use("/agent",agentRoutes)
 app.use("/dashboard", dashRoutes);
 app.use('/api/auth', authRoutes);
 app.use("/appointment", paymentRoutes);

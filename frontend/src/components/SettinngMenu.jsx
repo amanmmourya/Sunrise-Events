@@ -60,6 +60,9 @@ const SettinngMenu = () => {
   );
 };
 const StyledAdminBox = styled.div`
+  .main-cont{
+  padding:10vh;
+  }
   background: linear-gradient(135deg, #cb9c11, #fc25a2);
   color: white;
   padding: 2rem;

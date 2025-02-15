@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -14,18 +15,18 @@ const Footer = () => {
                 <div className="footer-section links">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li>Home</li>
-                        <li>Services</li>
-                        <li>Gallery</li>
-                        <li>Contact</li>
+                        <li><NavLink to={"/home"}>Home</NavLink></li>
+                        <li><NavLink to={"/services"}>Services</NavLink></li>
+                        <li><NavLink to={"/gallery"}>Gallery</NavLink></li>
+                        <li><NavLink to={"/contact"}>Contact</NavLink></li>
                     </ul>
                 </div>
 
                 <div className="footer-section social">
                     <h4>Follow Us</h4>
                     <div className="social-icons">
-                        <FaFacebook />
-                        <FaInstagram />
+                        <a href="https://www.facebook.com/SunriseEvent.in/"><FaFacebook /></a>
+                        <a href="https://www.instagram.com/sunriseevents.in/"><FaInstagram /></a>
                         <FaTwitter />
                         <FaLinkedin />
                     </div>

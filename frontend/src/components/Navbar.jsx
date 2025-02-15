@@ -29,78 +29,47 @@ const Navbar = () => {
   const toggleProfile = () => setShowProfile(!showProfile)
 
   return (
-    <NavWrapper scrolled={scrolled}>
-      <NavContainer>
-        <LogoContainer>
-          <BrandName>Sunrise Events</BrandName>
-        </LogoContainer>
+    <Wrapper>
+      <div className="navbar">
+        
+        <div className="brand flex justify-center items-center">
+          <div className='img-logo h-16 w-16 rounded-full'></div>
+          <h2 className="brand-name">Sunrise Events</h2>
+        </div>
+        
 
-        <MobileMenuIcon onClick={toggleMenu}>{isOpen ? <FaTimes /> : <FaBars />}</MobileMenuIcon>
+        <div className="nav-links">
+          <NavLink to="/home" className="nav-item">Home</NavLink>
+          <NavLink to="/services" className="nav-item">Services</NavLink>
+          <NavLink to="/gallery" className="nav-item">Gallery</NavLink>
+          <NavLink to="/contact" className="nav-item">Contact</NavLink>
+          <NavLink to="/login" className="btn">Log In</NavLink>
+          <NavLink to="/adminlogin" className="btn">Sign in as Admin</NavLink>
+          <div className="profile" onClick={handleProfile}></div>
+          {toShow && <Profile toShow={toShow} settoShow={setToShow} />}
+        </div>
+      </div>
+    </Wrapper>
+  );
+};
 
-        <NavMenu isOpen={isOpen}>
-          <NavItem>
-            <NavLink to="/home" onClick={() => setIsOpen(false)}>
-              Home
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/services" onClick={() => setIsOpen(false)}>
-              Services
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/gallery" onClick={() => setIsOpen(false)}>
-              Gallery
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink to="/contact" onClick={() => setIsOpen(false)}>
-              Contact
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <StyledButton to="/signin" onClick={() => setIsOpen(false)}>
-              Sign In
-            </StyledButton>
-          </NavItem>
-          <NavItem>
-            <StyledButton to="/admin-signin" onClick={() => setIsOpen(false)} admin>
-              Sign in as Admin
-            </StyledButton>
-          </NavItem>
-          <ProfileContainer>
-            <ProfileIcon onClick={toggleProfile}>
-              <FaUser />
-            </ProfileIcon>
-            {showProfile && <Profile setShowProfile={setShowProfile} />}
-          </ProfileContainer>
-        </NavMenu>
-      </NavContainer>
-    </NavWrapper>
-  )
+const Wrapper = styled.section`
+.img-logo{
+background-image:url('../../img/logosr.png');
+background-size:contain;
+margin-right:4px;
 }
-
-const NavWrapper = styled.nav`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: ${(props) => (props.scrolled ? "#870f0f" : "transparent")};
-  transition: background-color 0.3s ease-in-out;
-  z-index: 1000;
-  box-shadow: ${(props) => (props.scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none")};
-`
-
-const NavContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    padding: 1rem;
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 8vh;
+    background-color: #870f0f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2vw;
+    z-index: 20;
   }
 `
 
@@ -178,22 +147,22 @@ const StyledButton = styled(NavLink)`
   font-weight: 600;
   transition: all 0.3s ease;
 
-  &:hover {
-    background-color: ${(props) => (props.admin ? "#187bcd" : "#c99c3a")};
-    transform: translateY(-2px);
+    &:hover {
+      transform: scale(1.05);
+    }
   }
-`
 
-const ProfileContainer = styled.div`
-  position: relative;
-`
-
-const ProfileIcon = styled.div`
-  font-size: 1.2rem;
-  color: #ffffff;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  margin-left: 1rem;
+  .profile {
+    width: 3vw;
+    height: 3vw;
+    background-image: url('../../img/prf.jpg');
+    background-size: cover;
+    background-position: center;
+    // border: 2px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 1vw;
+    transition: transform 0.3s;
 
   &:hover {
     color: #e0aa3e;

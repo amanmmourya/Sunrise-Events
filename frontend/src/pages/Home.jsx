@@ -10,6 +10,8 @@ import Appointment from '../components/Appointment';
 import { NavLink } from 'react-router-dom';
 import { Flower2, Landmark, Music, Sun, Package, Armchair } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Agent from '../components/Agent';
+import Testimonials from '../components/Testimonial';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -21,7 +23,7 @@ const Home = () => {
       title: "Elegant Celebrations",
     },
     {
-      url: "https://images.unsplash.com/photo-1460978812857-470ed1c77af0?q=80&w=2070",
+      url: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       title: "Magical Moments",
     },
     {
@@ -86,9 +88,21 @@ const Home = () => {
       description: "Luxury seating for a comfortable wedding experience!"
     }
   ];
+  const [showAgent, setshowAgent] = useState(false);
+  const handleAgent=()=>{
+    setshowAgent(true)
+
+  }
 
   return (
     <Wrapper>
+      <div className="fixed bottom-4 z-20 text-6xl right-4 w-[5vw] h-[5vw] bg-red-200 text-white flex items-center justify-center rounded-full shadow-lg cursor-pointer hover:bg-red-400" onClick={handleAgent}>
+        💬
+      </div>
+      <div>
+        {showAgent?(<Agent showAgent={showAgent} setshowAgent={setshowAgent}/>):<div></div>}
+      </div>
+
       {/* Hero Section with Slider */}
       <div className="hero-slider">
         <AnimatePresence initial={false} mode="popLayout">
@@ -104,7 +118,7 @@ const Home = () => {
               opacity: { duration: 0.2 }
             }}
             className="slide"
-            style={{ 
+            style={{
               backgroundImage: `url(${sliderImages[currentSlide].url})`,
               position: 'absolute',
               width: '100%',
@@ -118,7 +132,7 @@ const Home = () => {
                 transition={{ delay: 0.2 }}
                 className="slide-content"
               >
-                <h1 className="main-title">Create Unforgettable</h1>
+                <h1 className="main-title ">Create Unforgettable</h1>
                 <h2 className="accent-title">Wedding Moments</h2>
                 <p className="hero-description">
                   Let us create the wedding of your dreams with our expert planning and
@@ -182,6 +196,7 @@ const Home = () => {
       </section>
 
       <Services />
+      <Testimonials/>
       <Conact />
       <Contact />
     </Wrapper>
@@ -194,6 +209,7 @@ const Wrapper = styled.section`
     height: 70vh;
     overflow: hidden;
     background-color: #000;
+    
   }
 
   .slide {
@@ -224,6 +240,7 @@ const Wrapper = styled.section`
   }
 
   .main-title {
+    color:white;
     font-size: 4rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
@@ -247,6 +264,7 @@ const Wrapper = styled.section`
   }
 
   .hero-description {
+    color:white;
     font-size: 1.25rem;
     margin-bottom: 2rem;
     line-height: 1.6;
