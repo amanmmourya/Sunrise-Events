@@ -29,6 +29,7 @@ import Help from './pages/Help';
 import Admin from './pages/Admin';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPage from './components/ResetPage';
+import SettinngMenu from './components/SettinngMenu';
 
 function App() {
   const theme = {
@@ -83,6 +84,7 @@ function App() {
               <Route path="/admin" element={<Admin />} />
               <Route path='/forgot-password' element={<ForgotPassword/>}/>
               <Route path='/resetpage' element={<ResetPage/>}/>
+              <Route path='/settingmenu' element={<SettinngMenu/>}/>
 
             </Routes>
             <Footer />
