@@ -98,8 +98,8 @@ const Agent = ({ showAgent, setshowAgent }) => {
   return (
     <Wrapper>
       <div className="agent">
-        <div className="header flex justify-between">Your Personal AI Companion <div className='bg-black w-[6vh] h-[6vh] flex justify-center items-center cursor-pointer rounded-2xl' onClick={closeAgent}>X</div></div>
-        <div className="response-area">{isLoading?(<div>Loading...</div>):(response)}</div>
+        <div className="header flex justify-between">Your Personal AI Companion <div className='border-2 border-amber-50 hover:bg-white hover:text-black w-[6vh] h-[6vh] flex justify-center items-center cursor-pointer rounded-2xl' onClick={closeAgent}>X</div></div>
+        <div className="response-area font-medium">{isLoading?(<div>Loading...</div>):(response)}</div>
         <div className="input-area">
           <textarea
             value={input}
@@ -136,7 +136,7 @@ font-size:larger;
 }
 
 .header {
-  background-color: #007bff;
+  background-color: #870f0f;
   color: white;
   padding: 10px;
   text-align: center;
@@ -175,15 +175,15 @@ button {
   margin-left: 5px;
   padding: 5px 10px;
   border: none;
-  background-color: #007bff;
+  background-color: #DC2626;
   color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #0056b3;
+transform:scale(1.02)
 }
 `
 

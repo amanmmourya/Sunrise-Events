@@ -96,7 +96,7 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <div className="fixed bottom-4 text-6xl right-4 w-[5vw] h-[5vw] bg-blue-500 text-white flex items-center justify-center rounded-full shadow-lg cursor-pointer hover:bg-blue-600" onClick={handleAgent}>
+      <div className="fixed bottom-4 text-6xl right-4 w-[5vw] h-[5vw] bg-red-200 text-white flex items-center justify-center rounded-full shadow-lg cursor-pointer hover:bg-red-400" onClick={handleAgent}>
         💬
       </div>
       <div>

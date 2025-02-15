@@ -13,12 +13,12 @@ const Contact = () => {
                         <div className="info-block">
                             <div className="small-heading">For Vendors</div>
                             <div className="big-text">sunrisevents01@gmail.com</div>
-                            <div className="big-text">+91 07942701066</div>
+                            <div className="big-text">+91 98878 29699 </div>
                         </div>
                         <div className="info-block">
                             <div className="small-heading">For Customers</div>
                             <div className="big-text">sunrisevents01@gmail.com</div>
-                            <div className="big-text">+91 07942701066</div>
+                            <div className="big-text">+91 98878 29699 </div>
                         </div>
                     </div>
 
@@ -38,8 +38,8 @@ const Contact = () => {
                             <a href="https://www.facebook.com/SunriseEvent.in/" className='social'>Facebook</a>
                         </div>
                         <div className="social-item">
-                            <FaTwitter size={42} className="icon" />
-                            <span className='social'>Twitter</span>
+                            <span className='font-extrabold text-5xl mt-3 mr-7'>JD</span>
+                            <span className='social cursor-pointer'><a href="https://www.justdial.com/Surat/Sunrise-Events-Vesu/0261PX261-X261-180424130057-N1N2_BZDET?auto=1&trkid=5457861600&term=sunrise%20events" className='social'>Just Dial</a></span>
                         </div>
                     </div>
                 </div>
