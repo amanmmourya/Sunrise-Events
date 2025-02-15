@@ -170,6 +170,8 @@ console.log(
     }
 
     if (!order || !price) {
+      console.log(order,"order");
+      console.log(price);
       alert("Order details or price are missing!");
       return;
     }

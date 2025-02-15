@@ -133,7 +133,7 @@ const Home = () => {
                 className="slide-content"
               >
                 <h1 className="main-title ">Create Unforgettable</h1>
-                <h2 className="accent-title">Wedding Moments</h2>
+                <h2 className="accent-title">Precious Moments</h2>
                 <p className="hero-description">
                   Let us create the wedding of your dreams with our expert planning and
                   exquisite attention to detail
