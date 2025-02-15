@@ -103,7 +103,7 @@ const Gallery = () => {
 
   let eventImages = {
     Wedding: [
-      '../../public/img/mrg3.jpg',
+      // '../../public/img/mrg3.jpg',
 
     ],
     // Reception: [
@@ -112,12 +112,12 @@ const Gallery = () => {
 
     // ],
     BabyShower: [
-      '../../public/img/mrg3.jpg',
+      // '../../public/img/mrg3.jpg',
 
 
     ],
     Birthday: [
-      '../../public/img/mrg3.jpg',
+      // '../../public/img/mrg3.jpg',
 
 
     ],
