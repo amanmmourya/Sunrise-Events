@@ -13,9 +13,12 @@ const Navbar = () => {
   return (
     <Wrapper>
       <div className="navbar">
-        <div className="brand">
+        
+        <div className="brand flex justify-center items-center">
+          <div className='img-logo h-16 w-16 rounded-full'></div>
           <h2 className="brand-name">Sunrise Events</h2>
         </div>
+        
 
         <div className="nav-links">
           <NavLink to="/home" className="nav-item">Home</NavLink>
@@ -33,6 +36,11 @@ const Navbar = () => {
 };
 
 const Wrapper = styled.section`
+.img-logo{
+background-image:url('../../img/logosr.png');
+background-size:contain;
+margin-right:4px;
+}
   .navbar {
     position: fixed;
     top: 0;
