@@ -12,12 +12,12 @@ const Contact = () => {
                     <div className="contact-info">
                         <div className="info-block">
                             <div className="small-heading">For Vendors</div>
-                            <div className="big-text">sunrisevents01@gmail.com</div>
+                            <a href="mailto:Sunriseevents.in@gmail.com"><div className="big-text">Sunriseevents.in@gmail.com</div></a>
                             <div className="big-text">+91 98878 29699 </div>
                         </div>
                         <div className="info-block">
                             <div className="small-heading">For Customers</div>
-                            <div className="big-text">sunrisevents01@gmail.com</div>
+                            <a href="mailto:Sunriseevents.in@gmail.com"><div className="big-text">Sunriseevents.in@gmail.com</div></a>
                             <div className="big-text">+91 98878 29699 </div>
                         </div>
                     </div>
