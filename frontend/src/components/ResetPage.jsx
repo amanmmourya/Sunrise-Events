@@ -89,7 +89,7 @@ console.log(api , "api")
        <Wrapper>
     <div className="reset-password-container">
       <div className="reset-password-card">
-        <span onClick={()=>{navigate("/home")}}> X</span>
+        <span onClick={()=>{navigate("/home")}} className="cross" > X</span>
         <h2>Reset Password</h2>
         <p className="description">Enter your new password below</p>
         <form onSubmit={handleSubmit}>
@@ -145,6 +145,11 @@ console.log(api , "api")
   )
 }
 const Wrapper  = styled.section`
+
+.cross{
+  font-size: 1.8rem;
+  font-weight: 600;
+}
   .reset-password-container {
     min-height: 100vh;
     display: flex;
@@ -166,6 +171,7 @@ const Wrapper  = styled.section`
   
   h2 {
     font-size: 24px;
+    font-weight: 600;
     color: #333;
     text-align: center;
     margin-bottom: 10px;
@@ -184,6 +190,7 @@ const Wrapper  = styled.section`
   label {
     display: block;
     margin-bottom: 5px;
+    font-size: 1.4rem;
     color: #333;
   }
   
@@ -191,8 +198,8 @@ const Wrapper  = styled.section`
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 2rem;
+    font-size: 1rem;
   }
   
   .password-input {
@@ -204,6 +211,7 @@ const Wrapper  = styled.section`
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
+    font-size: 1.5rem;
     background: none;
     border: none;
     cursor: pointer;
@@ -244,17 +252,17 @@ const Wrapper  = styled.section`
   .submit-button {
     width: 100%;
     padding: 10px;
-    background-color: #4a4aff;
+    background-color: #a0001b;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 2rem;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
   }
   
   .submit-button:hover {
-    background-color: #3a3aff;
+    background-color: #a0001b;
   }
   
   .footer-text {
@@ -267,7 +275,7 @@ const Wrapper  = styled.section`
   .background-icon {
     position: fixed;
     font-size: 48px;
-    color: rgba(74, 74, 255, 0.1);
+    color: rgba(215, 21, 21, 0.1);
     animation: pulse 2s infinite;
   }
   
