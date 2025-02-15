@@ -3,11 +3,12 @@ import { User, Settings, HelpCircle, LogIn, Shield } from 'lucide-react';
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom';
 
+
 const Profile = (props) => {
     const closeProfile=()=>{
         props.settoShow(false);
     }
-    
+   
   return (
     <Wrapper>
     <div className="w-[40vh] h-[60vh] absolute top-0 right-0 bg-white shadow-xl rounded-xl p-4 flex flex-col justify-start items-start space-y-4 border border-gray-300">
@@ -21,30 +22,30 @@ const Profile = (props) => {
         </div>
       </div>
 
-      {/* Menu Options */}
-      <div className="w-full flex flex-col space-y-3">
-        <button className="flex items-center space-x-3 hover:bg-gray-100 w-full p-2 rounded-md">
-          <Shield className="big1 w-5 h-5 text-blue-600" />
-          <NavLink to={"/adminlogin"}><span className="big1 text-sm font-medium">Sign in as Admin</span></NavLink>
-        </button>
 
+      {/* Menu Options */}
+      <div className="container w-full flex flex-col space-y-3">
+
+        <NavLink to={"/admin"}>
         <button className="flex items-center space-x-3 hover:bg-gray-100 w-full p-2 rounded-md">
-          <User className="big1 w-5 h-5 text-green-600" />
+          <User className=" w-5 h-5 text-green-600" />
           <span className="big1 text-sm font-medium">Your Profile</span>
         </button>
+        </NavLink>
         <NavLink to={"/settingmenu"}>
         <button className="flex items-center space-x-3 hover:bg-gray-100 w-full p-2 rounded-md">
-          <Settings className="big1 w-5 h-5 text-yellow-600" />
+          <Settings className=" w-5 h-5 text-yellow-600" />
           <span className="big1 text-sm font-medium">Settings</span>
         </button>
         </NavLink>
         <NavLink to={"/help"}>
         <button className="flex items-center space-x-3 hover:bg-gray-100 w-full p-2 rounded-md">
-          <HelpCircle className="big1 w-5 h-5 text-purple-600" />
+          <HelpCircle className=" w-5 h-5 text-purple-600" />
           <span className="big1 text-sm font-medium" >Help</span>
         </button>
         </NavLink>
       </div>
+
 
       {/* Logout */}
       <div className="mt-auto w-full">
@@ -58,9 +59,12 @@ const Profile = (props) => {
   );
 };
 
+
 const Wrapper = styled.section`
+
 .big1{
 font-size:larger;
+padding:5px;
 }
 .big2{
 font-size:larger;
@@ -70,3 +74,6 @@ font-size:x-large;
 }
 `
 export default Profile;
+
+
+

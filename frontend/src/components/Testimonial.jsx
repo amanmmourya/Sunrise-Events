@@ -2,6 +2,7 @@ import React from 'react';
 import { Star, Heart, Quote } from 'lucide-react';
 import styled from 'styled-components';
 
+
 const testimonials = [
   {
     name: "Sarah & James Thompson",
@@ -27,8 +28,9 @@ const testimonials = [
     quote: "The team went above and beyond for my daughter's Sweet 16. The theme was perfectly executed and everyone had an amazing time!",
     rating: 5
   },
-  
+ 
 ];
+
 
 function Testimonials() {
   return (
@@ -42,22 +44,23 @@ function Testimonials() {
           <Heart className="text-rose-500 w-6 h-6" />
         </div>
         <p className="text-gray-600 max-w-2xl mx-auto px-4">
-          Discover what our cherished clients say about their special moments with us. 
+          Discover what our cherished clients say about their special moments with us.
           Each story represents a unique celebration we had the privilege to bring to life.
         </p>
       </div>
 
+
       {/* Testimonials Grid */}
-      <div className="max-w-7xl mx-auto px-4 pb-20">
+      <div className="testimonial-grid max-w-7xl mx-auto px-4 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div 
+            <div
               key={index}
               className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="h-48 overflow-hidden">
-                <img 
-                  src={testimonial.image} 
+                <img
+                  src={testimonial.image}
                   alt={testimonial.name}
                   className="w-full h-full object-cover"
                 />
@@ -85,12 +88,17 @@ function Testimonials() {
     </div>
     </Wrapper>
 
+
   );
 }
 
+
 const Wrapper = styled.section`
 .testimonial-screen{
-padding:10vh
+display:flex;
+justify-content:center;
+align-items:center;
 }
 `
 export default Testimonials;
+
