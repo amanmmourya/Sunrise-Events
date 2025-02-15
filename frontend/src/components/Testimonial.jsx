@@ -23,7 +23,7 @@ const testimonials = [
     name: "The Patel Family",
     event: "Sweet 16 Birthday",
     date: "December 2023",
-    image: "https://images.unsplash.com/photo-1602631985686-1bb0e6a8696e?auto=format&fit=crop&q=80&w=600",
+    image: "https://  .unsplash.com/photo-1602631985686-1bb0e6a8696e?auto=format&fit=crop&q=80&w=600",
     quote: "The team went above and beyond for my daughter's Sweet 16. The theme was perfectly executed and everyone had an amazing time!",
     rating: 5
   },
