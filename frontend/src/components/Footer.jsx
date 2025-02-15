@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="footer-container">
                 <div className="footer-section about">
                     <h3>Sunrise Events</h3>
-                    <p className='footer-text'>Your one-stop destination for unforgettable events.</p>
+                    <p className='footer-text'>To grow this to Pan India Production Level</p>
                 </div>
 
                 <div className="footer-section links">

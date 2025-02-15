@@ -3,22 +3,26 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import Profile from './Profile';
 
+
 const Navbar = () => {
   const [toShow, setToShow] = useState(false);
+
 
   const handleProfile = () => {
     setToShow(true);
   };
 
+
   return (
     <Wrapper>
       <div className="navbar">
-        
+       
         <div className="brand flex justify-center items-center">
           <div className='img-logo h-16 w-16 rounded-full'></div>
           <h2 className="brand-name">Sunrise Events</h2>
         </div>
-        
+       
+
 
         <div className="nav-links">
           <NavLink to="/home" className="nav-item">Home</NavLink>
@@ -26,7 +30,6 @@ const Navbar = () => {
           <NavLink to="/gallery" className="nav-item">Gallery</NavLink>
           <NavLink to="/contact" className="nav-item">Contact</NavLink>
           <NavLink to="/login" className="btn">Log In</NavLink>
-          <NavLink to="/adminlogin" className="btn">Sign in as Admin</NavLink>
           <div className="profile" onClick={handleProfile}></div>
           {toShow && <Profile toShow={toShow} settoShow={setToShow} />}
         </div>
@@ -34,6 +37,7 @@ const Navbar = () => {
     </Wrapper>
   );
 };
+
 
 const Wrapper = styled.section`
 .img-logo{
@@ -54,16 +58,19 @@ margin-right:4px;
     z-index: 20;
   }
 
+
   .brand-name {
     color: #fff;
     font-size: 2.5vh;
     font-weight: bold;
   }
 
+
   .nav-links {
     display: flex;
     align-items: center;
   }
+
 
   .nav-item {
     color: white;
@@ -72,10 +79,12 @@ margin-right:4px;
     font-size: 2vh;
     transition: color 0.3s;
 
+
     &:hover {
       color: #e0aa3e;
     }
   }
+
 
   .btn {
     background-color: red;
@@ -88,10 +97,12 @@ margin-right:4px;
     font-size: 2vh;
     transition: transform 0.3s;
 
+
     &:hover {
       transform: scale(1.05);
     }
   }
+
 
   .profile {
     width: 3vw;
@@ -105,10 +116,12 @@ margin-right:4px;
     margin-left: 1vw;
     transition: transform 0.3s;
 
+
     &:hover {
       transform: scale(1.05);
     }
   }
+
 
   @media (max-width: 1024px) {
     .navbar {
@@ -118,14 +131,17 @@ margin-right:4px;
       position:static;
     }
 
+
     .nav-links {
       flex-direction: column;
       margin-top: 1vh;
     }
 
+
     .nav-item, .btn {
       margin: 1vh 0;
     }
+
 
     .profile {
       width: 6vw;
@@ -133,14 +149,17 @@ margin-right:4px;
     }
   }
 
+
   @media (max-width: 600px) {
     .brand-name {
       font-size: 2vh;
     }
 
+
     .nav-item, .btn {
       font-size: 1.5vh;
     }
+
 
     .profile {
       width: 8vw;
@@ -149,4 +168,8 @@ margin-right:4px;
   }
 `;
 
+
 export default Navbar;
+
+
+

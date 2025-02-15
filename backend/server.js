@@ -11,7 +11,7 @@ import connectDB from "./config/db.js";
 // import User from './models/user.js';
 
  
- 
+ import paymentRoutes from './routes/appointment.js'
 import serviceRoutes from "./routes/serviceRoutes.js"
 import appointmentRoutes from "./routes/appointment.js"
 import agentRoutes from "./routes/agentRoutes.js"
@@ -41,29 +41,15 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Middleware
 
-//Passports
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-
-// app.use(session({
-//   secret: "yourSecretKey",
-//   resave: false,
-//   saveUninitialized: true
-// }));
- 
-// Routes
-// app.use("/",userRouter)
 
 app.use("/services", serviceRoutes);
 app.use("/appointment", appointmentRoutes);
 app.use("/agent",agentRoutes)
 app.use("/dashboard", dashRoutes);
 app.use('/api/auth', authRoutes);
+app.use("/appointment", paymentRoutes);
+
 app.use(errorHandler);
 
 

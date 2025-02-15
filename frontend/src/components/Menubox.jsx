@@ -1,18 +1,13 @@
+import React from "react";
 import styled from "styled-components";
-import { FaUserCircle } from "react-icons/fa";
-import { NavLink , useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { motion } from "framer-motion";
 import { useGlobalContext } from "../Context";
+import { User, BarChart2, Users, Calendar } from "lucide-react";
 
-
-const Menubox = () => {
-
-    const {selectedButton , setSelectedButton} = useGlobalContext();
-  const { profileInfo} = useGlobalContext();
-  const name = profileInfo?.name ? profileInfo.name : "harsh";
-  const role = profileInfo?.role ? profileInfo.role : name;
-
-  const navigate = useNavigate();
+const MenuBox = () => {
+  const { selectedButton, setSelectedButton, profileInfo } = useGlobalContext();
+  const name = profileInfo?.name || "Admin";
+  const role = profileInfo?.role || "Administrator";
   const currentDate = new Date().toLocaleDateString();
   const currentTime = new Date().toLocaleTimeString();
 
@@ -23,126 +18,219 @@ const Menubox = () => {
     return "Good Evening";
   };
 
-  const handleButton =(button)=>{
-    setSelectedButton(button);
-  }
- console.log(selectedButton)
+  const menuItems = [
+    { id: 'button1', label: 'Revenue', icon: BarChart2 },
+    { id: 'button2', label: 'Customers', icon: Calendar },
+    { id: 'button3', label: 'Appointments', icon: Users }
+  ];
 
   return (
-    <StyledAdminBox>
-      <Avatar>
-        <FaUserCircle size={80} />
-      </Avatar>
-      <h2>{getGreeting()} {role}</h2>
-      <h3>Welcome <span>{name}</span>,<br />
-      Here's your dashboard overview.</h3>
-      <Info>
-        <p>
-          <strong>Date:</strong> {currentDate}
-        </p>
-        <p>
-          <strong>Time:</strong> {currentTime}
-        </p>
-      </Info>
-      <QuickActions>
-  <button onClick={() => handleButton('button1')}> Revenue </button>
-  <button onClick={() => handleButton('button2')}> view Appointments</button>
-  <button onClick={() => handleButton('button3')}> New Customers</button>
-</QuickActions>
+    <StyledMenuBox
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <ProfileSection>
+        <AvatarWrapper
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+        >
+          <User size={64} strokeWidth={1.5} />
+        </AvatarWrapper>
+        <GreetingContainer>
+          <Greeting>{getGreeting()},</Greeting>
+          <Name>{name}</Name>
+          <Role>{role}</Role>
+        </GreetingContainer>
+      </ProfileSection>
 
-    </StyledAdminBox>
+      <Divider />
+
+      <InfoSection>
+        <InfoItem>
+          <Label>Date</Label>
+          <Value>{currentDate}</Value>
+        </InfoItem>
+        <InfoItem>
+          <Label>Time</Label>
+          <Value>{currentTime}</Value>
+        </InfoItem>
+      </InfoSection>
+
+      <MenuSection>
+        {menuItems.map(({ id, label, icon: Icon }) => (
+          <MenuItem
+            key={id}
+            selected={selectedButton === id}
+            onClick={() => setSelectedButton(id)}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Icon size={20} />
+            <span>{label}</span>
+          </MenuItem>
+        ))}
+      </MenuSection>
+    </StyledMenuBox>
   );
 };
-const StyledAdminBox = styled.div`
-  background: linear-gradient(135deg, #cb9c11, #fc25a2);
+
+const StyledMenuBox = styled(motion.div)`
+  background: linear-gradient(135deg, #DB2777 0%, #9333EA 100%);
   color: white;
   padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  max-width: 300px; /* Adjust width for proper fit */
-  margin: 1rem auto; /* Center horizontally */
-
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05),
+              0 10px 15px rgba(219, 39, 119, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 300px;
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center items horizontally */
+  flex-direction: column;
+  gap: 1.5rem;
+  /* height: fit-content; */
 
-
-  @media (max-width: 740px)
-     {
-       
-         display: flex;
-         flex-direction: row;
-         text-align: left;
-         max-width: fit-content;
-         h2{
-          display: none;
-
-         }
-         h3{
-          font-size: 140%;
-         }
-    
+  @media (max-width: 1024px) {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
   }
 
-  h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0.5rem 0; /* Adjust margin for spacing */
-  }
-
-  p {
-    font-size: 2rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-    text-align: center; /* Ensure text is centered */
-    span {
-      font-weight: bold;
-      color: #ffebf0;
-    }
+  @media (max-width: 640px) {
+    flex-direction: column;
+    padding: 1.5rem;
   }
 `;
 
-const Avatar = styled.div`
-  margin-bottom: 1rem; /* Add space below avatar */
-  color: #ffebf0;
+const ProfileSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  @media (max-width: 1024px) {
+    flex: 1;
+    min-width: 300px;
+  }
 `;
 
-const Info = styled.div`
-  margin: 1rem 0;
-  font-size: 0.9rem;
+const AvatarWrapper = styled(motion.div)`
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+`;
+
+const GreetingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`;
+
+const Greeting = styled.span`
+  font-size: 0.875rem;
+  opacity: 0.9;
+`;
+
+const Name = styled.h2`
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+`;
+
+const Role = styled.span`
+  font-size: 0.875rem;
+  opacity: 0.8;
+`;
+
+const Divider = styled.div`
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0.5rem 0;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
+const InfoSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  @media (max-width: 1024px) {
+    flex: 1;
+    flex-direction: row;
+    min-width: 300px;
+    justify-content: space-around;
+  }
+`;
+
+const InfoItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+`;
+
+const Label = styled.span`
+  font-size: 0.75rem;
+  opacity: 0.8;
+`;
+
+const Value = styled.span`
+  font-size: 0.875rem;
+  font-weight: 500;
+`;
+
+const MenuSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  @media (max-width: 1024px) {
+    flex: 1;
+    flex-direction: row;
+    min-width: 300px;
+    justify-content: space-around;
+  }
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+`;
+
+const MenuItem = styled(motion.button)`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: ${props => props.selected ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)'};
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
   text-align: left;
-  width: 100%; /* Ensure full width for alignment */
 
-  p {
-    margin: 0.3rem 0;
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  @media (max-width: 1024px) {
+    width: auto;
   }
 `;
 
-const QuickActions = styled.div`
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column; /* Stack buttons vertically */
-  align-items: center; /* Center buttons horizontally */
-
-  button {
-    background: white;
-    color: #6a11cb;
-    border: none;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem 0; /* Add vertical spacing */
-    border-radius: 8px;
-    font-weight: bold;
-    font-size:1.5rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    width:max-content;/* Make buttons consistent in width */
-
-    &:hover {
-      background: #ffebf0;
-    }
-  }
-`;
-
-
-export default Menubox;
+export default MenuBox;

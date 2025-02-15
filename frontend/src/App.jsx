@@ -30,6 +30,7 @@ import Admin from './pages/Admin';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPage from './components/ResetPage';
 import SettinngMenu from './components/SettinngMenu';
+import Testimonials from './components/Testimonial';
 
 function App() {
   const theme = {
@@ -85,6 +86,8 @@ function App() {
               <Route path='/forgot-password' element={<ForgotPassword/>}/>
               <Route path='/resetpage' element={<ResetPage/>}/>
               <Route path='/settingmenu' element={<SettinngMenu/>}/>
+              <Route path='/testimonials' element={<Testimonials/>}/>
+
 
             </Routes>
             <Footer />

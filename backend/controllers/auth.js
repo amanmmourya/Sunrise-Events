@@ -42,29 +42,39 @@ export const findAllUsers = async (req, res, next) => {
 
 
 export const login = async (req, res, next) => {
-console.log("inside the login backend")  
-console.log(req.body);
+  console.log("Inside the login backend");  
+  console.log(req.body);
+
   try {
     const { email, password } = req.body;
 
     // Find user
     const user = await User.findOne({ email });
     if (!user) {
-      console.log("user not found")
+      console.log("User not found");
       return next(createError(404, 'User not found'));
     }
 
     // Check password
     const isPasswordCorrect = await user.comparePassword(password);
     if (!isPasswordCorrect) {
-      console.log("password is not correct")
+      console.log("Password is not correct");
       return next(createError(400, 'Invalid credentials'));
     }
 
-    // Generate token
+    // Determine user role
+    let role = user.role || "user"; // Default to "user"
+    const adminEmails = ["harshkamoriya@gmail.com"]; // Replace with actual admin emails
+    if (adminEmails.includes(email)) {
+      role = "admin";
+    }
+    console.log("user role ", role);
 
+
+
+    // Generate token
     const token = jwt.sign(
-      { id: user._id },
+      { id: user._id, role },
       process.env.JWT_SECRET,
       { expiresIn: '1d' }
     );
@@ -74,12 +84,14 @@ console.log(req.body);
 
     res.status(200).json({
       ...otherDetails,
+      role,
       token,
     });
   } catch (err) {
     next(err);
   }
 };
+
 
 export const register = async (req, res, next) => {
   console.log("inside the register controller backend")
@@ -203,5 +215,41 @@ export const resetPassword = async (req, res, next) => {
     res.status(200).json({ message: "Password has been reset successfully" });
   } catch (err) {
     next(err);
+  }
+};
+
+ export const getCurrentUser = async (req, res) => {
+  const {id} = req.user;
+  const userId = id;
+  console.log(req.user);
+  console.log(id, "user id");
+  // Extract user ID from the token payload
+  console.log("User ID from token:", userId);
+
+  try {
+      // Fetch the user from the database
+      const currentUser = await User.findById(userId).select('name email role profilePhoto'); // Exclude sensitive fields
+
+      if (!currentUser) {
+          console.log("User not found");
+          return res.status(404).json({ message: 'User not found' });
+      }
+// Determine user role
+console.log(currentUser,"current user")
+let role = currentUser.role || "user"; // Default to "user"
+const adminEmails = ["harshkamoriya@gmail.com"]; // Replace with actual admin emails
+if (adminEmails.includes(currentUser.email)) {
+  currentUser.role = "admin";
+}
+console.log("user role ", currentUser.role);
+
+      // Send the user details
+      res.status(200).json({
+          message: 'Current user info fetched successfully',
+          user: currentUser,
+      });
+  } catch (error) {
+      console.error("Error fetching the current user:", error);
+      res.status(500).json({ message: 'Internal server error', error });
   }
 };
