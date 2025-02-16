@@ -54,7 +54,7 @@ const Wrapper = styled.section`
       transition: background 0.3s;
 
       &:hover {
-        background: #e6005c;
+        transform:scale(1.01);
       }
     }
   }
@@ -69,6 +69,10 @@ const Wrapper = styled.section`
       max-width: 100%;
     }
   }
+    .feed{
+    font-size:2rem;
+    font-weight:600;
+    }
 `;
 
 const Conact = () => (
@@ -77,6 +81,7 @@ const Conact = () => (
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.6162324341494!2d78.167748775199!3d26.20915947707354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3976c426482f001d%3A0x181b55c85765c93d!2sItalian%20Garden!5e0!3m2!1sen!2sin!4v1730277914206!5m2!1sen!2sin" width="100%" height="450" loading="lazy" allowFullScreen="" referrerPolicy="no-referrer-when-downgrade"></iframe>
     <div className="contact-container">
       <form action="https://formspree.io/f/mwpklkvn" method="POST">
+        <label htmlFor="" className='feed'>Feedback Form</label>
         <input type="text" name="username" placeholder="Your Name" required />
         <input type="email" name="Email" placeholder="Your Email" required />
         <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
