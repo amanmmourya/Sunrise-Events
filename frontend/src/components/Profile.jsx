@@ -1,79 +1,187 @@
 import React from 'react';
-import { User, Settings, HelpCircle, LogIn, Shield } from 'lucide-react';
-import styled from 'styled-components'
+import { User, Settings, HelpCircle, LogIn } from 'lucide-react';
+import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-
 const Profile = (props) => {
-    const closeProfile=()=>{
+    const closeProfile = () => {
         props.settoShow(false);
-    }
-   
-  return (
-    <Wrapper>
-    <div className="w-[40vh] h-[60vh] absolute top-0 right-0 bg-white shadow-xl rounded-xl p-4 flex flex-col justify-start items-start space-y-4 border border-gray-300">
-      {/* Profile Info */}
-      <div className='big3 absolute top-1 right-3 hover:bg-[#4a4a4a] hover:text-white h-14 w-14 flex justify-center items-center bg-[#808080a3] rounded-full cursor-pointer' onClick={closeProfile}>X</div>
-      <div className="flex items-center space-x-3 border-b pb-3 w-full">
-        <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center text-white font-bold">A</div>
-        <div>
-          <div className="big3 text-lg font-semibold floating"><div className='big3 text-lg font-semibold'>Your Name</div></div>
-          <p className="big2 text-sm text-gray-500">yourname@example.com</p>
-        </div>
-      </div>
+    };
 
+    return (
+        <Wrapper>
+            <div className="profile-container">
+                <div className='close-button' onClick={closeProfile}>X</div>
+                <div className="profile-info">
+                    <div className="avatar">A</div>
+                    <div>
+                        <div className='name'>Your Name</div>
+                        <p className="email">yourname@example.com</p>
+                    </div>
+                </div>
 
-      {/* Menu Options */}
-      <div className="container w-full flex flex-col space-y-3">
+                <div className="menu">
+                    <NavLink to={"/admin"}>
+                        <button className="menu-item">
+                            <User className="icon text-green-600" />
+                            <span>Your Profile</span>
+                        </button>
+                    </NavLink>
+                    <NavLink to={"/settingmenu"}>
+                        <button className="menu-item">
+                            <Settings className="icon text-yellow-600" />
+                            <span>Settings</span>
+                        </button>
+                    </NavLink>
+                    <NavLink to={"/help"}>
+                        <button className="menu-item">
+                            <HelpCircle className="icon text-purple-600" />
+                            <span>Help</span>
+                        </button>
+                    </NavLink>
+                </div>
 
-        <NavLink to={"/admin"}>
-        <button className="flex items-center space-x-3 hover:bg-gray-100 w-full p-2 rounded-md">
-          <User className=" w-5 h-5 text-green-600" />
-          <span className="big1 text-sm font-medium">Your Profile</span>
-        </button>
-        </NavLink>
-        <NavLink to={"/settingmenu"}>
-        <button className="flex items-center space-x-3 hover:bg-gray-100 w-full p-2 rounded-md">
-          <Settings className=" w-5 h-5 text-yellow-600" />
-          <span className="big1 text-sm font-medium">Settings</span>
-        </button>
-        </NavLink>
-        <NavLink to={"/help"}>
-        <button className="flex items-center space-x-3 hover:bg-gray-100 w-full p-2 rounded-md">
-          <HelpCircle className=" w-5 h-5 text-purple-600" />
-          <span className="big1 text-sm font-medium" >Help</span>
-        </button>
-        </NavLink>
-      </div>
-
-
-      {/* Logout */}
-      <div className="mt-auto w-full">
-        <button className="flex items-center space-x-3 hover:bg-red-100 w-full p-2 rounded-md text-red-600 font-semibold">
-          <LogIn className="w-5 h-5" />
-          <NavLink to={"/home"}><span className='big2'>Log Out</span></NavLink>
-        </button>
-      </div>
-    </div>
-    </Wrapper>
-  );
+                <div className="logout">
+                    <button className="logout-button">
+                        <LogIn className="icon" />
+                        <NavLink to={"/home"}><span>Log Out</span></NavLink>
+                    </button>
+                </div>
+            </div>
+        </Wrapper>
+    );
 };
 
-
 const Wrapper = styled.section`
+  .profile-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    max-width: 400px;
+    height: 80vh;
+    border: 1px solid #ccc;
 
-.big1{
-font-size:larger;
-padding:5px;
-}
-.big2{
-font-size:larger;
-}
-.big3{
-font-size:x-large;
-}
-`
+    @media (max-width: 600px) {
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      right: 0;
+      border-radius: 0;
+    }
+  }
+
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: rgba(128, 128, 128, 0.6);
+    color: white;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: #4a4a4a;
+    }
+  }
+
+  .profile-info {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+
+    .avatar {
+      width: 4rem;
+      height: 4rem;
+      background-color: #f87171;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-right: 1rem;
+    }
+
+    .name {
+      font-size: 3rem;
+      font-weight: 600;
+    }
+
+    .email {
+      font-size: 1.5rem;
+      color: #6b7280;
+    }
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      transition: background 0.3s;
+
+      &:hover {
+        background-color: #f3f4f6;
+      }
+
+      .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+
+      span {
+        font-size: 2rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .logout {
+    margin-top: auto;
+
+    .logout-button {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      color: #dc2626;
+      font-weight: 600;
+      background-color: #fee2e2;
+      transition: background 0.3s;
+
+      &:hover {
+        background-color: #fecaca;
+      }
+
+      .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+  }
+`;
+
 export default Profile;
-
-
-

@@ -50,8 +50,8 @@ const FooterWrapper = styled.footer`
 .footer-text{
 color:white;
 }
-    background-color: #000;
-    color: #fff;
+    background-color: #870F0F;
+    color: white;
     padding: 3vh 5vw;
 
     .footer-container {
@@ -123,7 +123,7 @@ color:white;
 
     .footer-bottom {
         text-align: center;
-        border-top: 1px solid #333;
+        border-top: 1px solid white;
         padding-top: 2vh;
         font-size: 1.5vh;
     }

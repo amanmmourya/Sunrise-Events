@@ -162,6 +162,7 @@ const Gallery = () => {
                       640: { slidesPerView: 2 },
                       1024: { slidesPerView: 3 },
                       1280: { slidesPerView: 4 },
+                      2560: { slidesPerView: 5 },
                     }}
                   >
                     {images.map((src, index) => (

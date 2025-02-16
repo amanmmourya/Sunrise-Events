@@ -96,7 +96,7 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <div className="fixed bottom-4 z-20 text-6xl right-4 w-[5vw] h-[5vw] bg-red-200 text-white flex items-center justify-center rounded-full shadow-lg cursor-pointer hover:bg-red-400" onClick={handleAgent}>
+      <div className="agent-btn fixed bottom-4 z-20 text-6xl right-4 h-[7vh] w-[7vh] lg:w-[10vh] lg:h-[10vh] bg-[#dc2626] text-white flex items-center justify-center rounded-full shadow-lg cursor-pointer hover:bg-red-400" onClick={handleAgent}>
         💬
       </div>
       <div>
@@ -206,7 +206,7 @@ const Home = () => {
 const Wrapper = styled.section`
   .hero-slider {
     position: relative;
-    height: 70vh;
+    height: 100vh;
     overflow: hidden;
     background-color: #000;
     
