@@ -61,7 +61,7 @@ const NewDash = () => {
       legend: {
         position: 'top',
         labels: {
-          color: '#4A5568',
+          color: '#170000',
           font: {
             family: "'Poppins', sans-serif",
             size: 12
@@ -73,18 +73,18 @@ const NewDash = () => {
       y: {
         beginAtZero: true,
         grid: {
-          color: 'rgba(0, 0, 0, 0.05)'
+          color: 'rgba(255, 255, 255, 0.1)'
         },
         ticks: {
-          color: '#4A5568'
+          color: '#170000'
         }
       },
       x: {
         grid: {
-          color: 'rgba(0, 0, 0, 0.05)'
+          color: 'rgba(255, 255, 255, 0.1)'
         },
         ticks: {
-          color: '#4A5568'
+          color: '#170000'
         }
       }
     }
@@ -95,8 +95,8 @@ const NewDash = () => {
     datasets: [{
       label: 'Daily Revenue',
       data: dailyRevenue.map(entry => entry.totalRevenue),
-      backgroundColor: 'rgba(219, 39, 119, 0.5)',
-      borderColor: '#DB2777',
+      backgroundColor: '#a0001b',
+      borderColor: '#e0aa3e',
       borderWidth: 2
     }]
   };
@@ -106,8 +106,8 @@ const NewDash = () => {
     datasets: [{
       label: 'Daily Appointments',
       data: dailyAppointments.map(entry => entry.total),
-      backgroundColor: 'rgba(147, 51, 234, 0.5)',
-      borderColor: '#9333EA',
+      backgroundColor: '#e0aa3e',
+      borderColor: '#a0001b',
       borderWidth: 2
     }]
   };
@@ -117,8 +117,8 @@ const NewDash = () => {
     datasets: [{
       label: 'New Customers',
       data: dailyNewCustomers.map(entry => entry.totalCustomers),
-      backgroundColor: 'rgba(236, 72, 153, 0.5)',
-      borderColor: '#EC4899',
+      backgroundColor: '#a0001b',
+      borderColor: '#e0aa3e',
       borderWidth: 2
     }]
   };
@@ -128,11 +128,13 @@ const NewDash = () => {
     datasets: [{
       data: [40, 25, 15, 20],
       backgroundColor: [
-        '#DB2777',
-        '#9333EA',
-        '#EC4899',
-        '#F472B6'
-      ]
+        '#a0001b',
+        '#e0aa3e',
+        '#ffffff',
+        'rgba(160, 0, 27, 0.7)'
+      ],
+      borderColor: '#1a1a1a',
+      borderWidth: 1
     }]
   };
 
@@ -224,8 +226,8 @@ const NewDash = () => {
 const DashboardWrapper = styled.div`
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #FDF2F8 0%, #FDFCFE 100%);
-  padding: 6rem 0 2rem 0; // Added top padding to account for navbar
+  background: #ffffff;
+  padding: 6rem 0 2rem 0;
 `;
 
 const DashboardContainer = styled(motion.div)`
@@ -257,20 +259,19 @@ const DashboardGrid = styled.div`
 `;
 
 const ChartBox = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.9);
+  background: #ffffff;
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05),
-              0 10px 15px rgba(219, 39, 119, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(219, 39, 119, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2),
+              0 10px 15px rgba(160, 0, 27, 0.1);
+  border: 1px solid #660415;
   height: 400px;
   display: flex;
   flex-direction: column;
 `;
 
 const ChartTitle = styled.h3`
-  color: #4A5568;
+  color: #e0aa3e;
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -284,7 +285,7 @@ const ChartContainer = styled.div`
 `;
 
 const LoadingText = styled.p`
-  color: #718096;
+  color: #170000;
   text-align: center;
   position: absolute;
   top: 50%;

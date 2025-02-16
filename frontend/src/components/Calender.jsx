@@ -10,18 +10,48 @@ const Calendar = ({ selectedDate, onDateSelect }) => {
   const firstDayOfMonth = new Date(selectedYear, currentDate.getMonth(), 1).getDay();
 
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-  const nextMonth = () => setCurrentDate(new Date(selectedYear, currentDate.getMonth() + 1));
-  const prevMonth = () => setCurrentDate(new Date(selectedYear, currentDate.getMonth() - 1));
-
+  const nextMonth = () => {
+    let nextMonth = currentDate.getMonth() + 1;
+    let nextYear = selectedYear;
+    if (nextMonth > 11) {
+      nextMonth = 0;
+      nextYear += 1;
+    }
+    setSelectedYear(nextYear);
+    setCurrentDate(new Date(nextYear, nextMonth));
+  };
+  
+  const prevMonth = () => {
+    let prevMonth = currentDate.getMonth() - 1;
+    let prevYear = selectedYear;
+    if (prevMonth < 0) {
+      prevMonth = 11;
+      prevYear -= 1;
+    }
+    setSelectedYear(prevYear);
+    setCurrentDate(new Date(prevYear, prevMonth));
+  };
+  
   const handleDateClick = (day) => {
     const selected = new Date(selectedYear, currentDate.getMonth(), day);
-    onDateSelect(selected);
+  
+    if (isNaN(selected.getTime())) {
+      console.error("Invalid selected date:", selected);
+      return;
+    }
+  
+    // Convert to YYYY-MM-DD format
+    const formattedDate = selected.toISOString().split("T")[0];
+  
+    onDateSelect(formattedDate); // Pass properly formatted date
     setShowCalendar(false);
   };
-
-  const formatDate = (date) => date ? `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}` : '';
-
+  
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+  };
   const handleYearChange = (e) => {
     setSelectedYear(Number(e.target.value));
     setCurrentDate(new Date(Number(e.target.value), currentDate.getMonth()));

@@ -98,8 +98,8 @@ const AdminBox = () => {
 };
 
 const StyledAdminBox = styled(motion.div)`
-  background: linear-gradient(135deg, #DB2777 0%, #9333EA 100%);
-  color: white;
+  background: linear-gradient(135deg, #200601 0%, #980803 100%);
+  color: #f7f4f4;
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05),
@@ -154,18 +154,19 @@ const GreetingContainer = styled.div`
 `;
 
 const Greeting = styled.span`
-  font-size: 0.875rem;
+  font-size: 1.875rem;
   opacity: 0.9;
 `;
 
 const Name = styled.h2`
   font-size: 1.5rem;
   font-weight: 600;
+  color: white;
   margin: 0;
 `;
 
 const Role = styled.span`
-  font-size: 0.875rem;
+  font-size: 1.575rem;
   opacity: 0.8;
 `;
 
@@ -210,12 +211,12 @@ const InfoText = styled.div`
 `;
 
 const Label = styled.span`
-  font-size: 0.75rem;
+  font-size: 1.25rem;
   opacity: 0.8;
 `;
 
 const Value = styled.span`
-  font-size: 0.875rem;
+  font-size: 1.275rem;
   font-weight: 500;
 `;
 
@@ -240,7 +241,7 @@ const ActionButton = styled(motion.button)`
   color: white;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
-  font-size: 0.875rem;
+  font-size: 1.475rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;

@@ -20,6 +20,7 @@
     "concurrently": "^9.1.2",
     "context": "^3.0.33",
     "date-fns": "^4.1.0",
+    "fans": "^1.0.9",
     "framer-motion": "^12.4.1",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.475.0",

@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useGlobalContext } from "../Context";
 
+
 const Appointment = () => {
   const [formData, setFormData] = useState({
+
     name: "",
     email: "",
     phone: "",
@@ -62,17 +64,18 @@ const {setbookingData , order ,bookData} = useGlobalContext()
     }));
   };
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    script.onload = () => console.log("Razorpay script loaded.");
-    document.body.appendChild(script);
-  }, []);
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "https://checkout.razorpay.com/v1/checkout.js";
+  //   script.async = true;
+  //   script.onload = () => console.log("Razorpay script loaded.");
+  //   document.body.appendChild(script);
+  // }, []);
 
 
   const API = "http://localhost:5000/appointment/book-slots"
   const bookSlots = async ()=>{
+
     console.log("in the try book slots function ")
     if(!formData.name
        || !formData.email || 
@@ -163,81 +166,82 @@ console.log(
   };
 
 
-  const handlePayment = async () => {
-    if (!window.Razorpay) {
-      alert("Razorpay SDK not loaded. Please check your internet connection.");
-      return;
-    }
+  // const handlePayment = async () => {
+  //   if (!window.Razorpay) {
+  //     alert("Razorpay SDK not loaded. Please check your internet connection.");
+  //     return;
+  //   }
 
-    if (!order || !price) {
-      console.log(order,"order");
-      console.log(price);
-      alert("Order details or price are missing!");
-      return;
-    }
+  //   if (!order || !price) {
+  //     console.log(order,"order");
+  //     console.log(price);
+  //     alert("Order details or price are missing!");
+  //     return;
+  //   }
 
-    const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY,
-      amount: order.amount,
-      currency: "INR",
-      name: "Wedding Decor Services",
-      description: "Service Booking Payment",
-      order_id: order.id,
-      handler: async (response) => {
-        try {
-          const res = await axios.post("http://localhost:5000/appointment/verify-payment", {
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_signature: response.razorpay_signature,
-          });
+  //   const options = {
+  //     key: import.meta.env.VITE_RAZORPAY_KEY,
+  //     amount: order.amount,
+  //     currency: "INR",
+  //     name: "Wedding Decor Services",
+  //     description: "Service Booking Payment",
+  //     order_id: order.id,
+  //     handler: async (response) => {
+  //       try {
+  //         const res = await axios.post("http://localhost:5000/appointment/verify-payment", {
+  //           razorpay_order_id: response.razorpay_order_id,
+  //           razorpay_payment_id: response.razorpay_payment_id,
+  //           razorpay_signature: response.razorpay_signature,
+  //         });
 
-          if (res.data.message === "Payment verified successfully") {
-            alert("Payment successful!");
+  //         if (res.data.message === "Payment verified successfully") {
+  //           alert("Payment successful!");
 
-            // Now, book the appointment only after successful payment
-            console.log("payment success");
-            await bookSlots();
-            console.log("booking success");
-            navigate("/home");
-          } else {
-            console.log("else error")
+  //           // Now, book the appointment only after successful payment
+  //           console.log("payment success");
+  //           await bookSlots();
+  //           console.log("booking success");
+  //           navigate("/home");
+  //         } else {
+  //           console.log("else error")
 
-            alert("Payment verification failed. Please contact support.");
-          }
-        } catch (error) {
-          console.log("error error ror")
-          alert("Payment verification failed. Please try again.");
-        }
-      },
-      prefill: {
-        name: latestBooking?.name || "Customer Name",
-        email: latestBooking?.email || "customer@example.com",
-        contact: latestBooking?.phone || "1234567890",
-      },
-      theme: {
-        color: "#6366f1",
-      },
-    };
+  //           alert("Payment verification failed. Please contact support.");
+  //         }
+  //       } catch (error) {
+  //         console.log("error error ror")
+  //         alert("Payment verification failed. Please try again.");
+  //       }
+  //     },
+  //     prefill: {
+  //       name: latestBooking?.name || "Customer Name",
+  //       email: latestBooking?.email || "customer@example.com",
+  //       contact: latestBooking?.phone || "1234567890",
+  //     },
+  //     theme: {
+  //       color: "#6366f1",
+  //     },
+  //   };
 
-    const rzp1 = new window.Razorpay(options);
+  //   const rzp1 = new window.Razorpay(options);
 
-    rzp1.on("payment.failed", (response) => {
-      alert("Payment failed. Please try again.");
-    });
+  //   rzp1.on("payment.failed", (response) => {
+  //     alert("Payment failed. Please try again.");
+  //   });
 
-    rzp1.open();
-  };
+  //   rzp1.open();
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setIsSubmitting(true);
 
     try {
       await bookSlots();
-      await handlePayment();
+      // await handlePayment();
     } catch (error) {
-      console.error("Payment error:", error);
-      alert("Payment failed. Please try again.");
+      console.error("booking error:", error);
+      alert("booking failed. Please try again.");
     }
 
     setIsSubmitting(false);

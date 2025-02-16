@@ -77,7 +77,7 @@ const MenuBox = () => {
 };
 
 const StyledMenuBox = styled(motion.div)`
-  background: linear-gradient(135deg, #DB2777 0%, #9333EA 100%);
+  background: linear-gradient(135deg, #200601 0%, #980803 100%);
   color: white;
   padding: 2rem;
   border-radius: 1rem;
@@ -134,18 +134,19 @@ const GreetingContainer = styled.div`
 `;
 
 const Greeting = styled.span`
-  font-size: 0.875rem;
+  font-size: 1.875rem;
   opacity: 0.9;
 `;
 
 const Name = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 600;
   margin: 0;
+  color: #ffffff;
 `;
 
 const Role = styled.span`
-  font-size: 0.875rem;
+  font-size: 1.875rem;
   opacity: 0.8;
 `;
 
@@ -182,12 +183,12 @@ const InfoItem = styled.div`
 `;
 
 const Label = styled.span`
-  font-size: 0.75rem;
+  font-size: 1.2rem;
   opacity: 0.8;
 `;
 
 const Value = styled.span`
-  font-size: 0.875rem;
+  font-size: 1.275rem;
   font-weight: 500;
 `;
 
@@ -217,7 +218,7 @@ const MenuItem = styled(motion.button)`
   color: white;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
-  font-size: 0.875rem;
+  font-size: 1.575rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;

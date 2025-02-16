@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { GlobalStyle } from "../GlobalStyle";
 import SearchBox from "./SearchBox";
 
+
+
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,8 +17,12 @@ const Appointments = () => {
           "http://localhost:5000/appointment/details"
         );
         const data = await response.json();
+        console.log(data)
+
         setAppointments(data);
+        console.log(appointments);
         setFilteredAppointments(data);
+        console.log(filteredAppointments)
       } catch (error) {
         console.error("Error fetching appointments:", error);
       }
@@ -24,16 +30,19 @@ const Appointments = () => {
 
     fetchAppointments();
   }, []);
-
+  useEffect(() => {
+    console.log("Updated Appointments:", appointments);
+  }, [appointments]);
+  
   useEffect(() => {
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
     const filtered = appointments.filter(
       (appointment) =>
         appointment.name.toLowerCase().includes(lowerCaseSearchTerm) ||
-        appointment.service.toLowerCase().includes(lowerCaseSearchTerm) ||
+        appointment.eventType.toLowerCase().includes(lowerCaseSearchTerm) ||
         appointment.status.toLowerCase().includes(lowerCaseSearchTerm) ||
         appointment.date.includes(lowerCaseSearchTerm) ||
-        appointment.contact.includes(lowerCaseSearchTerm)
+        appointment.phone.includes(lowerCaseSearchTerm)
     );
     setFilteredAppointments(filtered);
   }, [searchTerm, appointments]);
@@ -158,7 +167,7 @@ const Appointments = () => {
           
           <div className="appointments-body">
             {filteredAppointments.map((appointment) => (
-              <div key={appointment.id} className="appointment-card">
+              <div key={appointment._id} className="appointment-card">
                 <div className="card-header">
                   <h3 className="customer-name">{appointment.name}</h3>
                   <span className={`status-badge ${appointment.status}`}>
@@ -230,7 +239,7 @@ const Wrapper = styled.section`
     text-align: center;
     margin-bottom: 2rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    background: linear-gradient(135deg, #620d01 0%, #2f3900 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -253,7 +262,7 @@ const Wrapper = styled.section`
   .appointments-header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    background: linear-gradient(135deg, #a0001b 0%, #690902 100%);
     padding: 1.5rem;
     gap: 1rem;
   }

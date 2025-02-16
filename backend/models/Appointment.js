@@ -4,7 +4,7 @@ const AppointmentSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   phone: { type: String, required: true },
-  date: { type: String, required: true },
+  date: { type: Date, required: true },
   time: { type: String, required: true },
   venue:{type:String , required:true},
   guests:{type:String , required:true},
@@ -24,6 +24,14 @@ const AppointmentSchema = new mongoose.Schema({
     enum :['pending', 'confirmed'],
     default :'pending'
   }
+});
+
+// Middleware to format the date before saving
+AppointmentSchema.pre("save", function (next) {
+  if (this.date && typeof this.date === "string") {
+    this.date = new Date(this.date); // Convert to Date object if it's a string
+  }
+  next();
 });
 
 const Appointment =
