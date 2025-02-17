@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useGlobalContext } from "../Context";
 import axios from "axios";
 import SettinngMenu from "../components/SettinngMenu.jsx";
+import { GlobalStyle } from "../GlobalStyle.jsx";
 
 const Settingpage = () => {
   const [formData, setFormData] = useState({
@@ -73,9 +74,9 @@ const Settingpage = () => {
     }
     try {
       console.log("formData is:", formData);
-      const token = localStorage.getItem("authtoken");
+      const token = localStorage.getItem("token");
       const response = await axios.put(
-        "https://salonease-oy0f.onrender.com/auth/user-update",
+        "http://localhost:5000/api/auth/user-update",
         formData,
         {
           headers: {
@@ -84,8 +85,10 @@ const Settingpage = () => {
           },
         }
       );
+      console.log("response coming ", response)
       alert(response.data.message);
     } catch (error) {
+      console.log("errror coming " , error.message)
       console.error("Error updating profile:", error.message);
       alert("Failed to update profile");
     }
@@ -104,10 +107,10 @@ const Settingpage = () => {
     try {
       // console.log("in the password try ");
 
-      const token = localStorage.getItem("authtoken"); // Get the token from localStorage
+      const token = localStorage.getItem("token"); // Get the token from localStorage
       console.log("token in the try is", token);
       const response = await axios.put(
-        "https://salonease-oy0f.onrender.com/auth/change-password",
+        "http://localhost:5000/api/auth/change-password",
         { currentPassword, newPassword },
         {
           headers: {
@@ -135,7 +138,9 @@ const Settingpage = () => {
     switch (selectedButton) {
       case "button1":
         return (
-          <Wrapper>
+         <>
+         <GlobalStyle/>
+         <Wrapper>
             <div>
               <h2>Edit Profile</h2>
               <form onSubmit={handleProfileUpdate}>
@@ -167,9 +172,13 @@ const Settingpage = () => {
               </form>
             </div>
           </Wrapper>
+         </>
         );
       case "button2":
         return (
+          <>
+          <GlobalStyle/>
+         
           <Wrapper>
             <div>
               <h2>Change Password</h2>
@@ -211,10 +220,13 @@ const Settingpage = () => {
               </form>
             </div>
           </Wrapper>
+          </>
         );
       case "button3":
         return (
-          <Wrapper>
+          <>
+          <GlobalStyle/>
+ <Wrapper>
             <div>
               <h2>Notification Preferences</h2>
               <form>
@@ -230,9 +242,13 @@ const Settingpage = () => {
               </form>
             </div>
           </Wrapper>
+          </>
         );
       case "button4":
         return (
+          <>
+          <GlobalStyle/>
+          
           <Wrapper>
             <div>
               <h2>Booking History</h2>
@@ -245,9 +261,13 @@ const Settingpage = () => {
               </ul>
             </div>
           </Wrapper>
+          </>
         );
       case "button5":
         return (
+          <>
+          <GlobalStyle/>
+          
           <Wrapper>
             <div>
               <h2>Payment History</h2>
@@ -260,6 +280,7 @@ const Settingpage = () => {
               </ul>
             </div>
           </Wrapper>
+          </>
         );
       default:
         return <div>Select an option to view details</div>;
@@ -267,6 +288,9 @@ const Settingpage = () => {
   };
 
   return (
+    <>
+    <GlobalStyle/>
+    
     <Wrapper>
       {" "}
       <div className="settings-page">
@@ -294,6 +318,7 @@ const Settingpage = () => {
         <div className="content-box">{renderContent()}</div>
       </div>
     </Wrapper>
+    </>
   );
 };
 const Wrapper = styled.section`
@@ -301,6 +326,7 @@ const Wrapper = styled.section`
     display: flex;
     padding: 20px;
     font-family: Arial, sans-serif;
+    margin: 10rem auto;
   }
 
   /* .admin-box {
@@ -321,6 +347,7 @@ const Wrapper = styled.section`
 
   .admin-box h2 {
     margin-bottom: 10px;
+    
   }
 
   .admin-box ul {
@@ -349,6 +376,9 @@ const Wrapper = styled.section`
 
   .content-box h2 {
     margin-bottom: 20px;
+    font-weight: 400;
+    color: #470000;
+
   }
   .content-box{
     display: flex;
@@ -366,6 +396,7 @@ const Wrapper = styled.section`
       flex-direction: column;
       input{
         margin-top: 1rem;
+        font-size: 1.3rem;
       }
       
     }
@@ -375,6 +406,7 @@ const Wrapper = styled.section`
     margin-bottom: 1rem;
     display: block;
     margin-bottom: 10px;
+    font-size: 1.3rem;
     
   }
 
@@ -383,22 +415,37 @@ const Wrapper = styled.section`
     margin-bottom: 20px;
     padding: 8px;
     width: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid #b13939;
     border-radius: 5px;
   }
 
   .content-box form button {
     padding: 10px 20px;
-    background-color: #ff758c;
-    color: white;
-    border: none;
+    background: ${props => props.selected ? '#a0001b' : 'rgba(160, 0, 27, 0.1)'};
+    color: #470000;
+    border:1px solid #700000;
+    font-size: 1.3rem;
     border-radius: 5px;
     cursor: pointer;
+    color: ${props => props.selected ? '#ffffff' : '#e0aa3e'};
+  border: 1px solid ${props => props.selected ? '#a0001b' : '#e0aa3e'};
+  border-radius: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #a0001b;
+    color: #ffffff;
+    border-color: #a0001b;
   }
 
-  .content-box form button:hover {
-    background-color: #ff5674;
+
+
   }
+
+ 
 `;
 
 export default Settingpage;

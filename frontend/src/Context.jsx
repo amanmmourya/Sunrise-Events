@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const AppContext = React.createContext();
 
 const url = "http://localhost:5000/services";
-
 const initialState ={
     services:[],
       bookData: JSON.parse(localStorage.getItem("bookData")) || [],
@@ -127,6 +126,16 @@ const AppProvider = ({ children }) => {
     }
   };
 
+
+
+  const setUserdata = (userEmail, userPassword) => {
+    dispatch({
+      type: "SET_DATA",
+      payload: { userEmail, userPassword },
+    });
+  };
+
+
   const setSelectedButton = (button) => {
     dispatch({
       type: "SET_SELECTED_BUTTON",
@@ -190,50 +199,8 @@ const AppProvider = ({ children }) => {
 
   }
 
-  // const fetchCurrentUser = async () => {
-  //   const url = "https://salonease-oy0f.onrender.com/auth/users/me";
-  //   const token = localStorage.getItem("authtoken"); // Assuming JWT is stored in localStorage
-  //   if (!token) {
-  //     localStorage.removeItem("authtoken");
-  //       dispatch({ type: "LOGOUT" }); // Optional: Dispatch logout action
-  //       navigate("/login"); // Redirect to login page
-  //       return; // Exit the function after logging out
-  //   }
-  //   try {
-  //     const response = await fetch(url, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`, // Pass the token for authentication
-  //       },
-  //     });
+ 
 
-  //     const data = await response.json();
-
-  //     // Handle token expiration
-  //     if (response.status === 401 && data.message === "Token has expired") {
-  //       console.log("Token expired, logging out...");
-  //       localStorage.removeItem("authtoken");
-  //       dispatch({ type: "LOGOUT" }); // Optional: Dispatch logout action
-  //       navigate("/login"); // Redirect to login page
-  //       return; // Exit the function after logging out
-  //     }
-  //     if (!response.ok) {
-  //       throw new Error("Failed to fetch current user info");
-  //     }
-
-  //     console.log("Data fetched:", data);
-  //     dispatch({
-  //       type: "SET_PROFILE_INFO",
-  //       payload: data.user, // Assuming the backend sends user data in `user`
-  //     });
-  //   } catch (error) {
-  //     console.error("Error fetching current user:", error);
-  //   }
-  // };
-  
-  // useEffect(() => {
-  //   fetchCurrentUser();
-  // }, []);
 
   useEffect(() => {
     getServices(url);
@@ -260,7 +227,8 @@ const AppProvider = ({ children }) => {
         setbookingData,
         fetchOrder,
         setSelectedButton,
-        fetchCurrentUser
+        fetchCurrentUser,
+        setUserdata
         // fetchCurrentUser
 
         

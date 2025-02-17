@@ -52,7 +52,14 @@ export const Reducer = (state , action)=>{
             userPassword:"",
             bookData:[],
         }
-    }
+    } if(action.type==="SET_DATA")
+      {
+          return{
+              ...state,
+              userEmail :action.payload.userEmail,
+              userPassword:action.payload.userPassword
+      }
+      }
       
       
         

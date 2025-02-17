@@ -49,7 +49,6 @@ console.log(services);
             >
               <figure>
                 <img src={imageUrl} alt={name} />
-                <span className="price-tag">₹{price}</span>
               </figure>
               <div className="card-data">
                 <h3>{name}</h3>

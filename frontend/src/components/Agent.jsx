@@ -1,105 +1,53 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useState } from 'react';
+import React, { useState } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 const Agent = ({ showAgent, setshowAgent }) => {
-  // From here langflow client starts
-
-  class LangflowClient {
-    constructor(baseURL, applicationToken) {
-      this.baseURL = baseURL;
-      this.applicationToken = applicationToken;
-    }
-
-    async post(endpoint, body) {
-      const url = `${this.baseURL}${endpoint}`;
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${this.applicationToken}`
-          },
-          mode:'cors',
-          credentials:'include',
-          body: JSON.stringify(body)
-        });
-
-        const jsonResponse = await response.json();
-        if (!response.ok) {
-          throw new Error(`${response.status} ${response.statusText} - ${JSON.stringify(jsonResponse)}`);
-        }
-        return jsonResponse;
-      } catch (error) {
-        console.error('API Request Error:', error.message);
-        throw error;
-      }
-    }
-
-    async runFlow(flowId, langflowId, inputValue) {
-      const endpoint = `/lf/${langflowId}/api/v1/run/${flowId}`;
-      return this.post(endpoint, { input_value: inputValue, input_type: 'chat', output_type: 'chat' });
-    }
-  }
-  // langflow agent
-
-  async function callAgent(inputValue) {
-    const flowId = "82e2ea20-976f-4908-b882-11997e847cda";
-    const langflowId = "d9e577e2-76f5-48e6-b4d7-3c7636d44404"; 
-    const applicationToken = "AstraCS:wpRRrJREklqMUqgPksSZMdJh:764c6a660159f9c265acf691ba2ec00c092ebb03d203afc803becc42ff08c8bf";
-
-    const client = new LangflowClient('https://api.langflow.astra.datastax.com', applicationToken);
-
-    try {
-      const response = await client.runFlow(flowId, langflowId, inputValue);
-      if (response && response.outputs) {
-        const output = response.outputs[0].outputs[0].outputs.message.message.text;
-        console.log("From langflow", output);
-        return output;
-
-      } else {
-        console.log("No valid response received from API.");
-      }
-    } catch (error) {
-      console.error('Error:', error.message);
-    }
-  }
-
-
-  // From here normal jsx starts
   const [input, setInput] = useState('');
   const [response, setResponse] = useState('Hello! How can I assist you today?');
-  const [isLoading,setisLoading]=useState(false)
-  const closeAgent = () => {
-    setshowAgent(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  }
-  const handleSubmit = async () => {
-    if (input.trim()) {
-      let temp_prompt=input.trim()
+  const predefinedQuestions = [
+    "In which cities do you offer event planning?",
+    "What is the average cost for a wedding?",
+    "Can I book on Sundays?",
+    "Is there a facility for 3-day events?"
+  ];
+
+  const closeAgent = () => setshowAgent(false);
+
+  const handleSubmit = async (prompt) => {
+    if (prompt.trim()) {
       setInput('');
-      setisLoading(true)
-      let response_from_langflow=await fetch('http://127.16.1.1:5000/agent/query',{
-
-        method:"POST",
-        headers:{
-          'Content-Type':'application/json'
-        },
-        body:JSON.stringify({"prompt":temp_prompt})
-      })
-      let final_data=await response_from_langflow.json()
-      setisLoading(false)
-      console.log(final_data)
-      setResponse(final_data.response)
+      setIsLoading(true);
+      try {
+        let response_from_langflow = await fetch('http://127.16.1.1:5000/agent/query', {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ "prompt": prompt })
+        });
+        let final_data = await response_from_langflow.json();
+        setResponse(final_data.response);
+      } catch (error) {
+        setResponse("Sorry, something went wrong. Please try again.");
+      }
+      setIsLoading(false);
     }
-
   };
 
   return (
     <Wrapper>
       <div className="agent">
-        <div className="header flex justify-between">Your Personal AI Companion <div className='border-2 border-amber-50 hover:bg-white hover:text-black w-[6vh] h-[6vh] flex justify-center items-center cursor-pointer rounded-2xl' onClick={closeAgent}>X</div></div>
-        <div className="response-area font-medium">{isLoading?(<div>Loading...</div>):(response)}</div>
+        <div className="header flex justify-between">Your Personal AI Companion
+          <div className='close-btn' onClick={closeAgent}>X</div>
+        </div>
+        <div className="response-area font-medium">
+          {isLoading ? <Loader /> : response}
+        </div>
+        <div className="predefined-questions">
+          {predefinedQuestions.map((question, index) => (
+            <button key={index} onClick={() => handleSubmit(question)}>{question}</button>
+          ))}
+        </div>
         <div className="input-area">
           <textarea
             value={input}
@@ -107,85 +55,145 @@ const Agent = ({ showAgent, setshowAgent }) => {
             placeholder="Type your message here..."
             className='textarea-cont'
           ></textarea>
-          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={() => handleSubmit(input)}>Submit</button>
         </div>
       </div>
     </Wrapper>
   );
-}
+};
+
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+const Loader = styled.div`
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #dc2626;
+  border-radius: 50%;
+  animation: ${spin} 1s linear infinite;
+  margin: auto;
+`;
 
 const Wrapper = styled.section`
-.agent{
-  position: fixed;
-  bottom: 1vh;
-  right: 1vh;
-  height: 80vh;
-  width: 27vw;
-  background-color: green;
-  z-index: 20;
+  .agent {
+    position: fixed;
+    bottom: 1vh;
+    right: 1vh;
+    height: 80vh;
+    width: 27vw;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    z-index: 20;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .header {
+    background: #dc2626;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .close-btn {
+    border: 2px solid white;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .close-btn:hover {
+    background: white;
+    color: #f7971e;
+    transform: scale(1.1);
+  }
+
+  .response-area {
+    font-size: 1.5rem;
+    flex: 1;
+    padding: 20px;
+    background-color: #f9fafb;
+    overflow-y: auto;
+    border-bottom: 2px solid #e5e7eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .predefined-questions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
     background-color: #f0f2f5;
-  border: 1px solid #ccc;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-}
-.textarea-cont{
-font-size:larger;
-}
+  }
 
-.header {
-  background-color: #870f0f;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
-  font-size:large;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
+  .predefined-questions button {
+    padding: 10px 15px;
+    background: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
 
-.response-area {
-  font-size:large;
-  flex: 1;
-  padding: 10px;
-  background-color: #fff;
-  overflow-y: auto;
-  border-bottom: 1px solid #ccc;
-}
+  .predefined-questions button:hover {
+    background: #b91c1c;
+    transform: scale(1.05);
+  }
 
-.input-area {
-  display: flex;
-  padding: 10px;
-  border-top: 1px solid #ccc;
-  font-size:larger;
-}
+  .input-area {
+    display: flex;
+    padding: 15px;
+    background-color: #f0f2f5;
+    border-top: 2px solid #e5e7eb;
+  }
 
-textarea {
-  flex: 1;
-  resize: none;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 1em;
-}
+  .textarea-cont {
+    flex: 1;
+    resize: none;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1.1rem;
+    background-color: #ffffff;
+    box-shadow: inset 0 4px 6px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s;
+  }
 
-button {
-  margin-left: 5px;
-  padding: 5px 10px;
-  border: none;
-  background-color: #DC2626;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+  .textarea-cont:focus {
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.15);
+  }
 
-button:hover {
-transform:scale(1.02)
-}
-`
+  button {
+    margin-left: 10px;
+    padding: 12px 20px;
+    border: none;
+    background: #dc2626;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    font-size: 1.5rem;
+  }
 
+  button:hover {
+    transform: scale(1.05);
+  }
+`;
 
-export default Agent
+export default Agent;

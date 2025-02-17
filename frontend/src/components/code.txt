@@ -1,0 +1,17 @@
+if (input.trim()) {
+      let temp_prompt=input.trim()
+      setInput('');
+      setisLoading(true)
+      let response_from_langflow=await fetch('http://127.16.1.1:5000/agent/query',{
+
+        method:"POST",
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify({"prompt":temp_prompt})
+      })
+      let final_data=await response_from_langflow.json()
+      setisLoading(false)
+      console.log(final_data)
+      setResponse(final_data.response)
+}

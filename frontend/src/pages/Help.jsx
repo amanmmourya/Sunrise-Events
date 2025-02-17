@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { GlobalStyle } from "../GlobalStyle";
 const HelpPage = () => {
   const articles = [
     {
@@ -21,6 +22,8 @@ const HelpPage = () => {
   ];
 
   return (
+    <>
+    <GlobalStyle/>
     <Wrapper>
     <div className="help-page">
       {/* Header Section */}
@@ -58,18 +61,22 @@ const HelpPage = () => {
       </section>
     </div>
     </Wrapper>
+    </>
   );
 };
 
 const Wrapper = styled.section`
     /* HelpPage.css */
+
+    
 body {
-  margin: 0;
+  margin: 200rem ;
   font-family: "Arial", sans-serif;
   color: #333;
 }
 
 .help-page {
+  margin: 10rem auto;
   text-align: center;
   background-color: #f9f9f9;
   padding: 20px;
@@ -77,8 +84,8 @@ body {
 
 /* Header Section */
 .help-header {
-    background: linear-gradient(135deg, #cb9c11, #fc25a2);
-  color: white;
+    background: linear-gradient(135deg, #910202, #820a04);
+  color: #fff1f1;
   padding: 60px 20px;
   border-radius: 10px;
   margin-bottom: 30px;
@@ -87,14 +94,16 @@ body {
 .help-header h1 {
   font-size: 2.8rem;
   margin-bottom: 20px;
+  color: white;
   font-weight: bold;
 }
 
 .search-bar {
   width: 70%;
   max-width: 600px;
+  
   padding: 12px 20px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   border: none;
   border-radius: 25px;
   margin: 20px 0;
@@ -102,13 +111,15 @@ body {
 
 .popular-links {
   margin-top: 10px;
-  font-size: 0.9rem;
+  font-size: 1.3rem;
+  color: white;
 }
 
 .popular-links a {
   color: #ffda79;
   text-decoration: none;
   font-weight: bold;
+  font-size: 1.3rem;
 }
 
 .popular-links a:hover {
@@ -166,13 +177,13 @@ body {
 }
 
 .article-card h3 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #004aad;
   margin-bottom: 10px;
 }
 
 .article-card p {
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   color: #555;
 }
 

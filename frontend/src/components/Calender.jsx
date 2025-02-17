@@ -32,7 +32,8 @@ const Calendar = ({ selectedDate, onDateSelect }) => {
     setCurrentDate(new Date(prevYear, prevMonth));
   };
   
-  const handleDateClick = (day) => {
+  const handleDateClick = (day, event) => {
+    event.stopPropagation();
     const selected = new Date(selectedYear, currentDate.getMonth(), day);
   
     if (isNaN(selected.getTime())) {
@@ -62,7 +63,7 @@ const Calendar = ({ selectedDate, onDateSelect }) => {
       Array.from({ length: daysInMonth }, (_, day) => {
         const date = new Date(selectedYear, currentDate.getMonth(), day + 1);
         return (
-          <DayCell key={day} onClick={() => handleDateClick(day + 1)}>
+          <DayCell key={day} onClick={(event) => handleDateClick(day + 1 , event)}>
             {day + 1}
           </DayCell>
         );
@@ -73,7 +74,7 @@ const Calendar = ({ selectedDate, onDateSelect }) => {
     <CalendarWrapper>
       <DateInput onClick={() => setShowCalendar(!showCalendar)} value={formatDate(selectedDate)} readOnly />
       {showCalendar && (
-        <CalendarDropdown>
+        <CalendarDropdown onClick={(e)=>e.stopPropagation()}>
           <CalendarHeader>
             <MonthNav onClick={prevMonth}>◀</MonthNav>
             <MonthYear>{months[currentDate.getMonth()]}</MonthYear>
@@ -99,6 +100,7 @@ const Calendar = ({ selectedDate, onDateSelect }) => {
 const CalendarWrapper = styled.div`
   position: relative;
   width: 100%;
+  z-index: 1;
 `;
 
 const DateInput = styled.input`

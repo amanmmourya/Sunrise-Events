@@ -74,6 +74,13 @@ const {setbookingData , order ,bookData} = useGlobalContext()
 
 
   const API = "http://localhost:5000/appointment/book-slots"
+
+
+  const sendemail = async ()=>{
+
+
+    
+  }
   const bookSlots = async ()=>{
 
     console.log("in the try book slots function ")
