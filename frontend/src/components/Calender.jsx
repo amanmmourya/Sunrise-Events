@@ -61,9 +61,9 @@ const Calendar = ({ selectedDate, onDateSelect }) => {
   const days = Array.from({ length: firstDayOfMonth }, (_, i) => <DayCell key={`empty-${i}`} />)
     .concat(
       Array.from({ length: daysInMonth }, (_, day) => {
-        const date = new Date(selectedYear, currentDate.getMonth(), day + 1);
+        const date = new Date(selectedYear, currentDate.getMonth(), day+2 );
         return (
-          <DayCell key={day} onClick={(event) => handleDateClick(day + 1 , event)}>
+          <DayCell key={day} onClick={(event) => handleDateClick(day +2, event)}>
             {day + 1}
           </DayCell>
         );
