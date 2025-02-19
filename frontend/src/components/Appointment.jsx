@@ -47,7 +47,7 @@ const {setbookingData , order ,bookData} = useGlobalContext()
       [name]: value,
     }));
   };
-  console.log(order,"ordder fetched ");
+  console.log(order,"order fetched ");
   console.log("price", price);
 
   const handleChange = (e) => {
@@ -134,7 +134,8 @@ try {
   formData.specialRequests,
   formData.date,
   appointmentData.eventType,
-  appointmentData.price
+  appointmentData.price,
+  appointmentData.time
     )
     console.log(response);
 
@@ -159,6 +160,9 @@ try {
 console.log(
   "response fetched successssfully", response
 )
+  // redirect to homepage
+  navigate("/home")
+  alert("Your booking is successfully done")
   }
   else{
     alert("Failed to book appointment. Please try again.");
