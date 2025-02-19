@@ -138,7 +138,7 @@ const bookSlots = async (req, res) => {
     await transporter.sendMail(mailOptions);
 
     res.status(201).json({
-      message: "Appointment confirmed",
+      message: "call has been scheduled",
       appointment,
       appointmentId: appointment._id,
     });

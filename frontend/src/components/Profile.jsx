@@ -52,7 +52,7 @@ const Profile = (props) => {
                 </div>
 
                 <div className="menu">
-                <NavLink to={role === "admin" ? "/admin" : "/profile"}>
+                <NavLink to={role === "admin" ? "/admin" : "/profilepage"}>
     <button className="menu-item">
         <User className="icon text-green-600" />
         <span>{role === "admin" ? "Admin" : "Profile"}</span>
