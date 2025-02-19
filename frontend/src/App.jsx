@@ -31,6 +31,8 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPage from './components/ResetPage';
 import SettinngMenu from './components/SettinngMenu';
 import Testimonials from './components/Testimonial';
+import ProfilePage from './components/ProfilePage';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const theme = {
@@ -68,7 +70,7 @@ function App() {
               <Route path="/services" element={<Services />} />
               <Route path="/service" element={<Service />} />
               <Route path="/gallery" element={<Gallery />} />
-              <Route path="/appointment" element={<Appointment />} />
+              <Route path="/appointment" element={<PrivateRoute element={<Appointment/>}/>} />
               <Route path="/contact" element={<><Contact /><MyMap /></>} />
               <Route path="/admin/appointments" element={<Appointments />} />
               <Route path="/admin/services-update" element={<ServicesUpdate />} />
@@ -87,6 +89,8 @@ function App() {
               <Route path='/resetpage' element={<ResetPage/>}/>
               <Route path='/settingmenu' element={<SettinngMenu/>}/>
               <Route path='/setting' element={<SettingPage/>}/>
+              <Route path='/profilepage' element={<ProfilePage/>}/>
+
 
               <Route path='/testimonials' element={<Testimonials/>}/>
 

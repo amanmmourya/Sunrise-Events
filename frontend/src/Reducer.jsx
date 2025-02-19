@@ -39,6 +39,8 @@ export const Reducer = (state , action)=>{
           };
         };
         if(action.type =="SET_PROFILE_INFO"){
+          console.log(action.payload,"profileInfo")
+
           return{
               ...state,
               profileInfo:action.payload,
@@ -47,18 +49,22 @@ export const Reducer = (state , action)=>{
       if(action.type=="LOGOUT"){
         return {
             ...state,
-            profileInfo:"",
-            userEmail:"",
-            userPassword:"",
-            bookData:[],
-        }
-    } if(action.type==="SET_DATA")
+            profileInfo:null,
+           
+    }
+   } if(action.type==="SET_DATA")
       {
           return{
               ...state,
               userEmail :action.payload.userEmail,
               userPassword:action.payload.userPassword
       }
+      }
+      if (action.type === "LOGOUT") {
+        return {
+          ...state,
+          profileInfo: {}, // ✅ Set to an empty object instead of ""
+        };
       }
       
       

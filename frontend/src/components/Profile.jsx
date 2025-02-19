@@ -1,19 +1,41 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { User, Settings, HelpCircle, LogIn } from 'lucide-react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { GlobalStyle } from '../GlobalStyle';
 import { useGlobalContext } from '../Context';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = (props) => {
     const closeProfile = () => {
         props.settoShow(false);
     };
+    const navigate= useNavigate();
 
-    const {profileInfo} =useGlobalContext();
+    const {setProfileInfo ,profileInfo} = useGlobalContext();
+    const handleLogout = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/auth/logout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+  
+        if (!response.ok) throw new Error("Failed to logout");
+  
+        localStorage.removeItem("token");
+        setProfileInfo();
+        navigate("/login");
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    };
     console.log(profileInfo);
-
-
+    const name = profileInfo?.name || "Guest";
+    const email = profileInfo?.email || "guest@example.com";
+    const role = profileInfo?.role || "user";
 
     return (
         <>
@@ -24,16 +46,16 @@ const Profile = (props) => {
                 <div className="profile-info">
                     <div className="avatar">A</div>
                     <div>
-                        <div className='name'>{profileInfo.name}</div>
-                        <p className="email">{profileInfo.email}</p>
+                        <div className='name'>{name}</div>
+                        <p className="email">{email}</p>
                     </div>
                 </div>
 
                 <div className="menu">
-                <NavLink to={profileInfo.role === "admin" ? "/admin" : "/profile"}>
+                <NavLink to={role === "admin" ? "/admin" : "/profile"}>
     <button className="menu-item">
         <User className="icon text-green-600" />
-        <span>{profileInfo.role === "admin" ? "Admin" : "Profile"}</span>
+        <span>{role === "admin" ? "Admin" : "Profile"}</span>
     </button>
 </NavLink>
 
@@ -54,7 +76,7 @@ const Profile = (props) => {
                 <div className="logout">
                     <button className="logout-button">
                         <LogIn className="icon" />
-                        <NavLink to={"/home"}><span>Log Out</span></NavLink>
+                        <NavLink onClick={handleLogout}><span>Log Out</span></NavLink>
                     </button>
                 </div>
             </div>

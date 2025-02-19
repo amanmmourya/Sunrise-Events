@@ -1,5 +1,5 @@
 import express from 'express';
-import { login, register, forgotPassword, resetPassword ,findAllUsers , deleteAllUsers , updatePassword, updateUser} from '../controllers/auth.js';
+import { login, register, forgotPassword, resetPassword ,findAllUsers , deleteAllUsers , updatePassword, updateUser , logout} from '../controllers/auth.js';
 import { validateLogin, validateRegister } from '../middlewares/validators.js';
 import { getCurrentUser } from '../controllers/auth.js';
 import authenticateUser from '../middlewares/authenticateUser.js';
@@ -16,6 +16,6 @@ router.get('/user/me',authenticateUser, getCurrentUser )
 
 router.put('/user-update', authenticateUser , uploadSingle('profilePhoto'),updateUser)
 router.put("/change-password", authenticateUser , updatePassword)
-
+router.post("/logout",logout)
 
 export default router;

@@ -5,6 +5,8 @@ import crypto from "crypto";
 import nodemailer from "nodemailer";
 import { randomBytes } from 'crypto';
 import bcrypt from "bcryptjs";
+import blacklistedTokens from '../models/blacklistedTokens.js';
+
 
 
 const transporter = nodemailer.createTransport({
@@ -228,7 +230,7 @@ export const resetPassword = async (req, res, next) => {
 
   try {
       // Fetch the user from the database
-      const currentUser = await User.findById(userId).select('name email role profilePhoto'); // Exclude sensitive fields
+      const currentUser = await User.findById(userId).select('name email role profilePhoto , phone , createdAt'); // Exclude sensitive fields
 
       if (!currentUser) {
           console.log("User not found");
@@ -352,5 +354,7 @@ console.log(req.body);
   res.status(400).json({error : 'token not provided'});
 
 }
+
+
 
 export { updatePassword, updateUser , logout};
