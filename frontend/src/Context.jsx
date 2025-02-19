@@ -108,6 +108,7 @@ const AppProvider = ({ children }) => {
 
       const data = await res.json();
       const services = data.data;
+      console.log("from aman mourya",data);
       console.log("Fetched services:", services);
       dispatch({ type: "GET_SERVICES", payload: services });
     } catch (error) {
