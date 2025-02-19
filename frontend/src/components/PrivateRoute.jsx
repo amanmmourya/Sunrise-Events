@@ -3,12 +3,12 @@ import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ element }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem('authtoken') // Initial check for token
+    !!localStorage.getItem('token') // Initial check for token
   );
 
  useEffect(() => {
     const checkAuth = () => {
-      const token = localStorage.getItem('authtoken');
+      const token = localStorage.getItem('token');
       
       setIsAuthenticated(!!token); // Update authentication state
     }; 
