@@ -141,6 +141,9 @@ const AppProvider = ({ children }) => {
       fetchCurrentUser();
     }
   }, [state.profileInfo]); 
+  useEffect(()=>{
+    getServices();
+  },[]);
   
 
   useEffect(() => {
