@@ -49,7 +49,7 @@ const Gallery = () => {
   return (
     <Wrapper>
       <div className="cont">
-        <div className="gallery-container">
+        <div className="gallery-container ">
           <h1 className="gallery-heading">Event Gallery</h1>
           <div className="main-container1">
             {Object.entries(images).map(([eventName, eventImages]) => (
@@ -94,14 +94,15 @@ const Gallery = () => {
 const Wrapper = styled.section`
   .cont {
     padding: 5%;
-    background-color: rgb(223, 210, 210);
+    // background-color: rgb(223, 210, 210);
   }
   .gallery-container {
     border-radius: 2%;
+    background-color:#f8e0e0;
   }
   .gallery-heading {
-    color: #1a090d;
-    font-weight: 500;
+    color: #dc2626;
+    font-weight: 600;
     font-family: sans-serif;
   }
   .event-title {
