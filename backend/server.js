@@ -39,7 +39,7 @@ app.use(cookieParser());
 
 // CORS Configuration
 const corsOptions = {
-  origin:"http://localhost:5173", // Replace with your frontend's domain in production
+  origin:process.env.CLIENT_URL, // Replace with your frontend's domain in production
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };

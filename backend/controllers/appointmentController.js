@@ -2,7 +2,7 @@ import Appointment from "../models/Appointment.js";
 import Razorpay from "razorpay";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
-import User from "../models/User.js";
+// import User from "../models/user.js";
 // import Service from "../model
 
     const transporter = nodemailer.createTransport({
