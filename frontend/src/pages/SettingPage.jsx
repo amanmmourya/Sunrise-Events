@@ -22,13 +22,9 @@ const Settingpage = () => {
 
   // Mock data for demonstration purposes
   const bookingHistory = [
-    { id: 1, date: "2024-12-20", service: "Haircut", status: "Completed" },
-    { id: 2, date: "2024-12-22", service: "Facial", status: "Pending" },
   ];
 
   const paymentHistory = [
-    { id: 1, date: "2024-12-20", amount: "$50", status: "Paid" },
-    { id: 2, date: "2024-12-22", amount: "$30", status: "Pending" },
   ];
 
   // handle change function for handling the password input for passwrod change

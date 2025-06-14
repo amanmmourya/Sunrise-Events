@@ -12,8 +12,8 @@ const SettingMenu = () => {
   const currentTime = new Date().toLocaleTimeString();
 
   const { profileInfo } = useGlobalContext();
-  const name = profileInfo?.name ? profileInfo.name : "harsh";
-  const role = profileInfo?.role ? profileInfo.role : name;
+  const name = localStorage.getItem("myname") || "Unknown";
+  const role = profileInfo?.role ? profileInfo.role : "User";
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -147,7 +147,6 @@ const Name = styled.h2`
 
 const Role = styled.span`
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.7);
 `;
 
 const Divider = styled.div`
@@ -192,7 +191,7 @@ const ActionButton = styled(motion.button)`
   width: 100%;
   padding: 0.75rem 1.5rem;
   background: ${props => props.selected ? '#a0001b' : 'rgba(160, 0, 27, 0.1)'};
-  color: ${props => props.selected ? '#ffffff' : '#e0aa3e'};
+  // color: ${props => props.selected ? '#ffffff' : '#e0aa3e'};
   border: 1px solid ${props => props.selected ? '#a0001b' : '#e0aa3e'};
   border-radius: 0.5rem;
   font-size: 1rem;

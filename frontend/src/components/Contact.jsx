@@ -3,129 +3,135 @@ import styled from 'styled-components';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 const Wrapper = styled.section`
-  padding: 4rem 2rem;
-  // background: linear-gradient(135deg, #f9fafb, #e0eafc);
+  font-family: 'Playfair Display', serif;
+  color: #4a1a1a;
 
 
-  .contact-container {
+  .contact-section {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 2rem;
+  }
+
+  .contact-box {
     display: flex;
     flex-wrap: wrap;
+    background: linear-gradient(to right, #fff1f2, #ffffff);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(255, 192, 203, 0.2);
+    padding: 2.5rem;
+    max-width: 1000px;
+    width: 100%;
     gap: 2rem;
-    justify-content: space-between;
   }
 
-  .left-contact, .right-contact {
-    flex: 1 1 45%;
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  .left,
+  .right {
+    flex: 1 1 400px;
   }
 
-  .large-heading {
-    font-size: 2rem;
-    font-weight: 700;
+  .section-title {
+    font-size: 2.5rem;
     margin-bottom: 1.5rem;
+    color: #dc2626;
+  }
+
+  .info-group {
+    margin-bottom: 2rem;
+  }
+
+  .info-label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #dc2626;
+    font-size: 1.5rem;
+  }
+
+  .info-value {
+    margin: 0.3rem 0;
+    font-size: 1.5rem;
     color: #333;
   }
 
-  .small-heading {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+  .address {
+    margin-top: 2rem;
   }
 
-  .big-text {
-    font-size: 1rem;
-    margin: 0.5rem 0;
-  }
-
-  .contact-info {
+  .social-icons {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
+    margin-top: 1rem;
   }
 
-  .social-links {
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  .social-icons a {
+    font-size: 2rem;
+    color: #b30059;
+    transition: 0.3s;
   }
 
-  .social-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-
-    .icon {
-      font-size: 2rem;
-      color: #4f46e5;
-    }
-
-    a {
-      text-decoration: none;
-      color: #333;
-      font-size: 1rem;
-      font-weight: 500;
-
-      &:hover {
-        color: #6366f1;
-      }
-    }
+  .social-icons a:hover {
+    color: #ff69b4;
   }
 
   @media (max-width: 768px) {
-    .contact-container {
-      flex-direction: column;
-      align-items: center;
+    .hero {
+      font-size: 2rem;
     }
 
-    .left-contact, .right-contact {
+    .contact-box {
+      flex-direction: column;
+      padding: 2rem;
+    }
+
+    .left, .right {
       width: 100%;
     }
   }
 `;
 
-const Contact = () => (
-  <Wrapper>
-    <div className="contact-container ">
-      <div className="left-contact">
-        <div className="large-heading">Contact Us to get the best deals</div>
-        <div className="contact-info">
-          <div className="info-block">
-            <div className="small-heading">For Vendors</div>
-            <a href="mailto:Sunriseevents.in@gmail.com" className="big-text">Sunriseevents.in@gmail.com</a>
-            <div className="big-text">+91 98878 29699</div>
+const Contact = () => {
+  return (
+    <Wrapper>
+
+      <div className="contact-section m-4">
+        <div className="contact-box">
+          <div className="left">
+            <div className="section-title">Contact Information</div>
+
+            <div className="info-group">
+              <div className="info-label">For Vendors</div>
+              <div className="info-value">📧 Sunriseevents.in@gmail.com</div>
+              <div className="info-value">📞 +91 98878 29699</div>
+            </div>
+
+            <div className="info-group">
+              <div className="info-label">For Customers</div>
+              <div className="info-value">📧 Sunriseevents.in@gmail.com</div>
+              <div className="info-value">📞 +91 98878 29699</div>
+            </div>
+
+            <div className="address">
+              <div className="info-label">Office Address</div>
+              <div className="info-value">
+                Near, 110, Aagam Ochid, Nadani-2, Vesu, Surat,<br />
+                Gujarat 395007
+              </div>
+            </div>
           </div>
-          <div className="info-block">
-            <div className="small-heading">For Customers</div>
-            <a href="mailto:Sunriseevents.in@gmail.com" className="big-text">Sunriseevents.in@gmail.com</a>
-            <div className="big-text">+91 98878 29699</div>
+
+          <div className="right">
+            <div className="section-title">Follow Us</div>
+            <div className="info-value">Stay updated and inspired by our latest wedding stories and offers.</div>
+            <div className="social-icons">
+              <a href="https://www.instagram.com/sunriseevents.in/" target="_blank" rel="noreferrer" ><FaInstagram color='#dc2626'/></a>
+              <a href="https://www.facebook.com/SunriseEvent.in/" target="_blank" rel="noreferrer"><FaFacebook color='#dc2626'/></a>
+              <a href="https://twitter.com/sunriseevents" target="_blank" rel="noreferrer"><FaTwitter color='#dc2626' /></a>
+            </div>
           </div>
         </div>
-        <div className="small-heading">Address Details</div>
-        <div className="big-text">Near, 110, Aagam Ochid, Nadani-2, Vesu, Surat, Gujarat 395007</div>
       </div>
-      <div className="right-contact">
-        <div className="large-heading">Follow us on</div>
-        <div className="social-links">
-          <div className="social-item">
-            <FaInstagram className="icon" />
-            <a href="https://www.instagram.com/sunriseevents.in/">Instagram</a>
-          </div>
-          <div className="social-item">
-            <FaFacebook className="icon" />
-            <a href="https://www.facebook.com/SunriseEvent.in/">Facebook</a>
-          </div>
-          <div className="social-item">
-            <FaTwitter className="icon" />
-            <a href="https://twitter.com/sunriseevents">Twitter</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Wrapper>
-);
+    </Wrapper>
+  );
+};
 
 export default Contact;

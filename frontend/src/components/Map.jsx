@@ -17,14 +17,14 @@ L.Icon.Default.mergeOptions({
 const MyMap = () => {
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
   const [loading, setLoading] = useState(true);
-  const companyAddress = "Vesu, Surat"; // Example: Empire State Building
+  const companyAddress = "Aagam Ochid, Nadani-2, Vesu, Surat"; // Example: Empire State Building
   const OPENCAGE_API_KEY = 'a3d9f1dbddf043128c8d379996785793'; // Replace with your API key
 
   useEffect(() => {
     const fetchCoordinates = async () => {
       try {
         const response = await axios.get(
-          `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent}(
+          `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(companyAddress)}(
             companyAddress
           )}&key=${OPENCAGE_API_KEY}`
         );
@@ -53,10 +53,10 @@ const MyMap = () => {
 
   return (
     <Wrapper>
-    <div className="w-full bg-red-50">
+    <div className="w-full">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-        <div className="p-4 bg-gradient-to-r bg-[#f2dfdf]">
-          <h2 className="heading text-2xl font-bold text-center text-[#870f0f] bg-red-50 flex items-center">
+        <div className="p-4 bg-gradient-to-r bg-rose-50">
+          <h2 className="heading text-2xl font-bold text-center text-[#dc2626]  flex items-center">
             
            <div className='m-2 our-location'>Our Location</div>
            <MapPin className="mr-2 pin" />
@@ -64,9 +64,9 @@ const MyMap = () => {
           <p className="address text-center mt-1">{companyAddress}</p>
         </div>
         <div className='upper-cont'>
-        <div className="map-cont h-[500px] relative">
+        <div className="map-cont h-[500px] relative z-0">
           <MapContainer
-            center={[location.lat, location.lng]}
+            center={[ location.lat, location.lng]}
             zoom={12}
             scrollWheelZoom={false}
             className="h-full w-full"
@@ -99,14 +99,12 @@ font-size:large;
 font-size:3vw;
 }
 .heading{
-background-color:#f2dfdf;
 display:flex;
 justify-content:center;
 align-items:center;
 font-weight:600;
 }
 .address{
-background-color:#f2dfdf;
 }
 .map-cont{
 width:80%;

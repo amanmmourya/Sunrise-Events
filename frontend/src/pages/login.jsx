@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import {toast} from "react-toastify";
 import axios from "axios";
 
 const Login = () => {
@@ -15,6 +15,7 @@ const Login = () => {
     if (savedEmail) {
       setFormData((prev) => ({ ...prev, email: savedEmail, rememberMe: true }));
     }
+
   }, []);
 
   const handleChange = (e) => {
@@ -28,12 +29,18 @@ const Login = () => {
     try {
       const { email, password, rememberMe } = formData;
       const response = await axios.post('http://localhost:5000/api/auth/login', { email, password }, {
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
       });
+      console.log(response);
       localStorage.setItem('token', response.data.token);
-      
+      localStorage.setItem("myemail", response.data.email);
+      localStorage.setItem("myname", response.data.name)  ;
+      console.log(response.data.ACCESS_TOKEN);
+      console.log(response);
       if (rememberMe) {
         localStorage.setItem("email", email);
+        localStorage.setItem("name", response.data.name);
       } else {
         localStorage.removeItem("email");
       }

@@ -12,6 +12,7 @@ import { Flower2, Landmark, Music, Sun, Package, Armchair } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Agent from '../components/Agent';
 import Testimonials from '../components/Testimonial';
+import {Bot} from 'lucide-react';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -96,9 +97,25 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <div className="agent-btn fixed bottom-4 z-20 text-6xl right-4 h-[7vh] w-[7vh] lg:w-[10vh] lg:h-[10vh] bg-[#dc2626] text-white flex items-center justify-center rounded-full shadow-lg cursor-pointer hover:bg-red-400" onClick={handleAgent}>
-        💬
-      </div>
+      <div
+  className="
+    fixed bottom-4 right-4 z-10
+    h-20 w-20 lg:h-20 lg:w-20 
+    bg-[#dc2626] 
+    text-white 
+    flex items-center justify-center 
+    rounded-full 
+    shadow-lg 
+    cursor-pointer 
+    transition-all duration-300 
+    hover:scale-105 hover:bg-[#b91c1c] 
+    active:scale-95
+  "
+  onClick={handleAgent}
+>
+  <Bot className="w-8 h-8 lg:w-10 lg:h-10" />
+</div>
+
       <div>
         {showAgent?(<Agent showAgent={showAgent} setshowAgent={setshowAgent}/>):<div></div>}
       </div>
@@ -277,7 +294,7 @@ const Wrapper = styled.section`
 
   .cta-button {
     display: inline-block;
-    background: #870F0F;
+    background: #dc2626;
     color: white;
     padding: 1rem 2.5rem;
     border-radius: 9999px;

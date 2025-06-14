@@ -96,7 +96,7 @@ const NewDash = () => {
       label: 'Daily Revenue',
       data: dailyRevenue.map(entry => entry.totalRevenue),
       backgroundColor: '#a0001b',
-      borderColor: '#e0aa3e',
+      borderColor: '#fff',
       borderWidth: 2
     }]
   };
@@ -107,7 +107,7 @@ const NewDash = () => {
       label: 'Daily Appointments',
       data: dailyAppointments.map(entry => entry.total),
       backgroundColor: '#e0aa3e',
-      borderColor: '#a0001b',
+      borderColor: '#fff',
       borderWidth: 2
     }]
   };
@@ -118,7 +118,7 @@ const NewDash = () => {
       label: 'New Customers',
       data: dailyNewCustomers.map(entry => entry.totalCustomers),
       backgroundColor: '#a0001b',
-      borderColor: '#e0aa3e',
+      borderColor: '#fff',
       borderWidth: 2
     }]
   };
@@ -130,10 +130,10 @@ const NewDash = () => {
       backgroundColor: [
         '#a0001b',
         '#e0aa3e',
-        '#ffffff',
+        '#C08081	',
         'rgba(160, 0, 27, 0.7)'
       ],
-      borderColor: '#1a1a1a',
+      borderColor: '#fff',
       borderWidth: 1
     }]
   };

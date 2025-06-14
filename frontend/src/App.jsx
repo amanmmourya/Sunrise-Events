@@ -33,6 +33,8 @@ import SettinngMenu from './components/SettinngMenu';
 import Testimonials from './components/Testimonial';
 import ProfilePage from './components/ProfilePage';
 import PrivateRoute from './components/PrivateRoute';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const theme = {
@@ -62,6 +64,7 @@ function App() {
       <AppProvider>
         <BrowserRouter>
           <div className='global-wrapper'>
+            <ToastContainer position="top-right" autoClose={3000} />
             <Navbar />
             <Routes>
               <Route path="/admin" element={<NewDash />} />
@@ -90,8 +93,6 @@ function App() {
               <Route path='/settingmenu' element={<SettinngMenu/>}/>
               <Route path='/setting' element={<SettingPage/>}/>
               <Route path='/profilepage' element={<ProfilePage/>}/>
-
-
               <Route path='/testimonials' element={<Testimonials/>}/>
 
 

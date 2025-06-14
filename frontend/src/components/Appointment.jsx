@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
 import { GlobalStyle } from "../GlobalStyle";
@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useGlobalContext } from "../Context";
+import { toast } from "react-toastify";
 
 
 const Appointment = () => {
@@ -22,11 +23,11 @@ const Appointment = () => {
     eventType: "wedding",
     specialRequests: "",
   });
-const {setbookingData , order ,bookData} = useGlobalContext()
-  const [appointments,setAppointments] =useState([]);
+  const { setbookingData, order, bookData } = useGlobalContext()
+  const [appointments, setAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
 
-  
+
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const location = useLocation();
@@ -47,7 +48,7 @@ const {setbookingData , order ,bookData} = useGlobalContext()
       [name]: value,
     }));
   };
-  console.log(order,"order fetched ");
+  console.log(order, "order fetched ");
   console.log("price", price);
 
   const handleChange = (e) => {
@@ -76,104 +77,104 @@ const {setbookingData , order ,bookData} = useGlobalContext()
   const API = "http://localhost:5000/appointment/book-slots"
 
 
-  const sendemail = async ()=>{
+  const sendemail = async () => {
 
 
-    
+
   }
-  const bookSlots = async ()=>{
+  const bookSlots = async () => {
 
     console.log("in the try book slots function ")
-    if(!formData.name
-       || !formData.email || 
-       !formData.phone ||
-       !formData.venue||
-       !formData.guests||
-       !formData.specialRequests||
-       !formData.date||
-       !appointmentData.eventType||
-       !appointmentData.price
+    if (!formData.name
+      || !formData.email ||
+      !formData.phone ||
+      !formData.venue ||
+      !formData.guests ||
+      !formData.specialRequests ||
+      !formData.date ||
+      !appointmentData.eventType ||
+      !appointmentData.price
 
-    ){
+    ) {
 
-      alert("please fill all the details ");
+      alert("Please fill all the details ");
       return;
     }
-    
 
 
-const requestBody={
-  name:formData.name,
-  email:formData.email,
- phone:formData.phone ,
+
+    const requestBody = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
       date: formData.date,
-     time : formData.time,
-     venue : formData.venue,
+      time: formData.time,
+      venue: formData.venue,
       guests: formData.guests,
-     specialRequests : formData.specialRequests,
-     eventType : appointmentData.eventType,
-     price:appointmentData.price
+      specialRequests: formData.specialRequests,
+      eventType: appointmentData.eventType,
+      price: appointmentData.price
 
-};
-try {
-  console.log("Sending request with:", requestBody);
+    };
+    try {
+      console.log("Sending request with:", requestBody);
 
-  const response = await axios.post(API,requestBody,{
-    headers:{
-      "content-Type":"application/json",
-    },
-  });
+      const response = await axios.post(API, requestBody, {
+        headers: {
+          "content-Type": "application/json",
+        },
+      });
+      console.log("Response received:", response);
+      if (response.status == 201) {
+        // setbookingData(
+        //   formData.name
+        //   , formData.email,
+        //   formData.phone,
+        //   formData.venue,
+        //   formData.guests,
+        //   formData.specialRequests,
+        //   formData.date,
+        //   appointmentData.eventType,
+        //   appointmentData.price,
+        //   appointmentData.time
+        // )
+        console.log(response);
 
-  if(response.status==201){
-    setbookingData(
-      formData.name
-       ,formData.email, 
-  formData.phone,
-  formData.venue,
-  formData.guests,
-  formData.specialRequests,
-  formData.date,
-  appointmentData.eventType,
-  appointmentData.price,
-  appointmentData.time
-    )
-    console.log(response);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          date: null,
+          time: "",
+          venue: "",
+          guests: "",
+          eventType: "wedding",
+          specialRequests: "",
+        });
 
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      date: null,
-      time: "",
-      venue: "",
-      guests: "",
-      eventType: "wedding",
-      specialRequests: "",
-    });
-  
-    setAppointmentData({
-      eventType: service.name || "", 
-      price: service.price || "",
-      customerName: "",
-      phone: "",
-    });
-console.log(
-  "response fetched successssfully", response
-)
-  // redirect to homepage
-  navigate("/home")
-  alert("Your booking is successfully done")
-  }
-  else{
-    alert("Failed to book appointment. Please try again.");
-    console.log("else statement error that is response is not ok")
-  }
-} catch (error) {
-  console.log("some catch error has occured");
+        setAppointmentData({
+          eventType: service.name || "",
+          price: service.price || "",
+          customerName: "",
+          phone: "",
+        });
+        console.log(
+          "response fetched successssfully", response
+        )
+        // redirect to homepage
+        navigate("/home")
+        toast.success("Appointment booked successfully!");
+      }
+      else {
+        alert("Failed to book appointment. Please try again.");
+        console.log("else statement error that is response is not ok")
+      }
+    } catch (error) {
+      console.log("some catch error has occured");
+      toast.error("Booking failed. Please try again.");
+      console.error("Booking failed:", error.response?.data || error.message);
 
-  console.error("Booking failed:", error.response?.data || error.message);
-
-};
+    };
   };
 
 
@@ -195,25 +196,25 @@ console.log(
   };
 
 
-useEffect(() => {
-  const fetchAppointments = async () => {
-    try {
-      const response = await fetch(
-"http://localhost:5000/appointment/details");
-      const data = await response.json();
-      setAppointments(data);
-      setFilteredAppointments(data);
-  
-    } catch (error) {
-      console.error("Error fetching appointments:", error);
-    }
-  };
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/appointment/details");
+        const data = await response.json();
+        setAppointments(data);
+        setFilteredAppointments(data);
 
-  fetchAppointments();
-}, []);
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    };
+
+    fetchAppointments();
+  }, []);
 
 
-  
+
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
@@ -351,7 +352,7 @@ useEffect(() => {
                 Previous
               </Button>
               <Button onClick={handleSubmit} disabled={isSubmitting}>
-                {isSubmitting ? "Processing..." : `precessing to pay ${price} `}
+                {isSubmitting ? "Processing..." : `Book Your Appointment`}
               </Button>
             </ButtonGroup>
           </FormStep>
@@ -361,7 +362,7 @@ useEffect(() => {
     }
   };
 
- 
+
   return (
     <Wrapper>
       <Container>

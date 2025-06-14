@@ -149,7 +149,7 @@ const Appointments = () => {
   return (
     <Wrapper>
       <div className="appointments-container">
-        <h2 className="appointments-title">Salon Appointments</h2>
+        <h2 className="appointments-title">All Appointments</h2>
         <div className="search-section">
           <SearchBox searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </div>

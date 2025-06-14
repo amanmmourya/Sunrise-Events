@@ -7,6 +7,7 @@ const router = express.Router();
 const validateBookingRequest = (req, res, next) => {
     const {date, time } = req.body;
 
+
     
     if (!date) return res.status(400).json({ error: 'Date is required' });
     if (!time) return res.status(400).json({ error: 'Time slot is required' });

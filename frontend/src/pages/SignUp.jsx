@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import { toast } from "react-toastify";
 import axios from "axios";
+import { useEffect } from "react";
+
 
 const Register = () => {
   const navigate = useNavigate();
@@ -14,7 +16,7 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
-
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -24,12 +26,11 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match!");
       return;
     }
-    
+
     if (formData.password.length < 6) {
       toast.error("Password must be at least 6 characters long");
       return;
@@ -37,16 +38,17 @@ const Register = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/register", {
+      console.log("till frontend fine");
+      const response = await axios.post('http://localhost:5000/api/auth/register', {
+        name: formData.name,
         email: formData.email,
         password: formData.password,
-        name: formData.name,
-      });
-
+      },{withCredentials: true});
       localStorage.setItem("token", response.data.token);
       toast.success("Successfully registered!");
-      navigate("/dashboard");
+      navigate("/home");
     } catch (error) {
+      console.log("Error at frontend submission");
       toast.error(error.response?.data?.message || "Registration failed");
     } finally {
       setIsLoading(false);

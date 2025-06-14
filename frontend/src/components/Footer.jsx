@@ -50,7 +50,7 @@ const FooterWrapper = styled.footer`
 .footer-text{
 color:white;
 }
-    background-color: #870F0F;
+    background-color: #B91C1C;
     color: white;
     padding: 3vh 5vw;
 
@@ -67,11 +67,13 @@ color:white;
         margin-bottom: 2vh;
     }
 
-    .about h3 {
+    .about h3{
         font-size: 2.5vh;
         margin-bottom: 1vh;
     }
-
+    h4{
+    font-size: 2vh;
+    }
     .links ul {
         list-style: none;
         padding: 0;
@@ -79,6 +81,7 @@ color:white;
 
     .links li {
         margin: 0.5vh 0;
+        font-size: 1.8vh;
         cursor: pointer;
         transition: color 0.3s;
     }

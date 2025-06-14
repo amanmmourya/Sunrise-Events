@@ -1,8 +1,8 @@
 import { createError } from '../utils/error.js';
 
 export const validateLogin = (req, res, next) => {
-  console.log("inside the login validator")
-  const { email, password } = req.body;
+  console.log("inside the login validator");
+  const { email, password ,name} = req.body;
 
   if (!email || !password) {
     console.log("email password required")

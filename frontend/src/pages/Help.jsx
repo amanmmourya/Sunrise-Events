@@ -5,7 +5,7 @@ const HelpPage = () => {
   const articles = [
     {
       title: "How to Book an Appointment",
-      description: "Learn the steps to book your salon appointment quickly.",
+      description: "Learn the steps to book your appointment quickly.",
     },
     {
       title: "Payment Methods",
@@ -17,7 +17,7 @@ const HelpPage = () => {
     },
     {
       title: "Our Services",
-      description: "Browse the range of salon services we offer.",
+      description: "Browse the range of services we offer.",
     },
   ];
 
@@ -44,7 +44,7 @@ const HelpPage = () => {
       {/* Featured Article Section */}
       <section className="featured-article">
         <h2>Featured Article</h2>
-        <p>How to Create the Perfect Salon Experience</p>
+        <p>How to Create the Perfect Wedding Experience</p>
       </section>
 
       {/* Getting Started Section */}

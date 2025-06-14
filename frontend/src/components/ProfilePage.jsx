@@ -3,10 +3,10 @@ import { useGlobalContext } from '../Context';
 import styled from 'styled-components';
 
 const ProfilePage = () => {
-    const { profileInfo } = useGlobalContext();
-  
-    if (!profileInfo) {
-      return <h2>Loading...</h2>; // Prevents accessing `profileInfo.name` when `null`
+    const profileInfo_ = localStorage.getItem("myemail") 
+   const { profileInfo } = useGlobalContext();
+    if (!profileInfo_) {
+      return <div className='min-h-screen flex justify-center items-center text-2xl'>Profile Not Found. Maybe You are Logged Out</div>; // Prevents accessing `profileInfo.name` when `null`
     }
   
     return (

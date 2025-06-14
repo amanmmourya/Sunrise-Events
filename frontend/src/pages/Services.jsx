@@ -8,28 +8,31 @@ import TiltCard from "../components/TiltCard";
 import { motion } from "framer-motion"; // Import animation library
 import '../style/services.css'
 import { useGlobalContext } from "../Context";
+import { useState } from "react";
+import axios from "axios";
 
-// const FlowerRain =()=>{
-//     useEffect(()=>{
-//         const numFlowers = 20;
-//         const container = document.getElementById("flower-container");
-//         for(let i = 0 ;i<numFlowers ;i++){
-//             const flower = document.createElement("div");
-//             flower.classList.add("flower");
-//             flower.style.left = `${Math.random()*5}vw`;
-//             flower.style.animationDelay = `${Math.random() *5}s`;
-//             container.appendChild(flower);
-//         }
-//     },[]);
-
-//     return <div id="flower-container"></div>;
-
-// };
 
 function Services() {
-const {services} = useGlobalContext();
+  const [servicesFromServer, setServicesFromServer] = useState([]);
 
-console.log(services);
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/services", {
+          withCredentials: true
+        });
+        console.log("Response from server:", response);
+        const services = response.data.data;
+        setServicesFromServer(services);
+        console.log("Fetched services:", services);
+      } catch (error) {
+        console.error("Error fetching services:", error.message);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
  
   return (
     <>
@@ -39,7 +42,7 @@ console.log(services);
       <div className="service-class">
       <h2 className="common-heading">Our Premium Services</h2>
       <div className="container grid grid-three-column">
-        {services.map((curElem) => {
+        {servicesFromServer.map((curElem) => {
           const { id, name, description, imageUrl, price } = curElem;
           return (
              <motion.div

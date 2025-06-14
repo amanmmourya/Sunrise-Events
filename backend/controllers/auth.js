@@ -45,6 +45,7 @@ export const findAllUsers = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   console.log("Inside the login backend");  
+  console.log("Cookies",req.cookies.ACCESS_TOKEN);
   console.log(req.body);
 
   try {
@@ -66,7 +67,7 @@ export const login = async (req, res, next) => {
 
     // Determine user role
     let role = user.role || "user"; // Default to "user"
-    const adminEmails = ["harshkamoriya@gmail.com"]; // Replace with actual admin emails
+    const adminEmails = ["mouryaaman69@gmail.com"]; // Replace with actual admin emails
     if (adminEmails.includes(email)) {
       role = "admin";
     }
@@ -80,11 +81,16 @@ export const login = async (req, res, next) => {
       process.env.JWT_SECRET,
       { expiresIn: '1d' }
     );
-
+    const token_ = jwt.sign(
+      { id: user._id},
+      process.env.JWT_SECRET,
+      { expiresIn: '1d' }
+    );
+    console.log("Token generated at login:", token);
     // Remove password from response
     const { password: pass, ...otherDetails } = user._doc;
 
-    res.status(200).json({
+    res.status(200).cookie("ACCESS_TOKEN",token_,{httpOnly:true,secure:true}).json({
       ...otherDetails,
       role,
       token,
@@ -95,48 +101,45 @@ export const login = async (req, res, next) => {
 };
 
 
-export const register = async (req, res, next) => {
-  console.log("inside the register controller backend")
-  console.log(req.body);
+export const register = async (req, res,next) => {
 
+  console.log("Inside the register controller backend");
+  console.log("Request body:", req.body);
   try {
     const { email, password, name } = req.body;
 
-    // Check if user exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return next(createError(400, 'User already exists'));
+    if (!email || !password || !name) {
+      return res.status(400).json({ message: "All fields are required" });
     }
 
-    // Create new user
-    const newUser = new User({
-      email,
-      password,
-      name,
-    });
+    const existingUser = await User.findOne({ email });
 
-    // Save user
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    const newUser = new User({ email, password, name });
     const savedUser = await newUser.save();
 
-    // Generate token
     const token = jwt.sign(
       { id: savedUser._id },
       process.env.JWT_SECRET,
       { expiresIn: '1d' }
     );
 
-    // Remove password from response
     const { password: pass, ...otherDetails } = savedUser._doc;
 
-    res.status(201).json({
+    return res.status(201).cookie("ACCESS_TOKEN",token,{httpOnly:true,secure:true}).json({
       ...otherDetails,
       token,
     });
+
   } catch (err) {
-    console.log("in the backend catch error")
-    next(err);
+    console.error("Backend error:", err);
+    return res.status(500).json({ message: "Something went wrong. Please try again." });
   }
 };
+
 
 export const forgotPassword = async (req, res, next) => {
   console.log(req.body);
@@ -186,6 +189,7 @@ export const resetPassword = async (req, res, next) => {
   try {
     const { token} = req.query;
     const { newPassword } = req.body;
+    console.log(req.body, "body of reset password");
 
     if (!token) {
       return res.status(400).json({ error: "Token is required" });

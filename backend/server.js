@@ -18,6 +18,9 @@ import agentRoutes from "./routes/agentRoutes.js"
 import dashRoutes from "./routes/dashRoutes.js";
 import authRoutes from './routes/auth.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import cookieParser from "cookie-parser";
+import router from "./routes/appointment.js";
+import { checkAdmin } from "./middlewares/authenticateUser.js";
 
 
 dotenv.config();
@@ -31,11 +34,12 @@ const port = process.env.PORT || 5000; // Use environment variable for port
 // Middleware to parse JSON request bodies
 app.use(express.json());  
 app.use(express.urlencoded({ extended: true })); // Optional: To handle form data
+app.use(cookieParser());
 // app.use(flash());
 
 // CORS Configuration
 const corsOptions = {
-  origin: process.env.CLIENT_URL || "*", // Replace with your frontend's domain in production
+  origin:"http://localhost:5173", // Replace with your frontend's domain in production
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };
@@ -49,6 +53,8 @@ app.use("/agent",agentRoutes)
 app.use("/dashboard", dashRoutes);
 app.use('/api/auth', authRoutes);
 app.use("/appointment", paymentRoutes);
+app.use("/admin",authRoutes);
+
 
 app.use(errorHandler);
 

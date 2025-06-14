@@ -26,7 +26,9 @@ const Agent = ({ showAgent, setshowAgent }) => {
           body: JSON.stringify({ "prompt": prompt })
         });
         let final_data = await response_from_langflow.json();
-        setResponse(final_data.response);
+        // setResponse(final_data.response);
+        console.log(final_data);
+        setResponse(final_data.response.kwargs.content || "Sorry, I couldn't find an answer to that.");
       } catch (error) {
         setResponse("Sorry, something went wrong. Please try again.");
       }

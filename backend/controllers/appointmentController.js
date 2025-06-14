@@ -5,16 +5,13 @@ import nodemailer from "nodemailer";
 import User from "../models/User.js";
 // import Service from "../model
 
-const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
-  secure: false,
-  requireTLS: true,
-  auth: {
-    user: process.env.EMAIL_USER, // Your email
-    pass: process.env.EMAIL_PASS, // Your email password
-  },
-});
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER, // Replace with your Gmail address
+        pass: process.env.EMAIL_PASSWORD , // not your actual Gmail password
+      },
+    });
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID, // Replace with your Razorpay Key ID
@@ -109,7 +106,7 @@ const bookSlots = async (req, res) => {
 
     await appointment.save();
     const mailOptions = {
-      from: "harshkamoriya@gmail.com",
+      from: "mouryaaman69@gmail.com",
       to: email,
       subject: "Appointment Scheduled - Pending Confirmation",
       html: `  <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
@@ -133,8 +130,8 @@ const bookSlots = async (req, res) => {
     </div>`,
                 };
 
-    console.log(email, "user.email");
-    console.log(mailOptions, "mailoptions");
+    // console.log(email, "user.email");
+    // console.log(mailOptions, "mailoptions");
     await transporter.sendMail(mailOptions);
 
     res.status(201).json({
