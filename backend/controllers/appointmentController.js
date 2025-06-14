@@ -14,8 +14,8 @@ import nodemailer from "nodemailer";
     });
 
 const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID, // Replace with your Razorpay Key ID
-  key_secret: process.env.RAZORPAY_KEY_SECRET, // Replace with your Razorpay Key Secret
+  key_id: "userid", // Replace with your Razorpay Key ID
+  key_secret: "passwordsecret", // Replace with your Razorpay Key Secret
 });
 
 const bookSlots = async (req, res) => {
@@ -340,66 +340,68 @@ const getAppointmentByName = async (req, res) => {
 // create Razorpay order after booking appointment
 
 const createRazorpayOrder = async (req, res) => {
-  console.log("Key ID:", process.env.RAZORPAY_KEY_ID);
-  console.log("Key Secret:", process.env.RAZORPAY_KEY_SECRET);
+  res.status(200).json({message: "Razorpay order creation endpoint is not implemented yet"});
+  // console.log("Key ID:", process.env.RAZORPAY_KEY_ID);
+  // console.log("Key Secret:", process.env.RAZORPAY_KEY_SECRET);
 
-  console.log("request body in the razorpay order is ", req.body);
-  const { amount } = req.body;
-  try {
-    const order = await razorpay.orders.create({
-      amount: amount,
-      currency: "INR",
-      receipt: `receipt_${Date.now()}`,
-    });
-    console.log("order found is ", order);
-    res.status(200).json(order);
-  } catch (error) {
-    console.log("error creating razorpay order :", error);
-    res.status(500).json({ error: "Server error" });
-  }
+  // console.log("request body in the razorpay order is ", req.body);
+  // const { amount } = req.body;
+  // try {
+  //   const order = await razorpay.orders.create({
+  //     amount: amount,
+  //     currency: "INR",
+  //     receipt: `receipt_${Date.now()}`,
+  //   });
+  //   console.log("order found is ", order);
+  //   res.status(200).json(order);
+  // } catch (error) {
+  //   console.log("error creating razorpay order :", error);
+  //   res.status(500).json({ error: "Server error" });
+  // }
 };
 
 const verifyPayment = async (req, res) => {
-  console.log("Request body in the verifyPayment function is", req.body);
+  res.status(400).json({ message: "Payment verification endpoint is not implemented yet"});
+  // console.log("Request body in the verifyPayment function is", req.body);
 
-  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
-    req.body;
-  const body = razorpay_order_id + "|" + razorpay_payment_id;
+  // const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+  //   req.body;
+  // const body = razorpay_order_id + "|" + razorpay_payment_id;
 
-  try {
-    const expected_signature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
-      .update(body.toString())
-      .digest("hex");
+  // try {
+  //   const expected_signature = crypto
+  //     .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+  //     .update(body.toString())
+  //     .digest("hex");
 
-    console.log("Body for signature:", body);
-    console.log("Expected Signature:", expected_signature);
-    console.log("Received Signature:", razorpay_signature);
+  //   console.log("Body for signature:", body);
+  //   console.log("Expected Signature:", expected_signature);
+  //   console.log("Received Signature:", razorpay_signature);
 
-    if (expected_signature === razorpay_signature) {
-      const appointment = await Appointment.findOneAndUpdate(
-        { razorpayOrderId: razorpay_order_id },
-        { paymentStatus: "confirmed", razorpayPaymentId: razorpay_payment_id },
-        { new: true }
-      );
-      console.log("Payment successful:", appointment);
-      console.log("response status , ", res.status);
-      res
-        .status(200)
-        .json({ message: "Payment verified successfully", appointment });
-    } else {
-      console.log("Payment verification failed: Signature mismatch");
+  //   if (expected_signature === razorpay_signature) {
+  //     const appointment = await Appointment.findOneAndUpdate(
+  //       { razorpayOrderId: razorpay_order_id },
+  //       { paymentStatus: "confirmed", razorpayPaymentId: razorpay_payment_id },
+  //       { new: true }
+  //     );
+  //     console.log("Payment successful:", appointment);
+  //     console.log("response status , ", res.status);
+  //     res
+  //       .status(200)
+  //       .json({ message: "Payment verified successfully", appointment });
+  //   } else {
+  //     console.log("Payment verification failed: Signature mismatch");
 
-      console.error("Payment verification failed: Signature mismatch");
-      res.status(400).json({ error: "Payment verification failed" });
-    }
-  } catch (error) {
-    console.log("error is coming");
+  //     console.error("Payment verification failed: Signature mismatch");
+  //     res.status(400).json({ error: "Payment verification failed" });
+  //   }
+  // } catch (error) {
+  //   console.log("error is coming");
 
-    console.error("error is coming", error.message);
-    console.error("Error during payment verification:", error);
-    res.status(500).json({ error: "Server error during payment verification" });
-  }
+  //   console.error("error is coming", error.message);
+  //   console.error("Error during payment verification:", error);
+  //   res.status(500).json({ error: "Server error during payment verification" });
+  // }
 };
 export {
   bookSlots,
