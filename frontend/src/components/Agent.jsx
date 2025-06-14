@@ -85,7 +85,7 @@ const Wrapper = styled.section`
     bottom: 1vh;
     right: 1vh;
     height: 80vh;
-    width: 27vw;
+    width: 35rem;
     background: linear-gradient(135deg, #667eea, #764ba2);
     z-index: 20;
     border-radius: 15px;
