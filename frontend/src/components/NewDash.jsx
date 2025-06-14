@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { Doughnut, Bar, Line, Pie } from "react-chartjs-2";
 import "chart.js/auto";
-import AdminBox from "../components/Adminbox";
+import AdminBox from "../components/AdminBox";
 import { GlobalStyle } from "../GlobalStyle";
 
 const fadeInUp = {
