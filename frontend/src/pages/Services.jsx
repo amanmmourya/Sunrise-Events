@@ -17,7 +17,7 @@ function Services() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/services`, {
+        const response = await axios.get(`${import.meta.env.BACKEND_URL}/services`, {
           withCredentials: true
         });
         console.log("Response from server:", response);
