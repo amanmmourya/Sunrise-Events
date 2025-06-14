@@ -20,7 +20,8 @@ const Agent = ({ showAgent, setshowAgent }) => {
       setInput('');
       setIsLoading(true);
       try {
-        let response_from_langflow = await fetch('http://127.16.1.1:5000/agent/query', {
+        const BASE_URL = process.env.BACKEND_URL || "http://localhost:5000";
+        let response_from_langflow = await fetch(`${BASE_URL}/agent/query`, {
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ "prompt": prompt })

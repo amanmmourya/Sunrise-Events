@@ -27,8 +27,9 @@ const Login = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
+      const BASE_URL = process.env.BACKEND_URL || "http://localhost:5000";
       const { email, password, rememberMe } = formData;
-      const response = await axios.post('http://localhost:5000/api/auth/login', { email, password }, {
+      const response = await axios.post(`${BASE_URL}/api/auth/login`, { email, password }, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });

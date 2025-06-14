@@ -38,8 +38,9 @@ const Register = () => {
 
     setIsLoading(true);
     try {
+      const BASE_URL = process.env.BACKEND_URL || "http://localhost:5000";
       console.log("till frontend fine");
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post(`${BASE_URL}/api/auth/register`, {
         name: formData.name,
         email: formData.email,
         password: formData.password,
