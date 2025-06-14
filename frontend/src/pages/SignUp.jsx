@@ -38,9 +38,8 @@ const Register = () => {
 
     setIsLoading(true);
     try {
-      const BASE_URL = process.env.BACKEND_URL || "http://localhost:5000";
       console.log("till frontend fine");
-      const response = await axios.post(`${BASE_URL}/api/auth/register`, {
+      const response = await axios.post(`https://sunrise-events-wty9.onrender.com/api/auth/register`, {
         name: formData.name,
         email: formData.email,
         password: formData.password,

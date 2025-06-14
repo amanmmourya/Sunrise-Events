@@ -15,7 +15,7 @@ const AdminLogin = () => {
     e.preventDefault();
     let data={email:email,password:password,mobile:mobile,username:username,u_id:u_id}
     console.log("Logging in with:", { email, password,mobile,u_id,username });
-    await fetch('http://localhost:5000/adminlogin',{
+    await fetch('https://sunrise-events-wty9.onrender.com/adminlogin',{
       method:"POST",
       headers:{
         "Content-Type":"application/json"

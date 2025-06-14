@@ -20,8 +20,7 @@ const Agent = ({ showAgent, setshowAgent }) => {
       setInput('');
       setIsLoading(true);
       try {
-        const BASE_URL = process.env.BACKEND_URL || "http://localhost:5000";
-        let response_from_langflow = await fetch(`${BASE_URL}/agent/query`, {
+        let response_from_langflow = await fetch(`https://sunrise-events-wty9.onrender.com/agent/query`, {
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ "prompt": prompt })

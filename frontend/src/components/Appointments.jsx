@@ -14,7 +14,7 @@ const Appointments = () => {
     const fetchAppointments = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/appointment/details"
+          "https://sunrise-events-wty9.onrender.com/appointment/details"
         );
         const data = await response.json();
         console.log(data)
@@ -51,7 +51,7 @@ const Appointments = () => {
     if (action === "Cancel") {
       try {
         const response = await fetch(
-          "http://localhost:5000/appointment/delete",
+          "https://sunrise-events-wty9.onrender.com/appointment/delete",
           {
             method: "DELETE",
             headers: {
@@ -78,7 +78,7 @@ const Appointments = () => {
     } else if (action === "Complete") {
       try {
         const response = await fetch(
-          "http://localhost:5000/appointment/update-status",
+          "https://sunrise-events-wty9.onrender.com/appointment/update-status",
           {
             method: "PUT",
             headers: {
@@ -113,7 +113,7 @@ const Appointments = () => {
       if (date && timeSlot) {
         try {
           const response = await fetch(
-            "http://localhost:5000/appointment/reschedule",
+            "https://sunrise-events-wty9.onrender.com/appointment/reschedule",
             {
               method: "PUT",
               headers: {

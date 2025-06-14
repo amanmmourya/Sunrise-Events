@@ -74,7 +74,7 @@ const Appointment = () => {
   // }, []);
 
 
-  const API = "http://localhost:5000/appointment/book-slots"
+  const API = "https://sunrise-events-wty9.onrender.com/appointment/book-slots"
 
 
   const sendemail = async () => {
@@ -200,7 +200,7 @@ const Appointment = () => {
     const fetchAppointments = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/appointment/details");
+          "https://sunrise-events-wty9.onrender.com/appointment/details");
         const data = await response.json();
         setAppointments(data);
         setFilteredAppointments(data);
