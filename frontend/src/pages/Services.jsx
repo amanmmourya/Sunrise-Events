@@ -17,7 +17,7 @@ function Services() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get(`https://sunrise-events-wty9.onrender.com/services`, {
+        const response = await axios.get(`https://sunrise-events-wty9.onrender.com:10000/services`, {
           withCredentials: true
         });
         console.log("Response from server:", response);
