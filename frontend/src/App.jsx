@@ -21,7 +21,7 @@ import Gototop from './components/Gototop';
 import Confirmation from './pages/Confirmation';
 import Appointments from './components/Appointments';
 import Reports from './components/Reports';
-import AdminBox from './components/Adminbox';
+// import AdminBox from './components/Adminbox';
 import Menubox from './components/Menubox';
 import SettingPage from './pages/SettingPage';
 import ServicesUpdate from './pages/ServicesUpdate';
@@ -79,7 +79,7 @@ function App() {
               <Route path="/admin/services-update" element={<ServicesUpdate />} />
               <Route path="/view-analytics" element={<Reports />} />
               <Route path="/admin/settings" element={<SettingPage />} />
-              <Route path="/adminbox" element={<AdminBox />} />
+              {/* <Route path="/adminbox" element={<AdminBox />} /> */}
               <Route path="/menubox" element={<Menubox />} />
               <Route path="/confirmation" element={<Confirmation />} />
               <Route path="/help" element={<Help />} />
