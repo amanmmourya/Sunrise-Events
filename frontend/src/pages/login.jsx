@@ -35,7 +35,7 @@ const Login = () => {
       console.log(response);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem("myemail", response.data.email);
-      localStorage.setItem("myname", response.data.name)  ;
+      localStorage.setItem("myname", response.data.name);
       console.log(response.data.ACCESS_TOKEN);
       console.log(response);
       if (rememberMe) {
@@ -43,6 +43,13 @@ const Login = () => {
         localStorage.setItem("name", response.data.name);
       } else {
         localStorage.removeItem("email");
+      }
+      if (email === "mouryaaman69@gmail.com") {
+        const answer=prompt("Would you like to login as Admin?");
+        if(answer.toLowerCase() === "yes") {
+          navigate('/admin');
+        }
+
       }
       
       toast.success('Successfully logged in!');
