@@ -4,7 +4,7 @@ import { Reducer } from "./Reducer";
 
 const AppContext = createContext();
 
-const url = "http://localhost:5000/services";
+const url = "https://sunrise-events-wty9.onrender.com/services";
 const initialState = {
   services: [],
   bookData: JSON.parse(localStorage.getItem("bookData")) || [],
@@ -47,7 +47,7 @@ const AppProvider = ({ children }) => {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/appointment/create-razorpay-order", {
+      const response = await fetch("https://sunrise-events-wty9.onrender.com/appointment/create-razorpay-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const AppProvider = ({ children }) => {
     }
   
     try {
-      const response = await fetch("http://localhost:5000/api/auth/user/me", {
+      const response = await fetch("https://sunrise-events-wty9.onrender.com/api/auth/user/me", {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       });
