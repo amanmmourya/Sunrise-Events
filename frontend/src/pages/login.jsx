@@ -46,7 +46,9 @@ const Login = () => {
       }
       if (email === "mouryaaman69@gmail.com") {
         const answer=prompt("Would you like to login as Admin?");
-        if(answer.toLowerCase() === "yes") {
+        console.log(answer);
+        console.log(answer.toLowerCase());
+        if(answer.toLowerCase() == "yes") {
           navigate('/admin');
         }
 
