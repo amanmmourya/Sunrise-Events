@@ -50,12 +50,16 @@ const Login = () => {
         console.log(answer.toLowerCase());
         if(answer.toLowerCase() == "yes") {
           navigate('/admin');
+        }else{
+          navigate('/services');
         }
 
+      }else{
+        navigate('/services');
       }
       
       toast.success('Successfully logged in!');
-      navigate('/services');
+      
     } catch (error) {
       toast.error(error.response?.data?.message || 'Login failed');
     } finally {
