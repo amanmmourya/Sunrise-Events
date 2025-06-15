@@ -84,7 +84,7 @@ const Login = () => {
           <motion.a href="/forgot-password" className="forgot-password" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>Forgot Password?</motion.a>
           <motion.button type="submit" className="submit-btn" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} disabled={isLoading}>{isLoading ? "Signing in..." : "Sign In"}</motion.button>
         </form>
-        <p className="signup-prompt">Don't have an account? <motion.a href="/register" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>Sign up</motion.a></p>
+        <p className="signup-prompt">Don't have an account? <a href="/register" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>Sign up</a></p>
       </motion.div>
     </Wrapper>
   );
