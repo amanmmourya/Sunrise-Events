@@ -40,13 +40,13 @@ function Reports() {
     const fetchData = async () => {
       try {
         const revenueRes = await axios.get(
-          "http://localhost:5000/dashboard/revenue-chart"
+          "https://sunrise-events-wty9.onrender.com/dashboard/revenue-chart"
         );
         const appointmentRes = await axios.get(
-          "http://localhost:5000/dashboard/appointments-chart"
+          "https://sunrise-events-wty9.onrender.com/dashboard/appointments-chart"
         );
         const customerRes = await axios.get(
-          "http://localhost:5000/dashboard/customers-chart"
+          "https://sunrise-events-wty9.onrender.com/dashboard/customers-chart"
         );
 
         setDailyRevenue(revenueRes.data.daily || []);

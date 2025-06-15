@@ -31,11 +31,11 @@ const NewDash = () => {
     const fetchData = async () => {
       try {
         const [revenueRes, serviceRes, appointmentRes, customerRes, chartRes] = await Promise.all([
-          axios.get("http://localhost:5000/dashboard/revenue"),
-          axios.get("http://localhost:5000/dashboard/popular-service"),
-          axios.get("http://localhost:5000/dashboard/appointments-chart"),
-          axios.get("http://localhost:5000/dashboard/customers-chart"),
-          axios.get("http://localhost:5000/dashboard/revenue-chart")
+          axios.get("https://sunrise-events-wty9.onrender.com/dashboard/revenue"),
+          axios.get("https://sunrise-events-wty9.onrender.com/dashboard/popular-service"),
+          axios.get("https://sunrise-events-wty9.onrender.com/dashboard/appointments-chart"),
+          axios.get("https://sunrise-events-wty9.onrender.com/dashboard/customers-chart"),
+          axios.get("https://sunrise-events-wty9.onrender.com/dashboard/revenue-chart")
         ]);
 
         setDailyRevenue(chartRes.data.daily || []);
