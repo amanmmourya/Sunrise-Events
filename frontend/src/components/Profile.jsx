@@ -54,22 +54,22 @@ const Profile = ({ settoShow }) => {
           <div className="menu">
             <NavLink to={role === "admin" ? "/admin" : "/profilepage"} className="menu-item">
               <User className="icon text-green-600" />
-              <span>{role === "admin" ? "Admin" : "Profile"}</span>
+              <span onClick={() => settoShow(false)}>{role === "admin" ? "Admin" : "Profile"}</span>
             </NavLink>
             <NavLink to="/setting" className="menu-item">
               <Settings className="icon text-yellow-600" />
-              <span>Settings</span>
+              <span onClick={() => settoShow(false)}>Settings</span>
             </NavLink>
             <NavLink to="/help" className="menu-item">
               <HelpCircle className="icon text-purple-600" />
-              <span>Help</span>
+              <span onClick={() => settoShow(false)}>Help</span>
             </NavLink>
           </div>
 
           <div className="logout">
             <button className="logout-button" onClick={handleLogout}>
               <LogOut className="icon" />
-              <span>Log Out</span>
+              <span onClick={() => settoShow(false)}>Log Out</span>
             </button>
           </div>
         </div>
